@@ -1,0 +1,110 @@
+/* Skills Section */
+.skills {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  --radius: 8px;
+  --muted: color-mix(in srgb, var(--default-color), transparent 65%);
+  --soft-border: color-mix(in srgb, var(--default-color), transparent 85%);
+  --soft-shadow: 0 8px 24px
+    color-mix(in srgb, var(--default-color), var(--transparent-94));
+  --shadow-hover: 0 0 20px
+    color-mix(in srgb, var(--default-color), var(--transparent-85));
+  --shadow-nav: 0 -5px 15px color-mix(in srgb, var(--default-color), var(--transparent-90));
+  --shadow-button: 0 0 0 3px
+    color-mix(in srgb, var(--accent-color), var(--transparent-70));
+}
+
+.skills .skill-block {
+  padding: 22px 6px 6px 6px;
+  border-radius: var(--radius);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  position: relative;
+}
+
+.skills .skill-block:hover {
+  transform: translateY(-2px);
+}
+
+.skills .skill-block header .skill-title {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.skills .skill-block header .skill-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 80%);
+}
+
+.skills .skill-block .skill-desc {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.skills .skill-block .progress.slim {
+  height: 6px;
+  background-color: color-mix(in srgb, var(--default-color), transparent 90%);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skills .skill-block .progress.slim .progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    red,
+    color-mix(in srgb, red, transparent 20%)
+  );
+  transition: width 0.6s ease-in-out;
+}
+
+.skills .soft-card {
+  background: var(--surface-color);
+  border: 1px solid var(--soft-border);
+  box-shadow: var(--soft-shadow);
+}
+
+.skills .soft-card .mini-head {
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  font-size: 16px;
+  color: var(--heading-color);
+  margin-bottom: 10px;
+}
+
+.skills .soft-card .tool-list li {
+  padding: 8px 0;
+  border-bottom: 1px dashed
+    color-mix(in srgb, var(--default-color), transparent 88%);
+}
+
+.skills .soft-card .tool-list li:last-child {
+  border-bottom: 0;
+}
+
+.skills .soft-card .tool-list li i {
+  color: var(--accent-color);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.skills .soft-card .tool-list li span {
+  color: var(--default-color);
+}
+
+.skills .note {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.skills .alt-grid {
+  margin-top: 60px;
+}

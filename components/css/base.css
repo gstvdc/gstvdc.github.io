@@ -1,0 +1,92 @@
+/* Base Styles */
+body {
+  color: var(--default-color);
+  font-family: var(--default-font);
+  background-color: var(--background-color);
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  color: var(--heading-color);
+}
+
+.light-background {
+  --background-color: #fafafa;
+  --surface-color: #ffffff;
+}
+
+/* Utility Classes */
+.main {
+  padding-left: 90px;
+}
+
+section,
+.section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: var(--space-xxxl) 0;
+  overflow: clip;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 60px;
+  position: relative;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.section-title p {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .main {
+    padding-left: 0;
+    margin-bottom: 70px;
+  }
+
+  .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+}
+
+@media (max-width: 576px) {
+  .section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .section-title {
+    padding-bottom: var(--space-xl);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}

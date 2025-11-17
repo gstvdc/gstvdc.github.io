@@ -1,418 +1,737 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Portfólio - Gustavo Constante</title>
+    <meta
+      name="description"
+      content="Portfólio de Gustavo da Cunha Constante, Sales Development Representative e Designer Gráfico"
+    />
+    <meta
+      name="keywords"
+      content="Sales, SDR, Vendas, Designer, Photoshop, CorelDraw, Carreira, HTML, CSS, Java, Computação"
+    />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Portfólio</title>
-  <meta name="description" content="Portfólio de Gustavo da Cunha Constante, Sales Development Representative e Designer Gráfico">
-  <meta name="keywords" content="Sales, SDR, Vendas, Designer, Photoshop, CorelDraw, Carreira, HTML, CSS, Java, Computação">
+    <link href="assets/img/logo_favicon.png" rel="icon" />
+    <link href="assets/img/logo.png" rel="apple-touch-icon" />
 
-  <link href="assets/img/logo_favicon.png" rel="icon">
-  <link href="assets/img/logo.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="components/css/variables.css" rel="stylesheet" />
+    <link href="components/css/base.css" rel="stylesheet" />
+    <link href="components/css/nav.css" rel="stylesheet" />
+    <link href="components/css/hero.css" rel="stylesheet" />
+    <link href="components/css/about.css" rel="stylesheet" />
+    <link href="components/css/skills.css" rel="stylesheet" />
+    <link href="components/css/resume.css" rel="stylesheet" />
+    <link href="components/css/contact.css" rel="stylesheet" />
+    <link href="components/css/footer.css" rel="stylesheet" />
+  </head>
 
-  <link href="assets/css/main.css" rel="stylesheet">
+  <body class="index-page">
+    <nav id="navmenu" class="navmenu-vertical">
+      <ul>
+        <li>
+          <a href="#hero"><i class="bi bi-house"></i></a>
+        </li>
+        <li>
+          <a href="#about"><i class="bi bi-person"></i></a>
+        </li>
+        <li>
+          <a href="#skills"><i class="bi bi-bar-chart"></i></a>
+        </li>
+        <li>
+          <a href="#resume"><i class="bi bi-file-earmark-text"></i></a>
+        </li>
+        <li>
+          <a href="#contact"><i class="bi bi-envelope"></i></a>
+        </li>
+      </ul>
+    </nav>
 
-</head>
-
-<body class="index-page">
-
-  <nav id="navmenu" class="navmenu-vertical">
-    <ul>
-  <li><a href="#hero"><i class="bi bi-house"></i></a></li>
-      <li><a href="#about"><i class="bi bi-person"></i></a></li>
-      <li><a href="#skills"><i class="bi bi-bar-chart"></i></a></li>
-      <li><a href="#resume"><i class="bi bi-file-earmark-text"></i></a></li>
-      <li><a href="#contact"><i class="bi bi-envelope"></i></a></li>
-    </ul>
-  </nav>
-
-  <main id="main" class="main">
-
-    <section id="hero" class="hero section">
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-center gx-5 gy-5">
-          <div class="col-lg-7">
-            <div class="intro">
-              <h1 class="display-heading mb-3">
-                Gustavo da Cunha Constante
-              </h1>
-              <h2 class="typed-container">
-                <span class="typed-fixed">Sou </span><span class="typed-effect"></span>
-              </h2>
-              <div class="hero-social">
-                <a href="https://www.linkedin.com/in/gustavo-constante-621884313" target="_blank"><i class="bi bi-linkedin"></i></a>
-                <a href="https://www.instagram.com/gstvdcc" target="_blank"><i class="bi bi-instagram"></i></a>
+    <main id="main" class="main">
+      <section id="hero" class="hero section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row align-items-center gx-5 gy-5 justify-content-center">
+            <div class="col-lg-7">
+              <div class="intro">
+                <h1 class="display-heading mb-3">Gustavo da Cunha Constante</h1>
+                <h2 class="typed-container">
+                  <span class="typed-fixed">Sou um </span
+                  ><span class="typed-effect"></span>
+                </h2>
+                <div class="hero-social">
+                  <a
+                    href="https://www.linkedin.com/in/gustavo-constante-621884313"
+                    target="_blank"
+                    ><i class="bi bi-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/gstvdc" target="_blank"
+                    ><i class="bi bi-github"></i
+                  ></a>
+                  <a href="https://www.instagram.com/gstvdcc" target="_blank"
+                    ><i class="bi bi-instagram"></i
+                  ></a>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-5">
-            <figure class="portrait-wrap position-relative" data-aos="fade-left" data-aos-delay="200">
-              <img src="assets/img/profile/profile-6.jpg" alt="Profile Portrait" class="img-fluid portrait-img">
-              <figcaption class="visually-hidden">Foto de perfil de Gustavo</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="about section light-background">
-  <div class="container section-title" data-aos="fade-up">
-        <h2>Sobre Mim</h2>
-      </div>
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-center gx-5 gy-5" data-aos="fade-up" data-aos-delay="200">
-        <div class="row align-items-center justify-content-between intro-wrap gy-5">
-          <div class="col-lg-7" data-aos="fade-right" data-aos-delay="150">
-            <div class="intro-content">
-              <span class="eyebrow">Olá!</span>
-              <h2 class="headline">Sou um profissional multifacetado, unindo vendas, design e tecnologia em uma única jornada.</h2>
-              <p class="lead">
-                Como SDR e Designer Gráfico, trago uma combinação única de habilidades criativas e analíticas. Minha experiência em design me permite criar soluções visuais impactantes, enquanto minha atuação em vendas me possibilita entender e atender às necessidades dos clientes. Atualmente, expando meus horizontes cursando Ciência da Computação, onde busco integrar tecnologia aos meus conhecimentos em design e vendas.
-              </p>
-              <div class="cta-group">
-                <a href="#resume" class="btn-ghost">
-                  Ver Meu Currículo <i class="bi bi-arrow-down"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="250">
-            <figure class="profile-figure text-center text-lg-end">
-              <img src="assets/img/profile/profile-square-7.jpg" alt="Portrait of Gustavo" class="img-fluid profile-photo">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="skills section">
-  <div class="container section-title" data-aos="fade-up">
-        <h2>Habilidades</h2>
-        <p>Minhas competências transitam entre a tecnologia e a comunicação, unindo o desenvolvimento lógico à criatividade e ao relacionamento interpessoal.</p>
-      </div>
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-center justify-content-between intro-wrap gy-5" data-aos="fade-up" data-aos-delay="200">
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6">
-            <div class="skill-block skills-animation">
-              <header class="d-flex align-items-center justify-content-between">
-                <h3 class="skill-title">CorelDRAW</h3>
-                <span class="skill-badge">Expert</span>
-              </header>
-              <p class="skill-desc">Ampla experiência na criação de artes vetoriais, adesivos, placas e materiais gráficos para produção e exportação.</p>
-              <div class="progress slim">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="skill-block skills-animation">
-              <header class="d-flex align-items-center justify-content-between">
-                <h3 class="skill-title">Comunicação e Vendas</h3>
-                <span class="skill-badge">Avançado</span>
-              </header>
-              <p class="skill-desc">Habilidade na articulação de propostas de valor e construção de relacionamentos, com foco em prospecção e qualificação de leads.</p>
-              <div class="progress slim">
-                <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6">
-            <div class="skill-block skills-animation">
-              <header class="d-flex align-items-center justify-content-between">
-                <h3 class="skill-title">Design / UX</h3>
-                <span class="skill-badge">Avançado</span>
-              </header>
-              <p class="skill-desc">Experiência em criar interfaces e materiais visuais intuitivos e atraentes, com foco na experiência do usuário e na comunicação efetiva da mensagem.</p>
-              <div class="progress slim">
-                <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="skill-block skills-animation">
-              <header class="d-flex align-items-center justify-content-between">
-                <h3 class="skill-title">HTML/CSS</h3>
-                <span class="skill-badge">Intermediário</span>
-              </header>
-              <p class="skill-desc">Conhecimento para estruturação e estilização de páginas web, criando interfaces claras e responsivas.</p>
-              <div class="progress slim">
-                <div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="skill-block skills-animation">
-              <header class="d-flex align-items-center justify-content-between">
-                <h3 class="skill-title">Java</h3>
-                <span class="skill-badge">Mediano</span>
-              </header>
-              <p class="skill-desc">Desenvolvimento de lógica de programação e funcionalidades básicas de back-end utilizando a linguagem Java.</p>
-              <div class="progress slim">
-                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6">
-            <div class="skill-block skills-animation">
-              <header class="d-flex align-items-center justify-content-between">
-                <h3 class="skill-title">PostgreSQL</h3>
-                <span class="skill-badge">Iniciante</span>
-              </header>
-              <p class="skill-desc">Noções básicas para gerenciar e consultar bancos de dados relacionais, com foco no aprendizado contínuo.</p>
-              <div class="progress slim">
-                <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="row alt-grid gy-4">
-          <div class="col-lg-8">
-            <p class="note">Minha trajetória me proporcionou uma base sólida tanto na área criativa quanto na administrativa, permitindo-me adaptar a diferentes desafios com organização, comunicação eficaz e um olhar atento aos detalhes.</p>
-          </div>
-          <div class="col-lg-4">
-            <div class="soft-card p-4">
-              <h4 class="mini-head">Toolbox</h4>
-              <ul class="list-unstyled tool-list">
-                <li><i class="bi bi-check-lg"></i> <span>CorelDRAW & Adobe Photoshop</span></li>
-                <li><i class="bi bi-check-lg"></i> <span>HTML, CSS, Java</span></li>
-                <li><i class="bi bi-check-lg"></i> <span>PostgreSQL</span></li>
-                <li><i class="bi bi-check-lg"></i> <span>Ferramentas de CRM</span></li>
-              </ul>
+            <div class="col-lg-5">
+              <figure
+                class="portrait-wrap position-relative"
+                data-aos="fade-left"
+                data-aos-delay="200"
+              >
+                <img
+                  src="assets/img/profile/profile-6.jpg"
+                  alt="Profile Portrait"
+                  class="img-fluid portrait-img"
+                />
+                <figcaption class="visually-hidden">
+                  Foto de perfil de Gustavo
+                </figcaption>
+              </figure>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="resume" class="resume section">
-  <div class="container section-title" data-aos="fade-up">
-        <h2>Currículo</h2>
-      </div>
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row" data-aos="fade-up" data-aos-delay="200">
-        <div class="row">
-          <div class="col-lg-12">
-            <ul class="nav nav-pills resume-navigation justify-content-center" id="resume-resume-tabs" role="tablist" data-aos="fade-up" data-aos-delay="200">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="resume-experience-tab" data-bs-toggle="pill" data-bs-target="#resume-experience" type="button" role="tab" aria-controls="resume-experience" aria-selected="true">
-                  <span class="nav-number">01</span>
-                  <span class="nav-label">Experiência</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="resume-education-tab" data-bs-toggle="pill" data-bs-target="#resume-education" type="button" role="tab" aria-controls="resume-education" aria-selected="false">
-                  <span class="nav-number">02</span>
-                  <span class="nav-label">Educação</span>
-                </button>
-              </li>
-            </ul>
+      <section id="about" class="about section light-background">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Sobre Mim</h2>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div
+            class="row align-items-center gx-5 gy-5"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="row align-items-center justify-content-between intro-wrap gy-5"
+            >
+              <div class="col-lg-7" data-aos="fade-right" data-aos-delay="150">
+                <div class="intro-content">
+                  <span class="eyebrow">Olá!</span>
+                  <h2 class="headline">
+                    Sou um desenvolvedor em formação, unindo design, tecnologia
+                    e aprendizado contínuo em uma única jornada.
+                  </h2>
+                  <p class="lead">
+                    Como Desenvolvedor FullStack em crescimento e Designer
+                    Gráfico, trago uma combinação única de habilidades criativas
+                    e técnicas. Minha experiência em design me permite criar
+                    soluções visuais impactantes e interfaces intuitivas,
+                    enquanto meu desenvolvimento em programação me capacita a
+                    transformar ideias em aplicações funcionais. Atualmente,
+                    curso Ciência da Computação e trabalho como estagiário na
+                    Procer em Criciúma/SC, onde aplico e expando meus
+                    conhecimentos diariamente.
+                  </p>
+                  <div class="cta-group">
+                    <a href="#resume" class="btn-ghost">
+                      Ver Meu Currículo <i class="bi bi-arrow-down"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="250">
+                <figure class="profile-figure text-center text-lg-end">
+                  <img
+                    src="assets/img/profile/profile-square-7.jpg"
+                    alt="Portrait of Gustavo"
+                    class="img-fluid profile-photo"
+                  />
+                </figure>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="tab-content resume-content" id="resume-resume-tabContent">
-          <div class="tab-pane fade show active" id="resume-experience" role="tabpanel" aria-labelledby="resume-experience-tab" tabindex="0" data-aos="fade-up" data-aos-delay="300">
-            <div class="timeline-container">
+      </section>
 
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <h4 class="timeline-date">Jul 2025 - Presente</h4>
-                <div class="timeline-content">
-                  <h3>SDR (Estágio)</h3>
-                  <p>Simples Dental - Criciúma, SC (Híbrido)</p>
+      <section id="skills" class="skills section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Habilidades</h2>
+          <p>
+            Minhas competências combinam desenvolvimento web e design, unindo
+            código limpo à criatividade visual e experiência do usuário.
+          </p>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div
+            class="row align-items-center justify-content-between intro-wrap gy-5"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="row">
+              <div class="col-lg-4 col-md-6">
+                <div class="skill-block skills-animation">
+                  <header
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <h3 class="skill-title">HTML/CSS</h3>
+                    <span class="skill-badge">Avançado</span>
+                  </header>
+                  <p class="skill-desc">
+                    Desenvolvimento de interfaces web responsivas e modernas,
+                    com domínio de layouts flexbox/grid e técnicas avançadas de
+                    estilização.
+                  </p>
+                  <div class="progress slim">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="85"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
                 </div>
               </div>
 
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <h4 class="timeline-date">Nov 2024 - Jul 2025</h4>
-                <div class="timeline-content">
-                  <h3>Auxiliar de Escritório</h3>
-                  <p>Emasel Contabilidade - Santa Catarina, SC (Presencial)</p>
-                  <small>Responsável pela entrega de documentações e organização de arquivos.</small>
-                </div>
-              </div>
-              
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <h4 class="timeline-date">Mar 2024 - Ago 2024</h4>
-                <div class="timeline-content">
-                  <h3>Designer Gráfico</h3>
-                  <p>HSports LTDA - Santa Catarina, SC (Presencial)</p>
-                  <small>Criação de adesivos e troféus para exportação e operação de máquinas.</small>
-                </div>
-              </div>
-
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <h4 class="timeline-date">Jan 2023 - Mai 2023</h4>
-                <div class="timeline-content">
-                  <h3>Designer Gráfico</h3>
-                  <p>Pip Publicidade - Santa Catarina, SC (Presencial)</p>
-                  <small>Produção de artes para outdoors, placas e adesivos.</small>
+              <div class="col-lg-4 col-md-6">
+                <div class="skill-block skills-animation">
+                  <header
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <h3 class="skill-title">CorelDRAW</h3>
+                    <span class="skill-badge">Avançado</span>
+                  </header>
+                  <p class="skill-desc">
+                    Ampla experiência na criação de artes vetoriais, adesivos,
+                    placas e materiais gráficos para produção e exportação.
+                  </p>
+                  <div class="progress slim">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="85"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
                 </div>
               </div>
 
+              <div class="col-lg-4 col-md-6">
+                <div class="skill-block skills-animation">
+                  <header
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <h3 class="skill-title">Design / UX</h3>
+                    <span class="skill-badge">Avançado</span>
+                  </header>
+                  <p class="skill-desc">
+                    Experiência em criar interfaces e materiais visuais
+                    intuitivos e atraentes, com foco na experiência do usuário e
+                    na comunicação efetiva da mensagem.
+                  </p>
+                  <div class="progress slim">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="85"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6">
+                <div class="skill-block skills-animation">
+                  <header
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <h3 class="skill-title">Java</h3>
+                    <span class="skill-badge">Mediano</span>
+                  </header>
+                  <p class="skill-desc">
+                    Desenvolvimento de lógica de programação e funcionalidades
+                    básicas de back-end utilizando a linguagem Java.
+                  </p>
+                  <div class="progress slim">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="50"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6">
+                <div class="skill-block skills-animation">
+                  <header
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <h3 class="skill-title">Angular</h3>
+                    <span class="skill-badge">Iniciante</span>
+                  </header>
+                  <p class="skill-desc">
+                    Desenvolvimento de aplicações web com Angular, utilizando
+                    TypeScript, componentes reativos e integração com APIs.
+                  </p>
+                  <div class="progress slim">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="30"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6">
+                <div class="skill-block skills-animation">
+                  <header
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <h3 class="skill-title">React</h3>
+                    <span class="skill-badge">Iniciante</span>
+                  </header>
+                  <p class="skill-desc">
+                    Construção de interfaces interativas com React, aplicando
+                    conceitos de hooks, estados e componentes funcionais.
+                  </p>
+                  <div class="progress slim">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="30"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="resume-education" role="tabpanel" aria-labelledby="resume-education-tab" tabindex="0" data-aos="fade-up" data-aos-delay="300">
-            <div class="timeline-container">
-                
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <h4 class="timeline-date">2024 - Presente</h4>
-                <div class="timeline-content">
-                  <h3>Bacharelado em Ciência da Computação</h3>
-                  <p>Universidade do Extremo Sul Catarinense - UNESC</p>
+            <div class="row alt-grid gy-4">
+              <div class="col-lg-8">
+                <p class="note">
+                  Minha trajetória combina design e desenvolvimento, permitindo
+                  criar soluções web completas com atenção tanto à experiência
+                  do usuário quanto à qualidade técnica do código.
+                </p>
+              </div>
+              <div class="col-lg-4">
+                <div class="soft-card p-4">
+                  <h4 class="mini-head">Toolbox</h4>
+                  <ul class="list-unstyled tool-list">
+                    <li>
+                      <i class="bi bi-check-lg"></i>
+                      <span>HTML, CSS, JavaScript</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-lg"></i> <span>Angular, React</span>
+                    </li>
+                    <li><i class="bi bi-check-lg"></i> <span>Java</span></li>
+                    <li>
+                      <i class="bi bi-check-lg"></i>
+                      <span>CorelDRAW & Adobe Photoshop</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    
-    <section id="contact" class="contact section light-background">
-  <div class="container section-title" data-aos="fade-up">
-        <h2>Contato</h2>
-      </div>
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-stretch">
-          <div class="col-lg-7 order-lg-1 order-2" data-aos="fade-right" data-aos-delay="200">
-            <div class="contact-form-container">
-              <div class="form-intro">
-                <h2>Vamos Conversar</h2>
-                <p>Tem alguma pergunta ou oportunidade? Sinta-se à vontade para me enviar uma mensagem através do formulário abaixo.</p>
+      </section>
+
+      <section id="resume" class="resume section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Currículo</h2>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row" data-aos="fade-up" data-aos-delay="200">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul
+                  class="nav nav-pills resume-navigation justify-content-center"
+                  id="resume-resume-tabs"
+                  role="tablist"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                  <li class="nav-item" role="presentation">
+                    <button
+                      class="nav-link active"
+                      id="resume-experience-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#resume-experience"
+                      type="button"
+                      role="tab"
+                      aria-controls="resume-experience"
+                      aria-selected="true"
+                    >
+                      <span class="nav-number">01</span>
+                      <span class="nav-label">Experiência</span>
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button
+                      class="nav-link"
+                      id="resume-education-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#resume-education"
+                      type="button"
+                      role="tab"
+                      aria-controls="resume-education"
+                      aria-selected="false"
+                    >
+                      <span class="nav-number">02</span>
+                      <span class="nav-label">Educação</span>
+                    </button>
+                  </li>
+                </ul>
               </div>
-              <form action="https://formspree.io/f/xblkwlra" method="post" class="contact-form">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-field">
-                      <input type="text" name="name" class="form-input" id="userName" placeholder="Seu Nome" required="">
-                      <label for="userName" class="field-label">Nome</label>
+            </div>
+            <div
+              class="tab-content resume-content"
+              id="resume-resume-tabContent"
+            >
+              <div
+                class="tab-pane fade show active"
+                id="resume-experience"
+                role="tabpanel"
+                aria-labelledby="resume-experience-tab"
+                tabindex="0"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <div class="timeline-container">
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="timeline-date">Out 2024 - Presente</h4>
+                    <div class="timeline-content">
+                      <h3>Desenvolvedor FullStack (Estágio)</h3>
+                      <p>Procer - Criciúma, SC (Híbrido)</p>
+                      <small
+                        >Desenvolvimento de aplicações web utilizando Angular,
+                        TypeScript e Nest.</small
+                      >
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-field">
-                      <input type="email" class="form-input" name="email" id="userEmail" placeholder="Seu Email" required="">
-                      <label for="userEmail" class="field-label">Email</label>
+
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="timeline-date">Jul 2024 - Out 2024</h4>
+                    <div class="timeline-content">
+                      <h3>SDR (Estágio)</h3>
+                      <p>Simples Dental - Criciúma, SC (Híbrido)</p>
+                      <small
+                        >Prospecção e qualificação de leads, atuando na geração
+                        de oportunidades de negócio.</small
+                      >
+                    </div>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="timeline-date">Nov 2023 - Jul 2024</h4>
+                    <div class="timeline-content">
+                      <h3>Auxiliar de Escritório</h3>
+                      <p>
+                        Emasel Contabilidade - Santa Catarina, SC (Presencial)
+                      </p>
+                      <small
+                        >Responsável pela entrega de documentações e organização
+                        de arquivos.</small
+                      >
+                    </div>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="timeline-date">Mar 2023 - Ago 2023</h4>
+                    <div class="timeline-content">
+                      <h3>Designer Gráfico</h3>
+                      <p>HSports LTDA - Santa Catarina, SC (Presencial)</p>
+                      <small
+                        >Criação de adesivos e troféus para exportação e
+                        operação de máquinas.</small
+                      >
+                    </div>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="timeline-date">Jan 2022 - Mai 2022</h4>
+                    <div class="timeline-content">
+                      <h3>Designer Gráfico</h3>
+                      <p>Pip Publicidade - Santa Catarina, SC (Presencial)</p>
+                      <small
+                        >Produção de artes para outdoors, placas e
+                        adesivos.</small
+                      >
                     </div>
                   </div>
                 </div>
-                <div class="form-field">
-                    <input type="text" class="form-input" name="subject" id="messageSubject" placeholder="Assunto" required="">
-                    <label for="messageSubject" class="field-label">Assunto</label>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="resume-education"
+                role="tabpanel"
+                aria-labelledby="resume-education-tab"
+                tabindex="0"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <div class="timeline-container">
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h4 class="timeline-date">2024 - Presente</h4>
+                    <div class="timeline-content">
+                      <h3>Bacharelado em Ciência da Computação</h3>
+                      <p>Universidade do Extremo Sul Catarinense - UNESC</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-field message-field">
-                  <textarea class="form-input message-input" name="message" id="userMessage" rows="5" placeholder="Sua mensagem" required=""></textarea>
-                  <label for="userMessage" class="field-label">Mensagem</label>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Carregando</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Sua mensagem foi enviada. Obrigado!</div>
-                </div>
-                <button type="submit" class="send-button">
-                  Enviar Mensagem
-                  <span class="button-arrow">→</span>
-                </button>
-              </form>
+              </div>
             </div>
           </div>
-          <div class="col-lg-5 order-lg-2 order-1" data-aos="fade-left" data-aos-delay="300">
-            <div class="contact-sidebar">
-              <div class="contact-header">
-                <h3>Entre em Contato</h3>
-                <p>Você também pode me encontrar aqui:</p>
-              </div>
-              <div class="contact-methods">
-                <div class="contact-method" data-aos="fade-in" data-aos-delay="350">
-                  <div class="contact-icon">
-                    <i class="bi bi-geo-alt"></i>
+        </div>
+      </section>
+
+      <section id="contact" class="contact section light-background">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Contato</h2>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row align-items-stretch">
+            <div
+              class="col-lg-7 order-lg-1 order-2"
+              data-aos="fade-right"
+              data-aos-delay="200"
+            >
+              <div class="contact-form-container">
+                <div class="form-intro">
+                  <h2>Vamos Conversar</h2>
+                  <p>
+                    Tem alguma pergunta ou oportunidade? Sinta-se à vontade para
+                    me enviar uma mensagem através do formulário abaixo.
+                  </p>
+                </div>
+                <form
+                  action="https://formspree.io/f/xblkwlra"
+                  method="post"
+                  class="contact-form"
+                >
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-field">
+                        <input
+                          type="text"
+                          name="name"
+                          class="form-input"
+                          id="userName"
+                          placeholder="Seu Nome"
+                          required=""
+                        />
+                        <label for="userName" class="field-label">Nome</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-field">
+                        <input
+                          type="email"
+                          class="form-input"
+                          name="email"
+                          id="userEmail"
+                          placeholder="Seu Email"
+                          required=""
+                        />
+                        <label for="userEmail" class="field-label">Email</label>
+                      </div>
+                    </div>
                   </div>
-                  <div class="contact-details">
-                    <span class="method-label">Localização</span>
-                    <p>Sombrio / SC<br>Brasil</p>
+                  <div class="form-field">
+                    <input
+                      type="text"
+                      class="form-input"
+                      name="subject"
+                      id="messageSubject"
+                      placeholder="Assunto"
+                      required=""
+                    />
+                    <label for="messageSubject" class="field-label"
+                      >Assunto</label
+                    >
+                  </div>
+                  <div class="form-field message-field">
+                    <textarea
+                      class="form-input message-input"
+                      name="message"
+                      id="userMessage"
+                      rows="5"
+                      placeholder="Sua mensagem"
+                      required=""
+                    ></textarea>
+                    <label for="userMessage" class="field-label"
+                      >Mensagem</label
+                    >
+                  </div>
+                  <div class="my-3">
+                    <div class="loading">Carregando</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">
+                      Sua mensagem foi enviada. Obrigado!
+                    </div>
+                  </div>
+                  <button type="submit" class="send-button">
+                    Enviar Mensagem
+                    <span class="button-arrow">→</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div
+              class="col-lg-5 order-lg-2 order-1"
+              data-aos="fade-left"
+              data-aos-delay="300"
+            >
+              <div class="contact-sidebar">
+                <div class="contact-header">
+                  <h3>Entre em Contato</h3>
+                  <p>Você também pode me encontrar aqui:</p>
+                </div>
+                <div class="contact-methods">
+                  <div
+                    class="contact-method"
+                    data-aos="fade-in"
+                    data-aos-delay="350"
+                  >
+                    <div class="contact-icon">
+                      <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                      <span class="method-label">Localização</span>
+                      <p>Sombrio / SC<br />Brasil</p>
+                    </div>
+                  </div>
+                  <div
+                    class="contact-method"
+                    data-aos="fade-in"
+                    data-aos-delay="400"
+                  >
+                    <div class="contact-icon">
+                      <i class="bi bi-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                      <span class="method-label">Email</span>
+                      <p>gustavo.cunha.constante@gmail.com</p>
+                    </div>
                   </div>
                 </div>
-                <div class="contact-method" data-aos="fade-in" data-aos-delay="400">
-                  <div class="contact-icon">
-                    <i class="bi bi-envelope"></i>
-                  </div>
-                  <div class="contact-details">
-                    <span class="method-label">Email</span>
-                    <p>gustavo.cunha.constante@gmail.com</p>
+                <div
+                  class="connect-section"
+                  data-aos="fade-up"
+                  data-aos-delay="550"
+                >
+                  <span class="connect-label">Conecte-se comigo</span>
+                  <div class="social-links">
+                    <a
+                      href="https://www.linkedin.com/in/gstvdc"
+                      target="_blank"
+                      class="social-link"
+                    >
+                      <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a
+                      href="https://github.com/gstvdc"
+                      target="_blank"
+                      class="social-link"
+                    >
+                      <i class="bi bi-github"></i>
+                    </a>
+                    <a
+                      href="https://www.instagram.com/gstvdcc"
+                      target="_blank"
+                      class="social-link"
+                    >
+                      <i class="bi bi-instagram"></i>
+                    </a>
                   </div>
                 </div>
               </div>
-              <div class="connect-section" data-aos="fade-up" data-aos-delay="550">
-                <span class="connect-label">Conecte-se comigo</span>
-                <div class="social-links">
-                  <a href="https://www.linkedin.com/in/gustavo-constante-621884313" target="_blank" class="social-link">
-                    <i class="bi bi-linkedin"></i>
-                  </a>
-                  <a href="https://www.instagram.com/gstvdcc" target="_blank" class="social-link">
-                    <i class="bi bi-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div> 
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-  </main>
+    <footer id="footer" class="footer">
+      <div class="container">
+        <div class="copyright text-center">
+          <p>
+            © <span>Copyright</span>
+            <strong class="px-1 sitename">Gustavo Constante.</strong>
+            <span>All Rights Reserved</span>
+          </p>
+        </div>
+        <div class="social-links d-flex justify-content-center">
+          <a
+            href="https://www.linkedin.com/in/gustavo-constante-621884313"
+            target="_blank"
+            ><i class="bi bi-linkedin"></i
+          ></a>
+          <a href="https://github.com/gstvdc" target="_blank"
+            ><i class="bi bi-github"></i
+          ></a>
+          <a href="https://www.instagram.com/gstvdcc" target="_blank"
+            ><i class="bi bi-instagram"></i
+          ></a>
+        </div>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </footer>
 
-  <footer id="footer" class="footer">
-    <div class="container">
-      <div class="copyright text-center ">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Gustavo Constante.</strong> <span>All Rights Reserved</span></p>
-      </div>
-      <div class="social-links d-flex justify-content-center">
-        <a href="https://www.linkedin.com/in/gustavo-constante-621884313" target="_blank"><i class="bi bi-linkedin"></i></a>
-        <a href="https://www.instagram.com/gstvdcc" target="_blank"><i class="bi bi-instagram"></i></a>
-      </div>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <div id="preloader">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-  </footer>
 
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/typed.js/typed.umd.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-  <div id="preloader">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/js/main.js"></script>
-
-</body>
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>

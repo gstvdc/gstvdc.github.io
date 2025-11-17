@@ -1,0 +1,294 @@
+/* Contact Section */
+.contact .contact-form-container {
+  padding: 60px 0;
+}
+
+.contact .contact-form-container .form-intro {
+  margin-bottom: 60px;
+}
+
+.contact .contact-form-container .form-intro h2 {
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1.3;
+  margin-bottom: 2px;
+  letter-spacing: -0.5px;
+}
+
+.contact .contact-form-container .form-intro p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--default-color);
+  margin-bottom: 0;
+  opacity: 0.85;
+}
+
+.contact .contact-form-container .contact-form .row {
+  margin-bottom: 40px;
+}
+
+.contact .contact-form-container .contact-form .row:last-of-type {
+  margin-bottom: 0;
+}
+
+.contact .contact-form-container .contact-form .form-field {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.contact .contact-form-container .contact-form .form-field.message-field {
+  margin-bottom: 24px;
+}
+
+.contact .contact-form-container .contact-form .form-field .field-label {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--heading-color);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.contact .contact-form-container .contact-form .form-field .form-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 80%);
+  background: transparent;
+  padding: 20px 0 15px 0;
+  font-size: 16px;
+  color: var(--default-color);
+  transition: all 0.3s ease;
+}
+
+.contact .contact-form-container .contact-form .form-field .form-input:focus {
+  outline: none;
+  border-bottom-color: var(--accent-color);
+  background: transparent;
+}
+
+.contact
+  .contact-form-container
+  .contact-form
+  .form-field
+  .form-input::placeholder {
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
+  opacity: 1;
+}
+
+.contact .contact-form-container .contact-form .form-field .message-input {
+  resize: vertical;
+  min-height: 48px;
+  height: 150px;
+  font-family: inherit;
+  padding-top: 12px;
+  opacity: 0.85;
+}
+
+.contact .contact-form-container .contact-form .send-button {
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 18px 40px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.contact .contact-form-container .contact-form .send-button .button-arrow {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.contact .contact-form-container .contact-form .send-button:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+.contact
+  .contact-form-container
+  .contact-form
+  .send-button:hover
+  .button-arrow {
+  transform: translateX(5px);
+}
+
+.contact .contact-sidebar {
+  background: color-mix(in srgb, var(--accent-color), transparent 97%);
+  height: 100%;
+  padding: 60px 40px;
+}
+
+.contact .contact-sidebar .contact-header {
+  margin-bottom: 24px;
+}
+
+.contact .contact-sidebar .contact-header h3 {
+  font-size: 28px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  color: var(--heading-color);
+  letter-spacing: -0.3px;
+}
+
+.contact .contact-sidebar .contact-header p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--default-color);
+  margin-bottom: 0;
+}
+
+.contact .contact-sidebar .contact-methods {
+  margin-bottom: 60px;
+}
+
+.contact .contact-sidebar .contact-method {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.contact .contact-sidebar .contact-method:last-child {
+  margin-bottom: 0;
+}
+
+.contact .contact-sidebar .contact-method .contact-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+}
+
+.contact .contact-sidebar .contact-method .contact-icon i {
+  font-size: 20px;
+}
+
+.contact .contact-sidebar .contact-method .contact-details {
+  flex: 1;
+}
+
+.contact .contact-sidebar .contact-method .contact-details .method-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-color);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.contact .contact-sidebar .contact-method .contact-details p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--default-color);
+  margin-bottom: 0;
+}
+
+.contact .contact-sidebar .connect-section {
+  border-top: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
+  padding-top: 40px;
+}
+
+.contact .contact-sidebar .connect-section .connect-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-color);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.contact .contact-sidebar .connect-section .social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.contact .contact-sidebar .connect-section .social-links .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--default-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contact .contact-sidebar .connect-section .social-links .social-link i {
+  font-size: 16px;
+}
+
+.contact .contact-sidebar .connect-section .social-links .social-link:hover {
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* Form Messages */
+.loading,
+.error-message,
+.sent-message {
+  display: none;
+}
+
+.loading.d-block,
+.error-message.d-block,
+.sent-message.d-block {
+  display: block;
+}
+
+@media (max-width: 992px) {
+  .contact .contact-form-container {
+    padding: 8px 0 16px 0;
+  }
+
+  .contact .contact-sidebar {
+    padding: 40px 30px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact .contact-form-container .form-intro h2 {
+    font-size: 28px;
+  }
+
+  .contact .contact-form-container .form-intro {
+    margin-bottom: 6px;
+  }
+
+  .contact .contact-form-container .contact-form .row {
+    margin-bottom: 4px;
+  }
+
+  .contact .contact-form-container .contact-form .form-field {
+    margin-bottom: 6px;
+  }
+
+  .contact .contact-sidebar {
+    padding: 30px 25px;
+  }
+
+  .contact .contact-sidebar .contact-header,
+  .contact .contact-sidebar .contact-methods {
+    margin-bottom: 40px;
+  }
+
+  .contact .contact-sidebar .contact-method {
+    margin-bottom: 30px;
+  }
+}
