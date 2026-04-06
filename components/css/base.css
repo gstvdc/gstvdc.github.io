@@ -1,14 +1,14 @@
-/* Base Styles */
 body {
   color: var(--default-color);
   font-family: var(--default-font);
   background-color: var(--background-color);
+  line-height: 1.65;
 }
 
 a {
   color: var(--accent-color);
   text-decoration: none;
-  transition: 0.3s;
+  transition: var(--transition-fast);
 }
 
 a:hover {
@@ -24,64 +24,75 @@ h5,
 h6 {
   font-family: var(--heading-font);
   color: var(--heading-color);
+  letter-spacing: -0.03em;
 }
 
 .light-background {
-  --background-color: #fafafa;
+  --background-color: #ffffff;
   --surface-color: #ffffff;
 }
 
-/* Utility Classes */
 .main {
-  padding-left: 90px;
+  padding-left: 96px;
 }
 
 section,
 .section {
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: var(--space-xxxl) 0;
+  padding: 84px 0;
   overflow: clip;
 }
 
 .section-title {
   text-align: center;
-  padding-bottom: 60px;
+  padding-bottom: 48px;
   position: relative;
 }
 
 .section-title h2 {
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 15px;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+  margin-bottom: 12px;
 }
 
 .section-title p {
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 300;
+  margin: 0 auto;
+  max-width: 680px;
+  font-size: 16px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--default-color), transparent 6%);
 }
 
-/* Responsive Adjustments */
 @media (max-width: 992px) {
   .main {
     padding-left: 0;
-    margin-bottom: 70px;
+    margin-bottom: 88px;
+  }
+
+  section,
+  .section {
+    padding: 68px 0;
   }
 
   .container {
-    padding-left: var(--space-md);
-    padding-right: var(--space-md);
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
 @media (max-width: 576px) {
+  section,
   .section {
-    padding: var(--space-xl) var(--space-md);
+    padding: 56px 0;
   }
 
   .section-title {
-    padding-bottom: var(--space-xl);
+    padding-bottom: 36px;
+  }
+
+  .section-title p {
+    font-size: 15px;
   }
 }
 

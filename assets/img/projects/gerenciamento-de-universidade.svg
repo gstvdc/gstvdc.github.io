@@ -1,0 +1,25 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" rx="36" fill="#11161C"/>
+  <rect x="44" y="44" width="1112" height="632" rx="28" fill="#161E27" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="92" y="94" width="84" height="8" rx="4" fill="#E2554D"/>
+  <text x="92" y="148" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="3">DESKTOP SYSTEM</text>
+  <text x="92" y="276" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="68" font-weight="700">Gerenciamento</text>
+  <text x="92" y="354" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="68" font-weight="700">de Universidade</text>
+  <text x="92" y="416" fill="#97A3B6" font-family="Arial, sans-serif" font-size="26" font-weight="400">Controle acadêmico com CRUD e persistência relacional</text>
+  <rect x="92" y="500" width="120" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="228" y="500" width="126" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="370" y="500" width="162" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
+  <text x="130" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">Java</text>
+  <text x="261" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">Swing</text>
+  <text x="402" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">PostgreSQL</text>
+  <rect x="820" y="120" width="264" height="440" rx="28" fill="#F8F6F2"/>
+  <rect x="860" y="172" width="184" height="18" rx="9" fill="#D9D1C6"/>
+  <rect x="860" y="208" width="138" height="14" rx="7" fill="#E7E0D6"/>
+  <rect x="860" y="240" width="162" height="14" rx="7" fill="#E7E0D6"/>
+  <rect x="860" y="300" width="184" height="46" rx="14" fill="#EFE8DC"/>
+  <rect x="860" y="366" width="184" height="46" rx="14" fill="#EFE8DC"/>
+  <rect x="860" y="432" width="184" height="46" rx="14" fill="#EFE8DC"/>
+  <path d="M742 170H772" stroke="#E2554D" stroke-width="4" stroke-linecap="round"/>
+  <path d="M742 220H790" stroke="#E2554D" stroke-width="4" stroke-linecap="round"/>
+  <path d="M742 270H760" stroke="#E2554D" stroke-width="4" stroke-linecap="round"/>
+</svg>

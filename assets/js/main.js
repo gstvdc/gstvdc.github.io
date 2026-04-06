@@ -43,15 +43,16 @@
     });
 
     const typedElement = document.querySelector(".typed-effect");
-    if (typedElement) {
+    if (typedElement && typeof Typed !== "undefined") {
       new Typed(".typed-effect", {
         strings: [
-          "Desenvolvedor FullStack",
-          "Estudante de Ciência da Computação",
+          "desenvolvendo aplicações corporativas com Angular e NestJS",
+          "implementando autenticação JWT e regras de negócio",
+          "trabalhando com Git, Scrum e code review",
         ],
-        typeSpeed: 50,
-        backSpeed: 30,
-        backDelay: 2000,
+        typeSpeed: 42,
+        backSpeed: 24,
+        backDelay: 1800,
         loop: true,
         smartBackspace: true,
       });

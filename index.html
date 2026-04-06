@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Portfólio - Gustavo Constante</title>
+    <title>Portfólio | Gustavo Constante</title>
     <meta
       name="description"
-      content="Portfólio de Gustavo da Cunha Constante, Sales Development Representative e Designer Gráfico"
+      content="Portfólio de Gustavo Constante, desenvolvedor full stack com experiência em Angular, NestJS, React, Node.js, TypeScript e aplicações corporativas."
     />
     <meta
       name="keywords"
-      content="Sales, SDR, Vendas, Designer, Photoshop, CorelDraw, Carreira, HTML, CSS, Java, Computação"
+      content="Gustavo Constante, Desenvolvedor Full Stack, Angular, NestJS, React, Next.js, TypeScript, Node.js, APIs REST, Docker, Portfólio"
     />
 
     <link href="assets/img/logo_favicon.png" rel="icon" />
@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Sora:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
 
@@ -43,6 +43,7 @@
     <link href="components/css/nav.css" rel="stylesheet" />
     <link href="components/css/hero.css" rel="stylesheet" />
     <link href="components/css/about.css" rel="stylesheet" />
+    <link href="components/css/projects.css" rel="stylesheet" />
     <link href="components/css/skills.css" rel="stylesheet" />
     <link href="components/css/resume.css" rel="stylesheet" />
     <link href="components/css/contact.css" rel="stylesheet" />
@@ -53,19 +54,30 @@
     <nav id="navmenu" class="navmenu-vertical">
       <ul>
         <li>
-          <a href="#hero"><i class="bi bi-house"></i></a>
+          <a href="#hero" aria-label="Início"><i class="bi bi-house"></i></a>
         </li>
         <li>
-          <a href="#about"><i class="bi bi-person"></i></a>
+          <a href="#about" aria-label="Sobre"><i class="bi bi-person"></i></a>
         </li>
         <li>
-          <a href="#skills"><i class="bi bi-bar-chart"></i></a>
+          <a href="#projects" aria-label="Projetos"
+            ><i class="bi bi-briefcase"></i
+          ></a>
         </li>
         <li>
-          <a href="#resume"><i class="bi bi-file-earmark-text"></i></a>
+          <a href="#skills" aria-label="Stack"
+            ><i class="bi bi-code-square"></i
+          ></a>
         </li>
         <li>
-          <a href="#contact"><i class="bi bi-envelope"></i></a>
+          <a href="#resume" aria-label="Experiência"
+            ><i class="bi bi-file-earmark-text"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#contact" aria-label="Contato"
+            ><i class="bi bi-envelope"></i
+          ></a>
         </li>
       </ul>
     </nav>
@@ -76,39 +88,82 @@
           <div class="row align-items-center gx-5 gy-5 justify-content-center">
             <div class="col-lg-7">
               <div class="intro">
-                <h1 class="display-heading mb-3">Gustavo da Cunha Constante</h1>
+                <h1 class="display-heading">Gustavo Constante</h1>
+                <figure class="portrait-wrap portrait-wrap-mobile">
+                  <img
+                    src="assets/img/profile/profile-6.jpg"
+                    alt="Foto de Gustavo Constante"
+                    class="img-fluid portrait-img"
+                  />
+                </figure>
+                <p class="hero-lead">
+                  Desenvolvedor Full Stack e estudante de Ciência da Computação
+                  pela UNESC, com experiência prática em aplicações web
+                  corporativas, APIs REST e integração entre sistemas. Hoje atuo
+                  na PROCER com Angular e NestJS, além de manter projetos
+                  próprios com React, Node.js, Express e TypeScript.
+                </p>
                 <h2 class="typed-container">
-                  <span class="typed-fixed">Sou um </span
+                  <span class="typed-fixed">Atualmente </span
                   ><span class="typed-effect"></span>
                 </h2>
+                <div class="hero-meta">
+                  <span>Angular e NestJS em produto corporativo</span>
+                  <span>APIs REST, autenticação JWT e regras de negócio</span>
+                  <span>Git, Pull Requests, Scrum e code review</span>
+                </div>
+                <div class="hero-actions">
+                  <a href="#projects" class="hero-link">Projetos</a>
+                  <a href="#resume" class="hero-link">Experiência</a>
+                  <a href="#contact" class="hero-link">Contato</a>
+                </div>
                 <div class="hero-social">
                   <a
-                    href="https://www.linkedin.com/in/gustavo-constante-621884313"
+                    href="https://www.linkedin.com/in/gstvdc"
                     target="_blank"
-                    ><i class="bi bi-linkedin"></i
-                  ></a>
-                  <a href="https://github.com/gstvdc" target="_blank"
-                    ><i class="bi bi-github"></i
-                  ></a>
-                  <a href="https://www.instagram.com/gstvdcc" target="_blank"
-                    ><i class="bi bi-instagram"></i
-                  ></a>
+                    rel="noreferrer"
+                    aria-label="LinkedIn"
+                  >
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                  <a
+                    href="https://github.com/gstvdc"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="GitHub"
+                  >
+                    <i class="bi bi-github"></i>
+                  </a>
+                  <a
+                    href="mailto:gustavo.cunha.constante@gmail.com"
+                    aria-label="Enviar email"
+                  >
+                    <i class="bi bi-envelope-paper"></i>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="col-lg-5">
+
+            <div class="col-lg-5 hero-portrait-desktop">
               <figure
                 class="portrait-wrap position-relative"
                 data-aos="fade-left"
                 data-aos-delay="200"
               >
+                <span class="portrait-badge badge-top"
+                  >Angular + NestJS + JWT</span
+                >
+                <span class="portrait-badge badge-bottom"
+                  >Sombrio/SC · disponível para oportunidades em
+                  desenvolvimento</span
+                >
                 <img
                   src="assets/img/profile/profile-6.jpg"
-                  alt="Profile Portrait"
+                  alt="Foto de Gustavo Constante"
                   class="img-fluid portrait-img"
                 />
                 <figcaption class="visually-hidden">
-                  Foto de perfil de Gustavo
+                  Foto de perfil de Gustavo Constante
                 </figcaption>
               </figure>
             </div>
@@ -118,51 +173,147 @@
 
       <section id="about" class="about section light-background">
         <div class="container section-title" data-aos="fade-up">
-          <h2>Sobre Mim</h2>
+          <h2>Sobre</h2>
+          <p>O que eu construo hoje e onde gero valor no desenvolvimento.</p>
         </div>
+
         <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div
-            class="row align-items-center gx-5 gy-5"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div
-              class="row align-items-center justify-content-between intro-wrap gy-5"
-            >
-              <div class="col-lg-7" data-aos="fade-right" data-aos-delay="150">
-                <div class="intro-content">
-                  <span class="eyebrow">Olá!</span>
-                  <h2 class="headline">
-                    Sou um desenvolvedor em formação, unindo design, tecnologia
-                    e aprendizado contínuo em uma única jornada.
-                  </h2>
-                  <p class="lead">
-                    Como Desenvolvedor FullStack em crescimento e Designer
-                    Gráfico, trago uma combinação única de habilidades criativas
-                    e técnicas. Minha experiência em design me permite criar
-                    soluções visuais impactantes e interfaces intuitivas,
-                    enquanto meu desenvolvimento em programação me capacita a
-                    transformar ideias em aplicações funcionais. Atualmente,
-                    curso Ciência da Computação e trabalho como estagiário na
-                    Procer em Criciúma/SC, onde aplico e expando meus
-                    conhecimentos diariamente.
-                  </p>
-                  <div class="cta-group">
-                    <a href="#resume" class="btn-ghost">
-                      Ver Meu Currículo <i class="bi bi-arrow-down"></i>
-                    </a>
-                  </div>
+          <div class="row align-items-center gx-5 gy-5">
+            <div class="col-lg-6">
+              <div class="intro-content">
+                <span class="eyebrow">Stack atual</span>
+                <h2 class="headline">
+                  Desenvolvo aplicações completas, do front-end ao back-end, com
+                  foco em interfaces modernas, APIs REST e código bem
+                  organizado.
+                </h2>
+                <p class="lead">
+                  Na PROCER, atuo com Angular e NestJS no desenvolvimento de
+                  aplicações corporativas, incluindo componentes reutilizáveis,
+                  Reactive Forms, services, guards, interceptors, autenticação
+                  JWT, validações e integração entre sistemas. Em projetos
+                  próprios, também trabalho com React, Node.js, Express,
+                  PostgreSQL e TypeScript.
+                </p>
+                <div class="cta-group">
+                  <a href="#resume" class="btn-ghost">
+                    Ver experiência
+                    <i class="bi bi-arrow-right-short"></i>
+                  </a>
+                  <a href="#contact" class="btn-ghost alt">
+                    Entrar em contato
+                    <i class="bi bi-envelope"></i>
+                  </a>
                 </div>
               </div>
-              <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="250">
-                <figure class="profile-figure text-center text-lg-end">
-                  <img
-                    src="assets/img/profile/profile-square-7.jpg"
-                    alt="Portrait of Gustavo"
-                    class="img-fluid profile-photo"
-                  />
-                </figure>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="about-highlight-grid">
+                <article
+                  class="about-card"
+                  data-aos="fade-up"
+                  data-aos-delay="150"
+                >
+                  <div class="about-card-icon">
+                    <i class="bi bi-building"></i>
+                  </div>
+                  <h3>Produto real</h3>
+                  <p>
+                    Atuação prática em software corporativo, com evolução de
+                    aplicação, refatoração e melhoria contínua de regras de
+                    negócio.
+                  </p>
+                </article>
+
+                <article
+                  class="about-card"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                  <div class="about-card-icon">
+                    <i class="bi bi-diagram-3"></i>
+                  </div>
+                  <h3>Integração full stack</h3>
+                  <p>
+                    Construção e consumo de APIs REST, autenticação, validações
+                    e fluxo entre front-end, back-end e serviços externos.
+                  </p>
+                </article>
+
+                <article
+                  class="about-card"
+                  data-aos="fade-up"
+                  data-aos-delay="250"
+                >
+                  <div class="about-card-icon">
+                    <i class="bi bi-lightning-charge"></i>
+                  </div>
+                  <h3>Stack além do trabalho</h3>
+                  <p>
+                    Também desenvolvo projetos próprios com React, Node.js,
+                    Express, PostgreSQL e TypeScript para ampliar repertório
+                    técnico.
+                  </p>
+                </article>
+
+                <article
+                  class="about-card"
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                >
+                  <div class="about-card-icon">
+                    <i class="bi bi-mortarboard"></i>
+                  </div>
+                  <h3>Fluxo profissional</h3>
+                  <p>
+                    Vivência com Scrum, Git, Pull Requests, code review e boas
+                    práticas de desenvolvimento em equipe.
+                  </p>
+                </article>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="projects-showcase section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Projetos em destaque</h2>
+          <p>
+            Repositórios selecionados do meu GitHub para demonstrar contexto,
+            stack e tipo de problema que eu resolvo.
+          </p>
+        </div>
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="projects-toolbar">
+            <div class="projects-status">
+              <span class="status-dot"></span>
+              <span id="github-sync-status" aria-live="polite"
+                >Sincronizando com GitHub...</span
+              >
+            </div>
+            <a
+              class="projects-all-link"
+              href="https://github.com/gstvdc?tab=repositories"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ver todos os repositórios
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+          </div>
+
+          <div id="github-projects-grid" class="row g-4">
+            <div class="col-lg-4 col-md-6">
+              <div class="project-loading-card"></div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="project-loading-card"></div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="project-loading-card"></div>
             </div>
           </div>
         </div>
@@ -170,491 +321,479 @@
 
       <section id="skills" class="skills section">
         <div class="container section-title" data-aos="fade-up">
-          <h2>Habilidades</h2>
+          <h2>Stack atual</h2>
           <p>
-            Minhas competências combinam desenvolvimento web e design, unindo
-            código limpo à criatividade visual e experiência do usuário.
+            Tecnologias, ferramentas e competências alinhadas ao currículo
+            atual.
           </p>
         </div>
+
         <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div
-            class="row align-items-center justify-content-between intro-wrap gy-5"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div class="row">
-              <div class="col-lg-4 col-md-6">
-                <div class="skill-block skills-animation">
-                  <header
-                    class="d-flex align-items-center justify-content-between"
-                  >
-                    <h3 class="skill-title">CorelDRAW</h3>
-                    <span class="skill-badge">Avançado</span>
-                  </header>
-                  <p class="skill-desc">
-                    Ampla experiência na criação de artes vetoriais, adesivos,
-                    placas e materiais gráficos para produção e exportação.
-                  </p>
-                  <div class="progress slim">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      aria-valuenow="85"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <div class="skill-block skills-animation">
-                  <header
-                    class="d-flex align-items-center justify-content-between"
-                  >
-                    <h3 class="skill-title">Design / UX</h3>
-                    <span class="skill-badge">Avançado</span>
-                  </header>
-                  <p class="skill-desc">
-                    Experiência em criar interfaces e materiais visuais
-                    intuitivos e atraentes, com foco na experiência do usuário e
-                    na comunicação efetiva da mensagem.
-                  </p>
-                  <div class="progress slim">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      aria-valuenow="85"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <div class="skill-block skills-animation">
-                  <header
-                    class="d-flex align-items-center justify-content-between"
-                  >
-                    <h3 class="skill-title">HTML/CSS</h3>
-                    <span class="skill-badge">Intermediário</span>
-                  </header>
-                  <p class="skill-desc">
-                    Desenvolvimento de interfaces web responsivas e modernas,
-                    com domínio de layouts flexbox/grid e técnicas avançadas de
-                    estilização.
-                  </p>
-                  <div class="progress slim">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      aria-valuenow="65"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <div class="skill-block skills-animation">
-                  <header
-                    class="d-flex align-items-center justify-content-between"
-                  >
-                    <h3 class="skill-title">Java</h3>
-                    <span class="skill-badge">Mediano</span>
-                  </header>
-                  <p class="skill-desc">
-                    Desenvolvimento de lógica de programação e funcionalidades
-                    básicas de back-end utilizando a linguagem Java.
-                  </p>
-                  <div class="progress slim">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      aria-valuenow="50"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <div class="skill-block skills-animation">
-                  <header
-                    class="d-flex align-items-center justify-content-between"
-                  >
-                    <h3 class="skill-title">Angular</h3>
-                    <span class="skill-badge">Iniciante</span>
-                  </header>
-                  <p class="skill-desc">
-                    Desenvolvimento de aplicações web com Angular, utilizando
-                    TypeScript, componentes reativos e integração com APIs.
-                  </p>
-                  <div class="progress slim">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      aria-valuenow="30"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6">
-                <div class="skill-block skills-animation">
-                  <header
-                    class="d-flex align-items-center justify-content-between"
-                  >
-                    <h3 class="skill-title">React</h3>
-                    <span class="skill-badge">Iniciante</span>
-                  </header>
-                  <p class="skill-desc">
-                    Construção de interfaces interativas com React, aplicando
-                    conceitos de hooks, estados e componentes funcionais.
-                  </p>
-                  <div class="progress slim">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      aria-valuenow="30"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </div>
-              </div>
+          <div class="stack-banner">
+            <div>
+              <span class="stack-banner-label">Foco atual</span>
+              <h3>Angular + NestJS em aplicações corporativas reais</h3>
             </div>
-            <div class="row alt-grid gy-4">
-              <div class="col-lg-8">
-                <p class="note">
-                  Minha trajetória combina design e desenvolvimento, permitindo
-                  criar soluções web completas com atenção tanto à experiência
-                  do usuário quanto à qualidade técnica do código.
+            <p>
+              Desenvolvimento de interfaces modernas, autenticação com JWT,
+              regras de negócio, integração de APIs REST e colaboração em
+              ambiente ágil com Git e code review.
+            </p>
+          </div>
+
+          <div class="row g-4 stack-grid">
+            <div class="col-lg-3 col-md-6">
+              <article
+                class="stack-card"
+                data-aos="fade-up"
+                data-aos-delay="150"
+              >
+                <div class="stack-icon">
+                  <i class="bi bi-window"></i>
+                </div>
+                <h3>Front-end</h3>
+                <p>
+                  Interfaces componentizadas, consumo de APIs e experiência de
+                  uso consistente.
                 </p>
-              </div>
-              <div class="col-lg-4">
-                <div class="soft-card p-4">
-                  <h4 class="mini-head">Toolbox</h4>
-                  <ul class="list-unstyled tool-list">
-                    <li>
-                      <i class="bi bi-check-lg"></i>
-                      <span>HTML, CSS, JavaScript</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check-lg"></i> <span>Angular, React</span>
-                    </li>
-                    <li><i class="bi bi-check-lg"></i> <span>Java</span></li>
-                    <li>
-                      <i class="bi bi-check-lg"></i>
-                      <span>CorelDRAW & Adobe Photoshop</span>
-                    </li>
-                  </ul>
+                <div class="stack-tags">
+                  <span>Angular</span>
+                  <span>React</span>
+                  <span>Next.js</span>
+                  <span>TypeScript</span>
+                  <span>HTML5</span>
+                  <span>CSS3</span>
+                  <span>Reactive Forms</span>
                 </div>
-              </div>
+              </article>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <article
+                class="stack-card"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <div class="stack-icon">
+                  <i class="bi bi-hdd-network"></i>
+                </div>
+                <h3>Back-end</h3>
+                <p>
+                  Construção de APIs, regras de negócio, rotas e integração
+                  entre camadas.
+                </p>
+                <div class="stack-tags">
+                  <span>NestJS</span>
+                  <span>Node.js</span>
+                  <span>Express</span>
+                  <span>Swagger</span>
+                  <span>JWT</span>
+                  <span>Java</span>
+                  <span>Python</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <article
+                class="stack-card"
+                data-aos="fade-up"
+                data-aos-delay="250"
+              >
+                <div class="stack-icon">
+                  <i class="bi bi-database"></i>
+                </div>
+                <h3>Dados & APIs</h3>
+                <p>
+                  Persistência relacional, modelagem de entidades e consultas
+                  para aplicações web e desktop.
+                </p>
+                <div class="stack-tags">
+                  <span>PostgreSQL</span>
+                  <span>MySQL</span>
+                  <span>MongoDB</span>
+                  <span>REST APIs</span>
+                  <span>Integrações</span>
+                  <span>Validações</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+              <article
+                class="stack-card"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <div class="stack-icon">
+                  <i class="bi bi-kanban"></i>
+                </div>
+                <h3>Workflow</h3>
+                <p>
+                  Entrega organizada, versionamento e atenção a clareza visual e
+                  manutenção.
+                </p>
+                <div class="stack-tags">
+                  <span>Git</span>
+                  <span>GitHub</span>
+                  <span>GitLab</span>
+                  <span>Docker</span>
+                  <span>Postman</span>
+                  <span>Figma</span>
+                  <span>Scrum</span>
+                  <span>UI/UX</span>
+                </div>
+              </article>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="resume" class="resume section">
+      <section id="resume" class="resume section light-background">
         <div class="container section-title" data-aos="fade-up">
-          <h2>Currículo</h2>
+          <h2>Experiência e formação</h2>
+          <p>
+            Um resumo direto do meu momento profissional, base acadêmica e
+            diferenciais de atuação.
+          </p>
         </div>
+
         <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row" data-aos="fade-up" data-aos-delay="200">
-            <div class="row">
-              <div class="col-lg-12">
-                <ul
-                  class="nav nav-pills resume-navigation justify-content-center"
-                  id="resume-resume-tabs"
-                  role="tablist"
-                  data-aos="fade-up"
-                  data-aos-delay="200"
-                >
-                  <li class="nav-item" role="presentation">
-                    <button
-                      class="nav-link active"
-                      id="resume-experience-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#resume-experience"
-                      type="button"
-                      role="tab"
-                      aria-controls="resume-experience"
-                      aria-selected="true"
-                    >
-                      <span class="nav-number">01</span>
-                      <span class="nav-label">Experiência</span>
-                    </button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button
-                      class="nav-link"
-                      id="resume-education-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#resume-education"
-                      type="button"
-                      role="tab"
-                      aria-controls="resume-education"
-                      aria-selected="false"
-                    >
-                      <span class="nav-number">02</span>
-                      <span class="nav-label">Educação</span>
-                    </button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button
-                      class="nav-link"
-                      id="resume-projects-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#resume-projects"
-                      type="button"
-                      role="tab"
-                      aria-controls="resume-projects"
-                      aria-selected="false"
-                    >
-                      <span class="nav-number">03</span>
-                      <span class="nav-label">Projetos</span>
-                    </button>
-                  </li>
-                </ul>
+          <div class="row">
+            <div class="col-lg-12">
+              <ul
+                class="nav nav-pills resume-navigation justify-content-center"
+                id="resume-tabs"
+                role="tablist"
+              >
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="resume-experience-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#resume-experience"
+                    type="button"
+                    role="tab"
+                    aria-controls="resume-experience"
+                    aria-selected="true"
+                  >
+                    <span class="nav-number">01</span>
+                    <span class="nav-label">Experiência</span>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="resume-education-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#resume-education"
+                    type="button"
+                    role="tab"
+                    aria-controls="resume-education"
+                    aria-selected="false"
+                  >
+                    <span class="nav-number">02</span>
+                    <span class="nav-label">Formação</span>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="resume-differentials-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#resume-differentials"
+                    type="button"
+                    role="tab"
+                    aria-controls="resume-differentials"
+                    aria-selected="false"
+                  >
+                    <span class="nav-number">03</span>
+                    <span class="nav-label">Diferenciais</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tab-content resume-content" id="resume-tab-content">
+            <div
+              class="tab-pane fade show active"
+              id="resume-experience"
+              role="tabpanel"
+              aria-labelledby="resume-experience-tab"
+              tabindex="0"
+            >
+              <article
+                class="experience-spotlight"
+                data-aos="fade-up"
+                data-aos-delay="150"
+              >
+                <div class="spotlight-header">
+                  <span class="spotlight-badge">Experiência atual</span>
+                  <h3>Desenvolvedor Full Stack - PROCER</h3>
+                  <p>Out 2025 - Atual · Criciúma/SC · Híbrido</p>
+                </div>
+
+                <div class="row g-4 spotlight-grid">
+                  <div class="col-md-6">
+                    <div class="spotlight-item">
+                      <i class="bi bi-window-stack"></i>
+                      <div>
+                        <h4>Front-end com Angular</h4>
+                        <p>
+                          Criação de componentes reutilizáveis, services,
+                          guards, interceptors e formulários com Reactive Forms.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="spotlight-item">
+                      <i class="bi bi-diagram-2"></i>
+                      <div>
+                        <h4>APIs com NestJS</h4>
+                        <p>
+                          Desenvolvimento de endpoints, regras de negócio,
+                          consistência de dados e integração entre sistemas.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="spotlight-item">
+                      <i class="bi bi-code-slash"></i>
+                      <div>
+                        <h4>Autenticação e acesso</h4>
+                        <p>
+                          Implementação de autenticação com JWT, controle de
+                          acesso e validações aplicadas ao sistema.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="spotlight-item">
+                      <i class="bi bi-people"></i>
+                      <div>
+                        <h4>Fluxo de trabalho em equipe</h4>
+                        <p>
+                          Participação em Scrum, dailies, sprints, code review,
+                          Pull Requests e colaboração contínua com o time.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <h3 class="resume-subtitle">Trajetória anterior</h3>
+
+              <div class="timeline-container">
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <h4 class="timeline-date">Jul 2025 - Out 2025</h4>
+                  <div class="timeline-content">
+                    <h3>SDR</h3>
+                    <p>Simples Dental - Criciúma/SC · Híbrido</p>
+                    <small>
+                      Organização e análise de dados em CRM, criação de
+                      automações, fluxos de mensagens e scripts de prospecção
+                      com colaboração multidisciplinar.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <h4 class="timeline-date">Nov 2024 - Jul 2025</h4>
+                  <div class="timeline-content">
+                    <h3>Auxiliar de Escritório</h3>
+                    <p>Emasel Contabilidade - Santa Catarina/SC · Presencial</p>
+                    <small>
+                      Execução de rotinas administrativas, organização
+                      documental e apoio na melhoria de processos internos.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <h4 class="timeline-date">Mar 2024 - Ago 2025</h4>
+                  <div class="timeline-content">
+                    <h3>Designer Gráfico</h3>
+                    <p>HSports LTDA - Santa Catarina/SC · Presencial</p>
+                    <small>
+                      Criação de materiais visuais e artes para produção, com
+                      apoio técnico no uso de ferramentas digitais.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <h4 class="timeline-date">Jan 2022 - Mai 2022</h4>
+                  <div class="timeline-content">
+                    <h3>Designer Gráfico</h3>
+                    <p>Pip Publicidade - Santa Catarina/SC · Presencial</p>
+                    <small>
+                      Criação de peças para mídia impressa e reforço de atenção
+                      a comunicação e composição visual.
+                    </small>
+                  </div>
+                </div>
               </div>
             </div>
+
             <div
-              class="tab-content resume-content"
-              id="resume-resume-tabContent"
+              class="tab-pane fade"
+              id="resume-education"
+              role="tabpanel"
+              aria-labelledby="resume-education-tab"
+              tabindex="0"
             >
-              <div
-                class="tab-pane fade show active"
-                id="resume-experience"
-                role="tabpanel"
-                aria-labelledby="resume-experience-tab"
-                tabindex="0"
-                data-aos="fade-up"
-                data-aos-delay="300"
-              >
-                <div class="timeline-container">
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">Out 2024 - Presente</h4>
-                    <div class="timeline-content">
-                      <h3>Desenvolvedor FullStack (Estágio)</h3>
-                      <p>Procer - Criciúma, SC (Híbrido)</p>
-                      <small
-                        >Desenvolvimento de aplicações web utilizando Angular,
-                        TypeScript e Nest.</small
-                      >
-                    </div>
-                  </div>
+              <div class="education-grid">
+                <article class="education-card">
+                  <span class="education-badge">Formação principal</span>
+                  <h3>Bacharelado em Ciência da Computação</h3>
+                  <p>Universidade do Extremo Sul Catarinense - UNESC</p>
+                  <strong>2024 - 2028</strong>
+                </article>
 
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">Jul 2024 - Out 2024</h4>
-                    <div class="timeline-content">
-                      <h3>SDR (Estágio)</h3>
-                      <p>Simples Dental - Criciúma, SC (Híbrido)</p>
-                      <small
-                        >Prospecção e qualificação de leads, atuando na geração
-                        de oportunidades de negócio.</small
-                      >
-                    </div>
-                  </div>
-
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">Nov 2023 - Jul 2024</h4>
-                    <div class="timeline-content">
-                      <h3>Auxiliar de Escritório</h3>
-                      <p>
-                        Emasel Contabilidade - Santa Catarina, SC (Presencial)
-                      </p>
-                      <small
-                        >Responsável pela entrega de documentações e organização
-                        de arquivos.</small
-                      >
-                    </div>
-                  </div>
-
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">Mar 2023 - Ago 2023</h4>
-                    <div class="timeline-content">
-                      <h3>Designer Gráfico</h3>
-                      <p>HSports LTDA - Santa Catarina, SC (Presencial)</p>
-                      <small
-                        >Criação de adesivos e troféus para exportação e
-                        operação de máquinas.</small
-                      >
-                    </div>
-                  </div>
-
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">Jan 2022 - Mai 2022</h4>
-                    <div class="timeline-content">
-                      <h3>Designer Gráfico</h3>
-                      <p>Pip Publicidade - Santa Catarina, SC (Presencial)</p>
-                      <small
-                        >Produção de artes para outdoors, placas e
-                        adesivos.</small
-                      >
-                    </div>
-                  </div>
-                </div>
+                <article class="education-card">
+                  <span class="education-badge">Aprendizado em foco</span>
+                  <h3>Desenvolvimento web full stack</h3>
+                  <p>
+                    Evolução constante em Angular, NestJS, React, Next.js,
+                    arquitetura de aplicações, APIs REST e banco de dados.
+                  </p>
+                  <strong
+                    >Prática acadêmica + projetos + experiência real</strong
+                  >
+                </article>
               </div>
-              <div
-                class="tab-pane fade"
-                id="resume-education"
-                role="tabpanel"
-                aria-labelledby="resume-education-tab"
-                tabindex="0"
-                data-aos="fade-up"
-                data-aos-delay="300"
-              >
-                <div class="timeline-container">
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">2024 - Presente</h4>
-                    <div class="timeline-content">
-                      <h3>Bacharelado em Ciência da Computação</h3>
-                      <p>Universidade do Extremo Sul Catarinense - UNESC</p>
-                    </div>
-                  </div>
-                </div>
+
+              <div class="learning-grid">
+                <article class="learning-card">
+                  <i class="bi bi-layers"></i>
+                  <h4>Arquitetura de interfaces</h4>
+                  <p>
+                    Organização de componentes, separação de responsabilidades e
+                    manutenção de aplicações front-end.
+                  </p>
+                </article>
+
+                <article class="learning-card">
+                  <i class="bi bi-server"></i>
+                  <h4>Integração de serviços</h4>
+                  <p>
+                    Construção e consumo de APIs com foco em fluxo de dados,
+                    regras de negócio e documentação.
+                  </p>
+                </article>
+
+                <article class="learning-card">
+                  <i class="bi bi-database-check"></i>
+                  <h4>Base relacional</h4>
+                  <p>
+                    Modelagem e persistência para cenários acadêmicos e projetos
+                    que simulam produto real.
+                  </p>
+                </article>
+
+                <article class="learning-card">
+                  <i class="bi bi-palette"></i>
+                  <h4>Repertório visual</h4>
+                  <p>
+                    Design e comunicação como apoio para interfaces mais claras
+                    e melhores decisões de apresentação.
+                  </p>
+                </article>
               </div>
-              <div
-                class="tab-pane fade"
-                id="resume-projects"
-                role="tabpanel"
-                aria-labelledby="resume-projects-tab"
-                tabindex="0"
-                data-aos="fade-up"
-                data-aos-delay="300"
-              >
-                <div class="timeline-container">
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">2025</h4>
-                    <div class="timeline-content">
-                      <h3>Gerador de Certificados</h3>
-                      <p>Angular, TypeScript</p>
-                      <small
-                        >Gerador de certificados acadêmicos com Angular - crie,
-                        visualize e gerencie certificados facilmente.
-                        <a
-                          href="https://github.com/gstvdc/Gerador-de-certificados"
-                          target="_blank"
-                          >Ver no GitHub</a
-                        ></small
-                      >
-                    </div>
-                  </div>
+            </div>
 
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">2024</h4>
-                    <div class="timeline-content">
-                      <h3>Gerenciamento de Universidade</h3>
-                      <p>Java, PostgreSQL, Swing</p>
-                      <small
-                        >Sistema desktop em Java + PostgreSQL para gerenciamento
-                        acadêmico (cursos, fases, disciplinas e professores).
-                        Interface Swing e padrão DAO.
-                        <a
-                          href="https://github.com/gstvdc/Gerenciamento-de-Universidade"
-                          target="_blank"
-                          >Ver no GitHub</a
-                        ></small
-                      >
-                    </div>
-                  </div>
+            <div
+              class="tab-pane fade"
+              id="resume-differentials"
+              role="tabpanel"
+              aria-labelledby="resume-differentials-tab"
+              tabindex="0"
+            >
+              <div class="differentials-grid">
+                <article class="differential-card">
+                  <h3>Experiência real em software</h3>
+                  <p>
+                    Atuação atual em ambiente corporativo com Angular, NestJS,
+                    Git, code review e evolução contínua de produto.
+                  </p>
+                </article>
 
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">2024</h4>
-                    <div class="timeline-content">
-                      <h3>Portfólio Pessoal</h3>
-                      <p>HTML, CSS, JavaScript, Bootstrap</p>
-                      <small
-                        >Portfólio pessoal desenvolvido com HTML, CSS e
-                        JavaScript. Design limpo, responsivo e focado na
-                        experiência do usuário.
-                        <a
-                          href="https://github.com/gstvdc/gstvdc.github.io"
-                          target="_blank"
-                          >Ver no GitHub</a
-                        ></small
-                      >
-                    </div>
-                  </div>
+                <article class="differential-card">
+                  <h3>Amplitude técnica</h3>
+                  <p>
+                    Além do stack principal, mantenho prática com React,
+                    Next.js, Node.js, Express, Java, Python, C++ e bancos
+                    relacionais e não relacionais.
+                  </p>
+                </article>
 
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">2025</h4>
-                    <div class="timeline-content">
-                      <h3>Central de Compras API</h3>
-                      <p>Node.js, Express, JavaScript</p>
-                      <small
-                        >API RESTful para gerenciamento de Central de Compras,
-                        com foco em operações de pedidos. Desenvolvida em
-                        Node.js com Express.
-                        <a
-                          href="https://github.com/gstvdc/central-de-compras-API"
-                          target="_blank"
-                          >Ver no GitHub</a
-                        ></small
-                      >
-                    </div>
-                  </div>
+                <article class="differential-card">
+                  <h3>Comunicação e produto</h3>
+                  <p>
+                    Base em UI/UX, design e experiência comercial que ajuda na
+                    comunicação, leitura de contexto e construção de interfaces
+                    mais claras.
+                  </p>
+                </article>
+              </div>
 
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h4 class="timeline-date">2024</h4>
-                    <div class="timeline-content">
-                      <h3>Anime Wikipedia</h3>
-                      <p>HTML, CSS, JavaScript</p>
-                      <small
-                        >Uma wiki interativa dos Hashiras de Kimetsu no Yaiba
-                        (Demon Slayer). Permite pesquisar e filtrar personagens
-                        por status e tipo de respiração.
-                        <a
-                          href="https://github.com/gstvdc/anime-wikipedia"
-                          target="_blank"
-                          >Ver no GitHub</a
-                        ></small
-                      >
-                    </div>
-                  </div>
-                </div>
+              <div class="resume-pill-group">
+                <span class="resume-pill">Angular</span>
+                <span class="resume-pill">NestJS</span>
+                <span class="resume-pill">React</span>
+                <span class="resume-pill">Next.js</span>
+                <span class="resume-pill">TypeScript</span>
+                <span class="resume-pill">APIs REST</span>
+                <span class="resume-pill">Git</span>
+                <span class="resume-pill">Docker</span>
+                <span class="resume-pill">MongoDB</span>
+                <span class="resume-pill">Postman</span>
+                <span class="resume-pill">Figma</span>
+                <span class="resume-pill">Java</span>
+                <span class="resume-pill">Python</span>
+                <span class="resume-pill">Scrum</span>
+                <span class="resume-pill">UI/UX</span>
+                <span class="resume-pill">Inglês intermediário</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="contact section light-background">
+      <section id="contact" class="contact section">
         <div class="container section-title" data-aos="fade-up">
           <h2>Contato</h2>
+          <p>
+            Se fizer sentido para sua equipe ou projeto, podemos conversar por
+            e-mail, LinkedIn ou GitHub.
+          </p>
         </div>
+
         <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row align-items-stretch">
-            <div
-              class="col-lg-7 order-lg-1 order-2"
-              data-aos="fade-right"
-              data-aos-delay="200"
-            >
+          <div class="row align-items-stretch gy-4">
+            <div class="col-lg-7">
               <div class="contact-form-container">
                 <div class="form-intro">
-                  <h2>Vamos Conversar</h2>
+                  <span class="contact-kicker">Vamos conversar</span>
+                  <h2>Aberto a oportunidades em desenvolvimento</h2>
                   <p>
-                    Tem alguma pergunta ou oportunidade? Sinta-se à vontade para
-                    me enviar uma mensagem através do formulário abaixo.
+                    Use o formulário para entrar em contato sobre vagas,
+                    projetos, freelas ou networking profissional.
                   </p>
                 </div>
+
                 <form
                   action="https://formspree.io/f/xblkwlra"
                   method="post"
@@ -668,8 +807,8 @@
                           name="name"
                           class="form-input"
                           id="userName"
-                          placeholder="Seu Nome"
-                          required=""
+                          placeholder="Seu nome"
+                          required
                         />
                         <label for="userName" class="field-label">Nome</label>
                       </div>
@@ -681,13 +820,14 @@
                           class="form-input"
                           name="email"
                           id="userEmail"
-                          placeholder="Seu Email"
-                          required=""
+                          placeholder="Seu email"
+                          required
                         />
                         <label for="userEmail" class="field-label">Email</label>
                       </div>
                     </div>
                   </div>
+
                   <div class="form-field">
                     <input
                       type="text"
@@ -695,12 +835,13 @@
                       name="subject"
                       id="messageSubject"
                       placeholder="Assunto"
-                      required=""
+                      required
                     />
                     <label for="messageSubject" class="field-label"
                       >Assunto</label
                     >
                   </div>
+
                   <div class="form-field message-field">
                     <textarea
                       class="form-input message-input"
@@ -708,95 +849,94 @@
                       id="userMessage"
                       rows="5"
                       placeholder="Sua mensagem"
-                      required=""
+                      required
                     ></textarea>
                     <label for="userMessage" class="field-label"
                       >Mensagem</label
                     >
                   </div>
+
                   <div class="my-3">
                     <div class="loading">Carregando</div>
                     <div class="error-message"></div>
                     <div class="sent-message">
-                      Sua mensagem foi enviada. Obrigado!
+                      Sua mensagem foi enviada. Obrigado.
                     </div>
                   </div>
+
                   <button type="submit" class="send-button">
-                    Enviar Mensagem
+                    Enviar mensagem
                     <span class="button-arrow">→</span>
                   </button>
                 </form>
               </div>
             </div>
-            <div
-              class="col-lg-5 order-lg-2 order-1"
-              data-aos="fade-left"
-              data-aos-delay="300"
-            >
-              <div class="contact-sidebar">
+
+            <div class="col-lg-5">
+              <aside class="contact-sidebar">
                 <div class="contact-header">
-                  <h3>Entre em Contato</h3>
-                  <p>Você também pode me encontrar aqui:</p>
+                  <span class="sidebar-badge">Contato direto</span>
+                  <h3>Formas rápidas de falar comigo</h3>
+                  <p>
+                    Prefere ir direto ao ponto? Estes são os canais mais
+                    rápidos.
+                  </p>
                 </div>
+
                 <div class="contact-methods">
-                  <div
-                    class="contact-method"
-                    data-aos="fade-in"
-                    data-aos-delay="350"
-                  >
+                  <div class="contact-method">
                     <div class="contact-icon">
                       <i class="bi bi-geo-alt"></i>
                     </div>
                     <div class="contact-details">
                       <span class="method-label">Localização</span>
-                      <p>Sombrio / SC<br />Brasil</p>
+                      <p>Sombrio/SC · Brasil</p>
                     </div>
                   </div>
-                  <div
-                    class="contact-method"
-                    data-aos="fade-in"
-                    data-aos-delay="400"
-                  >
+
+                  <div class="contact-method">
                     <div class="contact-icon">
                       <i class="bi bi-envelope"></i>
                     </div>
                     <div class="contact-details">
                       <span class="method-label">Email</span>
-                      <p>gustavo.cunha.constante@gmail.com</p>
+                      <p>
+                        <a href="mailto:gustavo.cunha.constante@gmail.com">
+                          gustavo.cunha.constante@gmail.com
+                        </a>
+                      </p>
                     </div>
                   </div>
                 </div>
-                <div
-                  class="connect-section"
-                  data-aos="fade-up"
-                  data-aos-delay="550"
-                >
-                  <span class="connect-label">Conecte-se comigo</span>
-                  <div class="social-links">
-                    <a
-                      href="https://www.linkedin.com/in/gstvdc"
-                      target="_blank"
-                      class="social-link"
-                    >
-                      <i class="bi bi-linkedin"></i>
-                    </a>
-                    <a
-                      href="https://github.com/gstvdc"
-                      target="_blank"
-                      class="social-link"
-                    >
-                      <i class="bi bi-github"></i>
-                    </a>
-                    <a
-                      href="https://www.instagram.com/gstvdcc"
-                      target="_blank"
-                      class="social-link"
-                    >
-                      <i class="bi bi-instagram"></i>
-                    </a>
-                  </div>
+
+                <div class="contact-quick-links">
+                  <a
+                    href="mailto:gustavo.cunha.constante@gmail.com"
+                    class="quick-link"
+                  >
+                    <span>Enviar e-mail</span>
+                    <i class="bi bi-arrow-up-right"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/gstvdc"
+                    target="_blank"
+                    rel="noreferrer"
+                    class="quick-link"
+                  >
+                    <span>LinkedIn</span>
+                    <i class="bi bi-arrow-up-right"></i>
+                  </a>
+                  <a
+                    href="https://github.com/gstvdc"
+                    target="_blank"
+                    rel="noreferrer"
+                    class="quick-link"
+                  >
+                    <span>GitHub</span>
+                    <i class="bi bi-arrow-up-right"></i>
+                  </a>
                 </div>
-              </div>
+              </aside>
             </div>
           </div>
         </div>
@@ -807,26 +947,39 @@
       <div class="container">
         <div class="copyright text-center">
           <p>
-            © <span>Copyright</span>
-            <strong class="px-1 sitename">Gustavo Constante.</strong>
-            <span>All Rights Reserved</span>
+            © <strong class="px-1 sitename">Gustavo Constante</strong>
+            <span
+              >Desenvolvedor Full Stack · Angular, NestJS, React e
+              Node.js.</span
+            >
           </p>
         </div>
         <div class="social-links d-flex justify-content-center">
           <a
-            href="https://www.linkedin.com/in/gustavo-constante-621884313"
+            href="https://www.linkedin.com/in/gstvdc"
             target="_blank"
-            ><i class="bi bi-linkedin"></i
-          ></a>
-          <a href="https://github.com/gstvdc" target="_blank"
-            ><i class="bi bi-github"></i
-          ></a>
-          <a href="https://www.instagram.com/gstvdcc" target="_blank"
-            ><i class="bi bi-instagram"></i
-          ></a>
+            rel="noreferrer"
+            aria-label="LinkedIn"
+          >
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a
+            href="https://github.com/gstvdc"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <i class="bi bi-github"></i>
+          </a>
+          <a
+            href="mailto:gustavo.cunha.constante@gmail.com"
+            aria-label="Enviar email"
+          >
+            <i class="bi bi-envelope"></i>
+          </a>
         </div>
         <div class="credits">
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          Construído para destacar experiência, projetos e stack atual.
         </div>
       </div>
     </footer>
@@ -835,8 +988,9 @@
       href="#"
       id="scroll-top"
       class="scroll-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
+    >
+      <i class="bi bi-arrow-up-short"></i>
+    </a>
 
     <div id="preloader">
       <div></div>
@@ -853,5 +1007,6 @@
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/github-projects.js"></script>
   </body>
 </html>

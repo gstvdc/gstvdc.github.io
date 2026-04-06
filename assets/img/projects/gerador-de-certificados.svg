@@ -1,0 +1,23 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" rx="36" fill="#10161D"/>
+  <rect x="44" y="44" width="1112" height="632" rx="28" fill="#151D26" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="92" y="94" width="84" height="8" rx="4" fill="#E2554D"/>
+  <text x="92" y="148" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="3">AUTOMATION TOOL</text>
+  <text x="92" y="278" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="72" font-weight="700">Gerador de</text>
+  <text x="92" y="360" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="72" font-weight="700">Certificados</text>
+  <text x="92" y="422" fill="#97A3B6" font-family="Arial, sans-serif" font-size="26" font-weight="400">Geração automática de certificados em PDF</text>
+  <rect x="92" y="500" width="168" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="276" y="500" width="122" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="414" y="500" width="106" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
+  <text x="122" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">JavaScript</text>
+  <text x="312" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">HTML5</text>
+  <text x="452" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">CSS3</text>
+  <rect x="790" y="116" width="290" height="430" rx="28" fill="#FAFBFC"/>
+  <rect x="830" y="160" width="210" height="18" rx="9" fill="#D7DDE6"/>
+  <rect x="830" y="198" width="154" height="14" rx="7" fill="#E8ECF1"/>
+  <rect x="830" y="230" width="176" height="14" rx="7" fill="#E8ECF1"/>
+  <path d="M858 354L930 420L1022 304" stroke="#E2554D" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="830" y="478" width="210" height="28" rx="14" fill="#ECEFF4"/>
+  <path d="M702 164L742 204" stroke="#28313D" stroke-width="2"/>
+  <path d="M742 164L702 204" stroke="#28313D" stroke-width="2"/>
+</svg>
