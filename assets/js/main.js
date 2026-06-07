@@ -47,7 +47,8 @@
       new Typed(".typed-effect", {
         strings: [
           "desenvolvendo aplicações corporativas com Angular e NestJS",
-          "implementando autenticação JWT e regras de negócio",
+          "entregando projetos freelance com Next.js e TypeScript",
+          "construindo projetos pessoais com React e IA generativa",
           "trabalhando com Git, Scrum e code review",
         ],
         typeSpeed: 42,
@@ -55,39 +56,6 @@
         backDelay: 1800,
         loop: true,
         smartBackspace: true,
-      });
-    }
-
-    let skillsAnimation = document.querySelectorAll(".skills-animation");
-    if (skillsAnimation.length > 0) {
-      skillsAnimation.forEach((item) => {
-        let progress = item.querySelectorAll(".progress .progress-bar");
-        progress.forEach((el) => {
-          el.style.transition = "none";
-          el.style.width = "0%";
-        });
-      });
-      setTimeout(() => {
-        skillsAnimation.forEach((item) => {
-          let progress = item.querySelectorAll(".progress .progress-bar");
-          progress.forEach((el) => {
-            el.style.transition = "width 1s cubic-bezier(0.4, 0, 0.2, 1)";
-            el.style.width = el.getAttribute("aria-valuenow") + "%";
-          });
-        });
-      }, 300);
-
-      skillsAnimation.forEach((item) => {
-        new Waypoint({
-          element: item,
-          offset: "80%",
-          handler: function (direction) {
-            let progress = item.querySelectorAll(".progress .progress-bar");
-            progress.forEach((el) => {
-              el.style.width = el.getAttribute("aria-valuenow") + "%";
-            });
-          },
-        });
       });
     }
 

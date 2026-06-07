@@ -21,7 +21,13 @@ Isso significa que o portfólio não depende de backend, build ou carregamento d
 .
 ├── index.html
 ├── assets/
+│   ├── docs/
+│   │   └── gustavo-constante.pdf
 │   ├── img/
+│   │   ├── projects/
+│   │   ├── profile/
+│   │   ├── OrganizAI.png
+│   │   └── drtalesllantada.png
 │   ├── js/
 │   │   ├── main.js
 │   │   └── github-projects.js
@@ -44,24 +50,30 @@ Isso significa que o portfólio não depende de backend, build ou carregamento d
 
 - `index.html`: estrutura principal do site e todas as seções da página
 - `assets/js/main.js`: animações, navegação, scroll e efeito de digitação
-- `assets/js/github-projects.js`: monta a seção de projetos em destaque e tenta sincronizar dados com o GitHub
-- `components/css/`: arquivos de estilo organizados por área do site
-- `assets/vendor/`: dependências visuais e scripts de apoio usados no front-end
+- `assets/js/github-projects.js`: monta os cards de projetos e sincroniza metadados com a API pública do GitHub
+- `assets/docs/gustavo-constante.pdf`: currículo disponível para download na seção de experiência
+- `components/css/`: estilos organizados por seção do site
+- `assets/vendor/`: Bootstrap, AOS e Typed.js
 
 ## O que o portfólio mostra
 
-- apresentação profissional na tela inicial
-- resumo sobre perfil e stack atual
-- projetos em destaque com links para GitHub
-- tecnologias organizadas por categoria
-- experiência profissional e formação
+- apresentação profissional com efeito de digitação descrevendo atuação atual
+- resumo de perfil e stack principal
+- projetos em destaque — pessoais, freelance e acadêmicos
+- tecnologias organizadas por categoria (front-end, back-end, dados, workflow)
+- experiência profissional, formação e diferenciais
+- download do currículo em PDF
 - formas de contato
 
 ## Projetos em destaque
 
-Os cards de projeto usam uma base local para garantir que a seção continue funcionando no GitHub Pages. Quando possível, o site também busca dados públicos do GitHub para mostrar informações como a última atualização do repositório.
+Os projetos são configurados em `PROJECTS_CONFIG` dentro de `github-projects.js`. Cada projeto define título, descrição, stack, preview, cor de acento e links.
 
-As imagens dos projetos ficam salvas localmente para evitar previews quebrados.
+- Projetos públicos: o script busca metadados na API do GitHub e exibe a data de atualização quando disponível
+- Projetos privados (`private: true`): exibem apenas o link de deploy, sem referência ao repositório
+- Projetos freelance recebem um badge visual (`badge: "Freelance"`) no card
+
+As imagens de preview ficam salvas localmente em `assets/img/` para evitar previews quebrados.
 
 ## Rodando localmente
 

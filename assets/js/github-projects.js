@@ -1,36 +1,68 @@
 (function () {
   "use strict";
 
-  const DEFAULT_REPO_OWNER = "gstvdc";
   const PROJECTS_CONFIG = [
     {
-      title: "Central de Compras",
+      title: "Tales Llantada",
       summary:
-        "Plataforma full stack para gerenciamento de compras institucionais com autenticação e regras de negócio.",
+        "Website institucional para clínica odontológica com Next.js 15, foco em SEO, animações e agendamento via WhatsApp.",
       problem:
-        "Resolve o fluxo de compras com autenticação de usuários, cashback e condições comerciais por estado.",
+        "Apresenta os serviços e especialidades do Dr. Tales Llantada com foco em conversão e agendamento direto.",
       role:
-        "Desenvolvimento completo de front-end e back-end com foco em fluxo de compra, regras do sistema e integração de dados.",
-      stack: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-      accent: "#ff6b6b",
-      year: "2025",
-      htmlUrl: "https://github.com/Centra-de-Compras-Unesc",
-      previewImage: "assets/img/projects/central-de-compras.svg",
+        "Desenvolvimento completo com Next.js 15, TypeScript e Tailwind CSS v4, com SEO, sitemap e animações com Framer Motion.",
+      stack: ["Next.js 15", "TypeScript", "Tailwind CSS"],
+      accent: "#1d6f8c",
+      year: "2026",
+      liveUrl: "https://drtalesllantada.com",
+      previewImage: "assets/img/drtalesllantada.png",
+      private: true,
+      badge: "Freelance",
+    },
+    {
+      owner: "gstvdc",
+      repo: "OrganizaAI",
+      title: "OrganizaAI",
+      summary:
+        "Aplicação web de educação financeira com IA generativa para análise e planejamento financeiro pessoal.",
+      problem:
+        "Transforma dados financeiros do usuário em insights e orientações geradas por IA.",
+      role:
+        "Desenvolvimento completo com React e TypeScript, integração com IA generativa e deploy no Vercel.",
+      stack: ["React", "TypeScript", "IA Generativa"],
+      accent: "#8B5CF6",
+      year: "2026",
+      liveUrl: "https://organiz-ai.vercel.app",
+      previewImage: "assets/img/OrganizAI.png",
     },
     {
       owner: "gstvdc",
       repo: "Gerador-de-certificados",
       title: "Gerador de Certificados",
       summary:
-        "Aplicação web para geração automática de certificados personalizados em PDF com foco em praticidade e escala.",
+        "Aplicação web para geração automática de certificados acadêmicos personalizados com Angular.",
       problem:
         "Facilita a emissão de certificados sem depender de montagem manual documento por documento.",
       role:
-        "Implementação do fluxo de entrada de dados, automação da geração de documentos e experiência de uso no navegador.",
-      stack: ["JavaScript", "HTML5", "CSS3", "PDF"],
+        "Implementação com Angular e TypeScript, automação da geração de documentos e experiência de uso no navegador.",
+      stack: ["Angular", "TypeScript", "Bootstrap"],
       accent: "#4dabf7",
       year: "2025",
       previewImage: "assets/img/projects/gerador-de-certificados.svg",
+    },
+    {
+      owner: "gstvdc",
+      repo: "8-Graus-de-Network",
+      title: "8 Graus de Network",
+      summary:
+        "Aplicação que encontra o menor caminho entre dois atores usando BFS em um grafo de coatuações.",
+      problem:
+        "Resolve o problema de seis graus de separação sobre dados reais de colaboração entre atores.",
+      role:
+        "Implementação do algoritmo BFS, modelagem do grafo e interface de consulta de conexões.",
+      stack: ["JavaScript", "BFS", "Grafos"],
+      accent: "#06B6D4",
+      year: "2026",
+      previewImage: "assets/img/projects/8-graus-de-network.svg",
     },
     {
       owner: "gstvdc",
@@ -123,6 +155,9 @@
       .map((tag) => `<span class="project-tag">${escapeHtml(tag)}</span>`)
       .join("");
 
+    const isPrivate = project.private || !project.htmlUrl;
+    const mediaHref = isPrivate ? project.liveUrl || "#" : project.htmlUrl;
+
     const liveLink = project.liveUrl
       ? `<a class="project-link primary" href="${escapeHtml(
           project.liveUrl
@@ -132,9 +167,28 @@
         </a>`
       : "";
 
-    const updatedAtLabel = project.updatedAt
-      ? `Atualizado em ${escapeHtml(formatUpdatedAt(project.updatedAt))}`
-      : "Atualização indisponível";
+    const githubLink = !isPrivate
+      ? `<a
+          class="project-link secondary"
+          href="${escapeHtml(project.htmlUrl)}"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Ver no GitHub
+          <i class="bi bi-arrow-up-right"></i>
+        </a>`
+      : "";
+
+    const badgeHtml = project.badge
+      ? `<span class="project-type-badge">${escapeHtml(project.badge)}</span>`
+      : "";
+
+    const updatedAtHtml = project.updatedAt
+      ? `<span title="Atualizado em ${escapeHtml(formatUpdatedAt(project.updatedAt))}">
+          <i class="bi bi-clock-history"></i>
+          Atualizado em ${escapeHtml(formatUpdatedAt(project.updatedAt))}
+        </span>`
+      : "";
 
     return `
       <div class="col-xl-4 col-md-6">
@@ -143,10 +197,10 @@
         )}">
           <a
             class="project-media"
-            href="${escapeHtml(project.htmlUrl)}"
+            href="${escapeHtml(mediaHref)}"
             target="_blank"
             rel="noreferrer"
-            aria-label="Abrir repositório ${escapeHtml(project.title)}"
+            aria-label="${isPrivate ? "Abrir demo" : "Abrir repositório"} ${escapeHtml(project.title)}"
           >
             <img
               src="${escapeHtml(project.previewImage)}"
@@ -154,18 +208,18 @@
               loading="lazy"
             />
             <span class="project-media-badge">
-              <i class="bi bi-github"></i>
-              GitHub
+              <i class="bi ${isPrivate ? "bi-arrow-up-right" : "bi-github"}"></i>
+              ${isPrivate ? "Demo" : "GitHub"}
             </span>
           </a>
 
           <div class="project-card-body">
             <div class="project-meta">
-              <span><strong>${escapeHtml(project.year)}</strong></span>
-              <span title="${escapeHtml(updatedAtLabel)}">
-                <i class="bi bi-clock-history"></i>
-                ${escapeHtml(updatedAtLabel)}
+              <span class="project-meta-primary">
+                <strong>${escapeHtml(project.year)}</strong>
+                ${badgeHtml}
               </span>
+              ${updatedAtHtml}
             </div>
 
             <h3>${escapeHtml(project.title)}</h3>
@@ -180,15 +234,7 @@
 
             <div class="project-links">
               ${liveLink}
-              <a
-                class="project-link secondary"
-                href="${escapeHtml(project.htmlUrl)}"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Ver no GitHub
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
+              ${githubLink}
             </div>
           </div>
         </article>
@@ -218,14 +264,16 @@
     }
   }
 
-  function updateStatus(message) {
-    const status = document.getElementById("github-sync-status");
-    if (status) {
-      status.textContent = message;
-    }
-  }
-
   function buildBaseProject(project) {
+    if (project.private) {
+      return {
+        ...project,
+        htmlUrl: "",
+        updatedAt: "",
+        liveUrl: project.liveUrl || "",
+      };
+    }
+
     const repository = getProjectRepository(project);
 
     if (!repository) {
@@ -250,7 +298,7 @@
   async function fetchRepositoryMetadata(project) {
     const baseProject = buildBaseProject(project);
 
-    if (!baseProject.owner || !baseProject.repo) {
+    if (project.private || !baseProject.owner || !baseProject.repo) {
       return baseProject;
     }
 
@@ -270,10 +318,15 @@
 
       const repository = await response.json();
 
+      const rawHomepage = repository.homepage || "";
+      const resolvedLiveUrl = rawHomepage
+        ? rawHomepage.startsWith("http") ? rawHomepage : `https://${rawHomepage}`
+        : baseProject.liveUrl;
+
       return {
         ...baseProject,
         htmlUrl: repository.html_url || baseProject.htmlUrl,
-        liveUrl: repository.homepage || baseProject.liveUrl,
+        liveUrl: resolvedLiveUrl,
         updatedAt: repository.pushed_at || repository.updated_at || "",
       };
     } catch (error) {
@@ -289,30 +342,9 @@
       const projects = await Promise.all(
         PROJECTS_CONFIG.map((project) => fetchRepositoryMetadata(project))
       );
-
-      const syncedProjects = projects.filter((project) => project.updatedAt).length;
       renderProjects(projects);
-
-      if (syncedProjects === PROJECTS_CONFIG.length) {
-        updateStatus("Projetos sincronizados com GitHub.");
-        return;
-      }
-
-      if (syncedProjects > 0) {
-        updateStatus(
-        "Projetos sincronizados parcialmente. Alguns links não expuseram metadados completos."
-        );
-        return;
-      }
-
-      updateStatus(
-        "Não foi possível ler as datas do GitHub agora. Exibindo a versão local."
-      );
     } catch (error) {
-      renderProjects(baseProjects);
-      updateStatus(
-        "Não foi possível sincronizar com o GitHub agora. Exibindo a versão local."
-      );
+      // baseProjects already rendered, nothing to do
     }
   }
 
