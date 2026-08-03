@@ -8,17 +8,17 @@
 }
 
 .contact .contact-kicker {
-  display: inline-flex;
-  margin-bottom: 14px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.04);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  color: var(--heading-color);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red, #e2554d);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  margin-bottom: 14px;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .contact .contact-form-container .form-intro {
@@ -116,25 +116,27 @@
 }
 
 .contact .contact-sidebar .sidebar-badge {
-  display: inline-flex;
-  margin-bottom: 14px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red, #e2554d);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  margin-bottom: 12px;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .contact .contact-sidebar .contact-header {
-  margin-bottom: 26px;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .contact .contact-sidebar .contact-header h3 {
-  font-size: clamp(28px, 4vw, 38px);
+  font-size: clamp(26px, 3.5vw, 36px);
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 10px;
@@ -143,47 +145,54 @@
 .contact .contact-sidebar .contact-header p {
   margin-bottom: 0;
   color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
 }
 
 .contact .contact-sidebar .contact-methods {
-  display: grid;
-  gap: 14px;
-  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact .contact-sidebar .contact-method {
   display: flex;
-  gap: 14px;
-  padding: 18px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border-radius: 0;
 }
 
 .contact .contact-sidebar .contact-icon {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  background: rgba(226, 85, 77, 0.16);
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  width: auto;
+  height: auto;
   color: var(--red);
 }
 
 .contact .contact-sidebar .contact-icon i {
-  font-size: 20px;
+  font-size: 22px;
+}
+
+.contact .contact-sidebar .contact-details {
+  min-width: 0;
+  flex: 1;
 }
 
 .contact .contact-sidebar .contact-details .method-label {
   display: block;
-  margin-bottom: 6px;
-  font-size: 12px;
+  margin-bottom: 4px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .contact .contact-sidebar .contact-details p,
@@ -191,11 +200,14 @@
   margin: 0;
   color: #ffffff;
   font-size: 15px;
+  font-weight: 600;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .contact .contact-sidebar .contact-quick-links {
-  display: grid;
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact .contact-sidebar .quick-link {
@@ -203,16 +215,23 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border-radius: 0;
   color: #ffffff;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+.contact .contact-sidebar .quick-link:last-child {
+  border-bottom: none;
 }
 
 .contact .contact-sidebar .quick-link:hover {
-  border-color: rgba(226, 85, 77, 0.42);
+  color: var(--red, #e2554d);
+  padding-left: 6px;
 }
 
 .loading,
@@ -231,5 +250,17 @@
   .contact .contact-form-container,
   .contact .contact-sidebar {
     padding: 26px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact .contact-form-container,
+  .contact .contact-sidebar {
+    padding: 22px 18px;
+  }
+
+  .contact .contact-sidebar .contact-details p,
+  .contact .contact-sidebar .contact-details a {
+    font-size: 13.5px;
   }
 }

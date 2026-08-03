@@ -1,6 +1,6 @@
 .resume .resume-download-row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-bottom: 28px;
 }
 
@@ -24,8 +24,10 @@
 }
 
 .resume .resume-navigation {
+  display: flex;
+  justify-content: center;
   gap: 14px;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
   padding: 0;
   border: none;
   flex-wrap: wrap;
@@ -87,17 +89,17 @@
 }
 
 .resume .spotlight-badge {
-  display: inline-flex;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.04);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  color: var(--heading-color);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red, #e2554d);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .resume .spotlight-header h3,
@@ -239,17 +241,17 @@
 }
 
 .resume .education-badge {
-  display: inline-flex;
-  margin-bottom: 14px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.04);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  color: var(--heading-color);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red, #e2554d);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  margin-bottom: 12px;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .resume .education-card h3,
@@ -288,31 +290,58 @@
 }
 
 .resume .resume-pill-group {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.resume .pill-col-title {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red, #e2554d);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.resume .pill-col-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  align-items: center;
+  gap: 6px 8px;
 }
 
 .resume .resume-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.04);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  color: var(--heading-color);
-  font-size: 13px;
-  font-weight: 700;
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--heading-color, #0f172a);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.resume .tag-sep {
+  color: var(--red, #e2554d);
+  font-size: 11px;
+  opacity: 0.7;
 }
 
 @media (max-width: 992px) {
   .resume .resume-navigation {
-    justify-content: flex-start !important;
+    justify-content: center !important;
   }
 
   .resume .education-grid,
   .resume .learning-grid,
-  .resume .differentials-grid {
+  .resume .differentials-grid,
+  .resume .resume-pill-group {
     grid-template-columns: 1fr;
   }
 }
@@ -332,5 +361,39 @@
 
   .resume .timeline-item {
     padding-left: 38px;
+  }
+}
+
+@media (max-width: 576px) {
+  .resume .resume-download-row {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .resume .resume-download-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 16px;
+  }
+
+  .resume .resume-navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+  }
+
+  .resume .resume-navigation .nav-item {
+    width: 100%;
+  }
+
+  .resume .resume-navigation .nav-item:nth-child(3) {
+    grid-column: span 2;
+  }
+
+  .resume .resume-navigation .nav-item .nav-link {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 12px;
   }
 }

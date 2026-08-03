@@ -5,88 +5,134 @@
   align-items: center;
   padding: 28px 30px;
   margin-bottom: 28px;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--radius-lg, 18px);
+  background: var(--bg-surface, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(15, 23, 42, 0.08));
 }
 
 .skills .stack-banner-label {
   display: inline-block;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.04);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  color: var(--heading-color);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red, #e2554d);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 12px;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .skills .stack-banner h3 {
-  font-size: clamp(28px, 4vw, 36px);
+  font-size: clamp(24px, 3.5vw, 34px);
   font-weight: 700;
+  letter-spacing: -0.015em;
   margin-bottom: 0;
+  color: var(--text-heading, var(--heading-color, #0f172a));
 }
 
 .skills .stack-banner p {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
+  color: var(--text-muted, #475569);
+  line-height: 1.65;
 }
 
 .skills .stack-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  padding: 26px 24px;
-  background: var(--surface-color);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 16px;
-  box-shadow: none;
-  transition: var(--transition-medium);
+  padding: 26px 22px;
+  background: var(--bg-surface, var(--surface-color, #ffffff));
+  border: 1px solid var(--border-subtle, rgba(15, 23, 42, 0.08));
+  border-radius: var(--radius-lg, 16px);
+  transition: all var(--transition-medium, 0.3s ease);
+  overflow: hidden;
+}
+
+.skills .stack-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--red, #e2554d);
+  opacity: 0;
+  transition: opacity var(--transition-fast, 0.2s ease);
 }
 
 .skills .stack-card:hover {
-  border-color: rgba(15, 23, 42, 0.14);
+  border-color: rgba(226, 85, 77, 0.28);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft, 0 10px 30px rgba(0, 0, 0, 0.05));
+}
+
+.skills .stack-card:hover::before {
+  opacity: 1;
 }
 
 .skills .stack-icon {
-  width: 50px;
-  height: 50px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
-  border-radius: 12px;
-  background: rgba(226, 85, 77, 0.08);
-  color: var(--red);
-  font-size: 24px;
+  margin-bottom: 16px;
+  background: none;
+  border: none;
+  padding: 0;
+  width: auto;
+  height: auto;
+  color: var(--red, #e2554d);
+  font-size: 26px;
+  transition: transform var(--transition-fast, 0.2s ease);
+}
+
+.skills .stack-card:hover .stack-icon {
+  transform: scale(1.15);
+  color: var(--red, #e2554d);
+  background: none;
+  box-shadow: none;
 }
 
 .skills .stack-card h3 {
-  font-size: 22px;
+  font-size: 19px;
   font-weight: 700;
-  margin-bottom: 12px;
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+  color: var(--text-heading, var(--heading-color, #0f172a));
 }
 
 .skills .stack-card p {
-  font-size: 15px;
-  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-muted, #475569);
+  line-height: 1.6;
+  margin-bottom: 18px;
+  flex-grow: 1;
 }
 
 .skills .stack-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 6px;
+  margin-top: auto;
 }
 
 .skills .stack-tags span {
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.04);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  color: var(--heading-color);
-  font-size: 12px;
-  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--bg-primary, #f8fafc);
+  border: 1px solid var(--border-subtle, rgba(15, 23, 42, 0.08));
+  color: var(--text-muted, #475569);
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  transition: var(--transition-fast, 0.2s ease);
+}
+
+.skills .stack-card:hover .stack-tags span {
+  border-color: var(--border-medium, rgba(15, 23, 42, 0.14));
 }
 
 @media (max-width: 992px) {

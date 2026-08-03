@@ -6,14 +6,13 @@
   <text x="92" y="286" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="72" font-weight="700">Central de</text>
   <text x="92" y="368" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="72" font-weight="700">Compras API</text>
   <text x="92" y="430" fill="#97A3B6" font-family="Arial, sans-serif" font-size="26" font-weight="400">API REST com documentação, regras e persistência</text>
-  <rect x="92" y="500" width="136" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
-  <rect x="244" y="500" width="134" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
-  <rect x="394" y="500" width="160" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
-  <rect x="570" y="500" width="132" height="44" rx="22" fill="#1D2630" stroke="rgba(255,255,255,0.1)"/>
-  <text x="125" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">Node.js</text>
-  <text x="278" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">Express</text>
-  <text x="424" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">TypeScript</text>
-  <text x="604" y="529" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="18" font-weight="700">Swagger</text>
+  <text x="92" y="525" fill="#E2554D" font-family="Arial, sans-serif" font-size="18" font-weight="700">Node.js</text>
+  <text x="180" y="525" fill="#97A3B6" font-family="Arial, sans-serif" font-size="18" font-weight="700">•</text>
+  <text x="200" y="525" fill="#E2554D" font-family="Arial, sans-serif" font-size="18" font-weight="700">Express</text>
+  <text x="290" y="525" fill="#97A3B6" font-family="Arial, sans-serif" font-size="18" font-weight="700">•</text>
+  <text x="310" y="525" fill="#E2554D" font-family="Arial, sans-serif" font-size="18" font-weight="700">TypeScript</text>
+  <text x="420" y="525" fill="#97A3B6" font-family="Arial, sans-serif" font-size="18" font-weight="700">•</text>
+  <text x="440" y="525" fill="#E2554D" font-family="Arial, sans-serif" font-size="18" font-weight="700">Swagger</text>
   <rect x="808" y="118" width="276" height="484" rx="28" fill="#151D26" stroke="#24303D" stroke-width="2"/>
   <rect x="848" y="164" width="196" height="18" rx="9" fill="#FFFFFF"/>
   <rect x="848" y="198" width="142" height="14" rx="7" fill="#9DAABC"/>
