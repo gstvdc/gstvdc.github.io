@@ -46,10 +46,10 @@
     if (typedElement && typeof Typed !== "undefined") {
       new Typed(".typed-effect", {
         strings: [
-          "desenvolvendo aplicações corporativas com Angular e NestJS",
-          "entregando projetos freelance com Next.js e TypeScript",
-          "construindo projetos pessoais com React e IA generativa",
-          "trabalhando com Git, Scrum e code review",
+          "criando sistemas que facilitam o trabalho das empresas",
+          "transformando ideias em sites e aplicações úteis",
+          "automatizando tarefas e conectando ferramentas do dia a dia",
+          "evoluindo produtos com atenção à qualidade e às pessoas",
         ],
         typeSpeed: 42,
         backSpeed: 24,

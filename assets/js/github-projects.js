@@ -15,6 +15,7 @@
       year: "2026",
       liveUrl: "https://drtalesllantada.com",
       previewImage: "assets/img/drtalesllantada.png",
+      imagePosition: "58% center",
       private: true,
       badge: "Freelance",
     },
@@ -33,6 +34,7 @@
       year: "2026",
       liveUrl: "https://organiz-ai.vercel.app",
       previewImage: "assets/img/OrganizAI.png",
+      imagePosition: "center center",
     },
     {
       owner: "gstvdc",
@@ -48,6 +50,8 @@
       accent: "#4dabf7",
       year: "2025",
       previewImage: "assets/img/projects/gerador-de-certificados.svg",
+      imagePosition: "center top",
+      isArtwork: true,
     },
     {
       owner: "gstvdc",
@@ -63,6 +67,8 @@
       accent: "#06B6D4",
       year: "2026",
       previewImage: "assets/img/projects/8-graus-de-network.svg",
+      imagePosition: "center top",
+      isArtwork: true,
     },
     {
       owner: "gstvdc",
@@ -78,21 +84,25 @@
       accent: "#ffd166",
       year: "2024",
       previewImage: "assets/img/projects/gerenciamento-de-universidade.svg",
+      imagePosition: "center top",
+      isArtwork: true,
     },
     {
       owner: "gstvdc",
       repo: "central-de-compras-API",
-      title: "Central de Compras API",
+      title: "Central de Compras",
       summary:
-        "API REST para o backend da Central de Compras com documentação Swagger e integração com PostgreSQL.",
+        "Plataforma full stack para gerenciamento de compras institucionais.",
       problem:
-        "Estrutura o backend da plataforma com rotas documentadas, persistência relacional e organização do domínio.",
+        "Organiza compras institucionais com autenticação, cashback e condições específicas por estado.",
       role:
-        "Desenvolvimento do backend com Node.js, Express, TypeScript, PostgreSQL e documentação da API.",
-      stack: ["Node.js", "Express", "TypeScript", "Swagger"],
+        "Desenvolvimento completo de frontend e backend, com regras de negócio e persistência de dados.",
+      stack: ["React", "TypeScript", "Node.js", "PostgreSQL"],
       accent: "#7bd389",
       year: "2025",
       previewImage: "assets/img/projects/central-de-compras-api.svg",
+      imagePosition: "center top",
+      isArtwork: true,
     },
   ];
 
@@ -158,24 +168,16 @@
     const isPrivate = project.private || !project.htmlUrl;
     const mediaHref = isPrivate ? project.liveUrl || "#" : project.htmlUrl;
 
-    const liveLink = project.liveUrl
-      ? `<a class="project-link primary" href="${escapeHtml(
-          project.liveUrl
-        )}" target="_blank" rel="noreferrer">
-          Ver deploy
-          <i class="bi bi-arrow-up-right"></i>
-        </a>`
-      : "";
-
-    const githubLink = !isPrivate
+    const githubIcon = project.liveUrl && !isPrivate
       ? `<a
-          class="project-link secondary"
+          class="project-repository-link"
           href="${escapeHtml(project.htmlUrl)}"
           target="_blank"
           rel="noreferrer"
+          aria-label="Abrir repositório de ${escapeHtml(project.title)} no GitHub"
+          title="Ver no GitHub"
         >
-          Ver no GitHub
-          <i class="bi bi-arrow-up-right"></i>
+          <i class="bi bi-github"></i>
         </a>`
       : "";
 
@@ -183,62 +185,37 @@
       ? `<span class="project-type-badge">${escapeHtml(project.badge)}</span>`
       : "";
 
-    const updatedAtHtml = project.updatedAt
-      ? `<span title="Atualizado em ${escapeHtml(formatUpdatedAt(project.updatedAt))}">
-          <i class="bi bi-clock-history"></i>
-          Atualizado em ${escapeHtml(formatUpdatedAt(project.updatedAt))}
-        </span>`
-      : "";
-
     return `
-      <div class="col-xl-4 col-md-6">
-        <article class="project-card" style="--project-accent: ${escapeHtml(
-          project.accent
-        )}">
-          <a
-            class="project-media"
-            href="${escapeHtml(mediaHref)}"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="${isPrivate ? "Abrir demo" : "Abrir repositório"} ${escapeHtml(project.title)}"
-          >
-            <img
-              src="${escapeHtml(project.previewImage)}"
-              alt="Preview do projeto ${escapeHtml(project.title)}"
-              loading="lazy"
-            />
-            <span class="project-media-badge">
-              <i class="bi ${isPrivate ? "bi-arrow-up-right" : "bi-github"}"></i>
-              ${isPrivate ? "Demo" : "GitHub"}
-            </span>
-          </a>
-
-          <div class="project-card-body">
-            <div class="project-meta">
-              <span class="project-meta-primary">
-                <strong>${escapeHtml(project.year)}</strong>
-                ${badgeHtml}
-              </span>
-              ${updatedAtHtml}
-            </div>
-
-            <h3>${escapeHtml(project.title)}</h3>
-            <p class="project-summary">${escapeHtml(project.summary)}</p>
-
-            <ul class="project-points">
-              <li>${escapeHtml(project.problem)}</li>
-              <li>${escapeHtml(project.role)}</li>
-            </ul>
-
-            <div class="project-tags">${tags}</div>
-
-            <div class="project-links">
-              ${liveLink}
-              ${githubLink}
-            </div>
+      <article class="project-card" style="--project-accent: ${escapeHtml(
+        project.accent
+      )}; --project-image-position: ${escapeHtml(project.imagePosition || "center")}; --project-image-fit: ${escapeHtml(project.imageFit || "cover")}">
+        <img
+          class="project-media${project.isArtwork ? " project-media-artwork" : ""}"
+          src="${escapeHtml(project.previewImage)}"
+          alt="Preview do projeto ${escapeHtml(project.title)}"
+          loading="lazy"
+        />
+        <div class="project-card-overlay"></div>
+        <div class="project-card-body">
+          <div class="project-meta">
+            <strong>${escapeHtml(project.year)}</strong>
+            ${badgeHtml}
           </div>
-        </article>
-      </div>
+          <h3>${escapeHtml(project.title)}</h3>
+          <div class="project-card-details">
+            <p class="project-summary">${escapeHtml(project.summary)}</p>
+            <div class="project-tags">${tags}</div>
+          </div>
+        </div>
+        ${githubIcon}
+        <a
+          class="project-expand-link"
+          href="${escapeHtml(mediaHref)}"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="${isPrivate ? "Abrir demo" : "Abrir repositório"} ${escapeHtml(project.title)}"
+        ></a>
+      </article>
     `;
   }
 
@@ -248,10 +225,8 @@
 
     if (!projects.length) {
       grid.innerHTML = `
-        <div class="col-12">
-          <div class="project-empty">
-            Nenhum projeto destacado foi encontrado no momento.
-          </div>
+        <div class="project-empty">
+          Nenhum projeto destacado foi encontrado no momento.
         </div>
       `;
       return;
