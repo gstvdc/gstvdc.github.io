@@ -15,55 +15,61 @@
 }
 
 .lang-switch button {
-  min-width: 34px;
-  max-width: 60px;
-  padding: 6px 9px;
-  border: 0;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
   background: transparent;
-  color: rgba(245, 244, 241, 0.62);
-  font-family: var(--mono-font);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
   overflow: hidden;
-  white-space: nowrap;
   cursor: pointer;
-  transition: max-width 0.3s ease, min-width 0.3s ease, padding 0.3s ease,
-    opacity 0.2s ease, background 0.25s, color 0.25s;
+  transition: width 0.3s ease, margin 0.3s ease, opacity 0.2s ease,
+    border-color 0.25s, transform 0.25s;
+}
+
+.lang-flag {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
 .lang-switch button:hover {
-  color: #f5f4f1;
+  transform: scale(1.08);
 }
 
 .lang-switch button.is-active {
-  background: var(--red);
-  color: #fff;
+  border-color: var(--red);
 }
 
 /* Collapsed: the other languages take no room and are invisible. */
 .lang-switch button:not(.is-active) {
-  min-width: 0;
-  max-width: 0;
-  padding-left: 0;
-  padding-right: 0;
+  width: 0;
+  border-width: 0;
   opacity: 0;
 }
 
-.lang-switch:hover button:not(.is-active),
-.lang-switch:focus-within button:not(.is-active),
 .lang-switch.is-open button:not(.is-active) {
-  min-width: 34px;
-  max-width: 60px;
-  padding-left: 9px;
-  padding-right: 9px;
+  width: 28px;
+  margin-left: 4px;
+  border-width: 2px;
   opacity: 1;
 }
 
 /* Leaves room for the collapsed switch next to the hero's "Contato" link. */
 .hero-cover-topbar {
   padding-right: 72px;
+  transition: padding-right 0.3s ease;
+}
+
+/* Expanded box adds two flags (2 x 32px): "Contato" slides aside instead of being covered. */
+html.lang-open .hero-cover-topbar {
+  padding-right: 136px;
 }
 
 @media (max-width: 992px) {
@@ -73,5 +79,9 @@
 
   .hero-cover-topbar {
     padding-right: 62px;
+  }
+
+  html.lang-open .hero-cover-topbar {
+    padding-right: 126px;
   }
 }
