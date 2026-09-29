@@ -1,0 +1,124 @@
+/* Pinned transition: hero stays fixed in the viewport while this overlay
+   fades in on top of it, driven by scroll progress (see main.js). The real
+   .hero-cover-name node itself is reparented and translated into the
+   overlay's centered slot — a single element travels, nothing is cloned. */
+.hero-pin-wrap {
+  position: relative;
+  /* name travel + "sobre mim" panel + pinned screen + screen the next card slides over */
+  height: 500vh;
+}
+
+.signature-overlay {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  margin-top: -100vh;
+  margin-top: -100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #0a0a0a;
+  opacity: 0;
+  pointer-events: none;
+  overflow: clip;
+  z-index: 3;
+  will-change: opacity;
+}
+
+.signature-scribbles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.signature-scribbles .scribble {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0.22;
+}
+
+.signature-scribbles .scribble-accent {
+  stroke-width: 2.2;
+  opacity: 0.4;
+}
+
+.signature-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signature-kicker {
+  display: inline-block;
+  font-family: var(--serif-font);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.signature-name-spacer {
+  width: 1px;
+  height: 140px;
+}
+
+.signature-tagline {
+  font-family: var(--mono-font);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 244, 241, 0.45);
+  margin: 6px 0 0;
+}
+
+/* ---------- Traveling name (reparented .hero-cover-name) ---------- */
+.hero-cover-name.is-traveling {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  margin: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pin-wrap {
+    height: auto;
+  }
+
+  .signature-overlay {
+    position: relative;
+    margin-top: 0;
+    opacity: 1;
+    height: auto;
+    flex-direction: column;
+    padding: 80px 0;
+  }
+
+  .bio-panel {
+    --p: 1;
+    position: relative;
+    opacity: 1;
+    inset: auto;
+    padding: 40px clamp(20px, 5vw, 96px);
+  }
+
+  .hero-cover-split {
+    opacity: 1 !important;
+  }
+}
+
+/* While the "sobre mim" panel comes in, the kicker and tagline step aside. */
+.signature-content {
+  opacity: clamp(0, calc(1 - var(--bp, 0) * 10), 1);
+}

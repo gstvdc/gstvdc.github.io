@@ -1,0 +1,119 @@
+/* Dark theme corrections + motion helpers (loaded last). */
+
+/* ---------- Dark overrides for legacy light literals ---------- */
+.contact .contact-form-container .contact-form .form-field .form-input,
+.contact .contact-form-container .contact-form .form-field .form-input:focus {
+  background: rgba(245, 244, 241, 0.04);
+}
+
+.navmenu-vertical a {
+  background: rgba(18, 18, 18, 0.92);
+  color: var(--nav-color);
+}
+
+@media (max-width: 992px) {
+  .navmenu-vertical {
+    background: rgba(10, 10, 10, 0.92);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ---------- Big section headings with masked word reveal ---------- */
+.section-title h2 {
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(40px, 6.4vw, 92px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin-bottom: 18px;
+}
+
+.rv .rv-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.rv .rv-word {
+  display: inline-block;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.js-motion .rv:not(.rv-in) .rv-word {
+  transform: translateY(110%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv .rv-word {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Watermark parallax ---------- */
+.section-watermark,
+.projects-watermark {
+  translate: 0 var(--drift, 0px);
+}
+
+/* ---------- Stack marquee ---------- */
+.stack-marquee {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: 26px 0 26px 96px;
+  background: var(--red);
+  color: #0a0a0a;
+}
+
+.stack-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  width: max-content;
+  animation: stack-marquee 38s linear infinite;
+}
+
+.stack-marquee:hover .stack-marquee-track {
+  animation-play-state: paused;
+}
+
+.stack-marquee span {
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(26px, 3.4vw, 46px);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stack-marquee i {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
+  background: #0a0a0a;
+}
+
+@keyframes stack-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 992px) {
+  .stack-marquee {
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-marquee-track {
+    animation: none;
+  }
+}
+
+/* ---------- Card hover: lift + red edge ---------- */

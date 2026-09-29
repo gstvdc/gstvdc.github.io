@@ -1,0 +1,424 @@
+/* Horizontal pinned timeline: everything is sized in vw so it scales with the screen. */
+.tl-section {
+  position: relative;
+  width: 100%;
+  height: 200vw;
+  padding: 0; /* overrides the global section padding */
+}
+
+.tl-sticky {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 10%;
+  overflow: hidden;
+}
+
+.tl-slider {
+  display: flex;
+  align-items: center;
+  gap: 5vw;
+  width: 240vw;
+  height: 30vw;
+  margin-right: 2vw;
+  padding: 0 5vw;
+  will-change: transform;
+}
+
+.tl-photo {
+  flex: none;
+  width: 30vw;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1vw;
+}
+
+.tl-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.tl-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* The horizontal line with a dot on each end (its width is scrubbed by GSAP). */
+.tl-line-wrap {
+  position: absolute;
+  left: 0;
+  top: 49%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+}
+
+.tl-end-dot {
+  flex: none;
+  position: relative;
+  z-index: 1;
+  width: 0.8vw;
+  height: 0.8vw;
+  border-radius: 50%;
+}
+
+.tl-end-dot--end {
+  opacity: 0; /* faded in by the scroll animation */
+}
+
+/* A faint rail shows the whole route; the red line draws over it while scrolling. */
+.tl-line-wrap::before {
+  content: "";
+  position: absolute;
+  left: 0.4vw;
+  top: 50%;
+  width: 98%;
+  height: 1px;
+  background: rgba(245, 244, 241, 0.12);
+  transform: translateY(-50%);
+}
+
+.tl-line {
+  flex: none;
+  width: 0;
+  height: 1px;
+  border-radius: 999px;
+}
+
+.tl-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 50%;
+}
+
+.tl-row--top {
+  gap: 0.5vw;
+}
+
+.tl-side {
+  height: 100%;
+  padding-top: 2vw;
+}
+
+.tl-side--top {
+  width: 20%;
+}
+
+.tl-side--bottom {
+  width: 34%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2vw;
+}
+
+.tl-heading {
+  width: 65%;
+  margin: 0;
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: 3vw;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: inherit;
+}
+
+.tl-period-label {
+  margin: 0;
+  font-family: var(--mono-font);
+  font-size: 1.65vw;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.tl-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6vw;
+  padding: 0.7vw 1.2vw;
+  border: 1px solid rgba(245, 244, 241, 0.25);
+  border-radius: 999px;
+  font-size: 0.95vw;
+  font-weight: 600;
+  color: #f5f4f1;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.tl-cv:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.tl-items {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.tl-items--top {
+  gap: 15vw;
+}
+
+.tl-items--bottom {
+  gap: 20vw;
+  margin-left: 7vw;
+}
+
+.tl-item {
+  position: relative;
+  height: 100%;
+  padding: 0 3vw;
+}
+
+.tl-item--top {
+  width: 30vw;
+}
+
+.tl-item--bottom {
+  width: 25vw;
+}
+
+.tl-stem-wrap {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tl-stem-wrap--top {
+  top: 0;
+  bottom: 0;
+}
+
+.tl-stem-wrap--bottom {
+  bottom: -1%;
+}
+
+.tl-dot {
+  position: relative;
+  width: 1vw;
+  height: 1vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.tl-stem {
+  width: 1px;
+  border-radius: 999px;
+}
+
+.tl-stem--top {
+  height: 94%;
+  transform-origin: bottom;
+}
+
+.tl-stem--bottom {
+  height: 94%;
+  transform-origin: top;
+}
+
+.tl-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+
+.tl-text--top {
+  margin-top: -1vw;
+}
+
+.tl-text--bottom {
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.tl-period {
+  margin: 0;
+  font-family: var(--display-font);
+  font-weight: 700;
+  font-size: 2.5vw;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: inherit;
+}
+
+.tl-desc {
+  width: 90%;
+  margin: 0;
+  font-size: 1.5vw;
+  line-height: 1.15;
+}
+
+/* ---------- Phones: taller pin, slimmer track, bigger type ---------- */
+@media (max-width: 600px) {
+  .tl-section {
+    height: 400vh;
+  }
+
+  .tl-sticky {
+    top: 5%;
+  }
+
+  .tl-slider {
+    width: 800vw;
+    height: 80vh;
+    padding: 0 7vw;
+  }
+
+  .tl-photo {
+    width: 85vw;
+    height: 65vw;
+    border-radius: 5vw;
+  }
+
+  .tl-end-dot {
+    width: 2vw;
+    height: 2vw;
+  }
+
+  .tl-side--top {
+    height: fit-content;
+    padding-top: 5vw;
+  }
+
+  .tl-side--bottom {
+    width: 30%;
+    padding-top: 5vw;
+  }
+
+  .tl-heading {
+    font-size: 8.5vw;
+  }
+
+  .tl-period-label {
+    font-size: 4.2vw;
+  }
+
+  .tl-cv {
+    font-size: 3.2vw;
+    padding: 2vw 3.4vw;
+    gap: 1.6vw;
+  }
+
+  .tl-items--top {
+    gap: 40vw;
+  }
+
+  .tl-items--bottom {
+    gap: 40vw;
+    margin-left: 7vw;
+  }
+
+  .tl-item {
+    padding: 0 7vw;
+  }
+
+  .tl-item--top {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+  }
+
+  .tl-item--bottom {
+    width: 70vw;
+  }
+
+  .tl-dot {
+    width: 2.5vw;
+    height: 2.5vw;
+  }
+
+  .tl-text--top {
+    margin-top: -2vw;
+  }
+
+  .tl-stem--bottom {
+    height: 100%;
+  }
+
+  .tl-period {
+    font-size: 6.4vw;
+  }
+
+  .tl-desc {
+    font-size: 4.8vw;
+  }
+}
+
+/* Reduced motion: the timeline is shown fully drawn, still pinned and slid by scroll. */
+
+/* ---------- First card: portrait + caption ---------- */
+.tl-portrait {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.tl-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0) 45%,
+    rgba(10, 10, 10, 0.55) 72%,
+    rgba(10, 10, 10, 0.92) 100%
+  );
+}
+
+.tl-portrait-caption {
+  position: absolute;
+  z-index: 2;
+  left: 1.6vw;
+  right: 1.6vw;
+  bottom: 1.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35vw;
+}
+
+.tl-portrait-eyebrow {
+  font-family: var(--mono-font);
+  font-size: 0.72vw;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--red);
+}
+
+.tl-portrait-caption strong {
+  font-family: var(--display-font);
+  font-size: 1.9vw;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .tl-portrait-caption {
+    left: 5vw;
+    right: 5vw;
+    bottom: 4.5vw;
+    gap: 1vw;
+  }
+
+  .tl-portrait-eyebrow {
+    font-size: 2.4vw;
+  }
+
+  .tl-portrait-caption strong {
+    font-size: 6vw;
+  }
+
+}

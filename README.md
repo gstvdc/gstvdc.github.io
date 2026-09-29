@@ -2,105 +2,46 @@
 
 Portfólio pessoal de Gustavo Constante, publicado em [gstvdc.github.io](https://gstvdc.github.io).
 
-O projeto foi reorganizado para uma arquitetura mais simples e estável para GitHub Pages, mantendo o site leve e fácil de atualizar.
+Construído com **Next.js (App Router) + React + TypeScript**, exportado como site estático para o GitHub Pages.
 
-## Arquitetura atual
-
-Hoje o site funciona de forma direta:
-
-- o conteúdo principal fica em `index.html`
-- os estilos são separados por seção em `components/css/`
-- os comportamentos da página ficam em `assets/js/`
-- bibliotecas externas ficam locais em `assets/vendor/`
-
-Isso significa que o portfólio não depende de backend, build ou carregamento dinâmico de componentes HTML para funcionar.
-
-## Estrutura do projeto
-
-```text
-.
-├── index.html
-├── assets/
-│   ├── docs/
-│   │   └── gustavo-constante.pdf
-│   ├── img/
-│   │   ├── projects/
-│   │   ├── profile/
-│   │   ├── OrganizAI.png
-│   │   └── drtalesllantada.png
-│   ├── js/
-│   │   ├── main.js
-│   │   └── github-projects.js
-│   └── vendor/
-└── components/
-    └── css/
-        ├── variables.css
-        ├── base.css
-        ├── nav.css
-        ├── hero.css
-        ├── about.css
-        ├── projects.css
-        ├── skills.css
-        ├── resume.css
-        ├── contact.css
-        └── footer.css
-```
-
-## Como cada parte funciona
-
-- `index.html`: estrutura principal do site e todas as seções da página
-- `assets/js/main.js`: animações, navegação, scroll e efeito de digitação
-- `assets/js/github-projects.js`: monta os cards de projetos e sincroniza metadados com a API pública do GitHub
-- `assets/docs/gustavo-constante.pdf`: currículo disponível para download na seção de experiência
-- `components/css/`: estilos organizados por seção do site
-- `assets/vendor/`: Bootstrap, AOS e Typed.js
-
-## O que o portfólio mostra
-
-- apresentação profissional com efeito de digitação descrevendo atuação atual
-- resumo de perfil e stack principal
-- projetos em destaque — pessoais, freelance e acadêmicos
-- tecnologias organizadas por categoria (front-end, back-end, dados, workflow)
-- experiência profissional, formação e diferenciais
-- download do currículo em PDF
-- formas de contato
-
-## Projetos em destaque
-
-Os projetos são configurados em `PROJECTS_CONFIG` dentro de `github-projects.js`. Cada projeto define título, descrição, stack, preview, cor de acento e links.
-
-- Projetos públicos: o script busca metadados na API do GitHub e exibe a data de atualização quando disponível
-- Projetos privados (`private: true`): exibem apenas o link de deploy, sem referência ao repositório
-- Projetos freelance recebem um badge visual (`badge: "Freelance"`) no card
-
-As imagens de preview ficam salvas localmente em `assets/img/` para evitar previews quebrados.
-
-## Rodando localmente
-
-Para abrir o projeto localmente, basta iniciar um servidor simples:
+## Comandos
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev     # desenvolvimento em http://localhost:3000
+npm run build   # gera o site estático em out/
+npm start       # serve out/ localmente (após o build)
 ```
 
-Depois acesse:
+## Estrutura
 
 ```text
-http://localhost:8000
+app/                layout, página e metadados
+components/         seções (Hero, About, Projects, Skills, Resume, Contact...), Effects e a stack interativa
+components/ui/      Split, SectionTitle, CountUp, timeline, spotlight e a cena 3D (three.js)
+lib/                dados dos projetos, scroll (Lenis), helpers de animação e hook de digitação
+styles/             CSS por seção + motion.css e theme.css (efeitos e ajustes finais)
+public/             imagens e o currículo em PDF
+AGENTS.md           guia para agentes de código
 ```
 
-## Publicação
+## Efeitos
 
-O deploy é feito pelo GitHub Pages a partir da branch `main`.
+- scroll suave com Lenis e navegação por âncoras
+- preloader de entrada, cursor personalizado e botões magnéticos
+- nome do hero que viaja até o centro conforme o scroll
+- títulos com revelação por palavra, letreiro da stack e parallax nas marcas d'água
+- stack interativa em 3D (three.js, carregada sob demanda)
+- respeita `prefers-reduced-motion`
 
-```bash
-git add .
-git commit -m "Atualiza portfolio"
-git push origin main
-```
+## Deploy
 
-## Contato
+O workflow `.github/workflows/deploy.yml` builda e publica a pasta `out/` a cada push na `main`.
+Em **Settings → Pages**, a fonte precisa estar como **GitHub Actions**.
 
-- Email: gustavo.cunha.constante@gmail.com
-- LinkedIn: [linkedin.com/in/gstvdc](https://www.linkedin.com/in/gstvdc)
-- GitHub: [github.com/gstvdc](https://github.com/gstvdc)
+## Conteúdo
+
+- Projetos: `components/Projects.tsx` (lista `PROJECTS`; metadados do GitHub são buscados no navegador)
+- Experiência e formação: `components/Resume.tsx`
+- Currículo em PDF: `public/docs/gustavo-constante.pdf`
+- Formulário de contato: Formspree, em `components/Contact.tsx`

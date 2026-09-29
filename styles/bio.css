@@ -1,0 +1,219 @@
+/* "Sobre mim": lives on the hero's signature screen and fades in over its lines. */
+.bio-panel {
+  /* --p and --bp are inherited from the hero overlay, which sets them on scroll. */
+  text-align: left;
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  padding: 0 clamp(20px, 5vw, 96px) 0 clamp(20px, 6vw, 110px);
+  pointer-events: none;
+  opacity: clamp(0, calc((var(--bp, 0) - 0.1) * 10), 1);
+  visibility: visible;
+}
+
+.bio-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  padding: clamp(28px, 4vw, 64px);
+  border: 1px solid rgba(245, 244, 241, 0.09);
+  background: radial-gradient(rgba(245, 244, 241, 0.06) 1px, transparent 1px) 0 0 / 22px 22px,
+    rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+/* Red corner marks. */
+.bio-corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+}
+
+.bio-corner--tl {
+  top: -3px;
+  left: -3px;
+}
+
+.bio-corner--tr {
+  top: -3px;
+  right: -3px;
+}
+
+.bio-corner--bl {
+  bottom: -3px;
+  left: -3px;
+}
+
+.bio-corner--br {
+  bottom: -3px;
+  right: -3px;
+}
+
+.bio-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(22px, 3vw, 46px);
+}
+
+.bio-label {
+  font-family: var(--default-font);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: var(--red);
+}
+
+.bio-tag {
+  font-family: var(--mono-font);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(245, 244, 241, 0.32);
+}
+
+/* ---------- Headline ---------- */
+.bio-headline {
+  position: relative;
+  margin: 0;
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(34px, 5.9vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.bio-quote {
+  position: absolute;
+  left: -0.42em;
+  top: 0;
+  color: rgba(245, 244, 241, 0.16);
+  font-weight: 800;
+}
+
+.bio-quote--end {
+  position: static;
+  margin-left: 0.05em;
+}
+
+.bio-w {
+  display: inline;
+  /* Each word rises from a dim outline of itself to full colour as --p passes --s. */
+  --k: clamp(0, calc((var(--p) - var(--s)) * 9), 1);
+  opacity: calc(0.14 + var(--k) * 0.86);
+}
+
+.bio-w--bright {
+  color: #fff;
+}
+
+.bio-w--dim {
+  color: rgba(245, 244, 241, 0.42);
+  font-weight: 700;
+}
+
+.bio-w--serif {
+  color: #f5f4f1;
+  font-family: var(--serif-font);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.bio-rule {
+  height: 1px;
+  margin: clamp(22px, 3vw, 44px) 0;
+  background: rgba(245, 244, 241, 0.12);
+  transform-origin: left;
+  transform: scaleX(clamp(0, calc(var(--p) * 6), 1));
+}
+
+/* ---------- Columns ---------- */
+.bio-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+
+.bio-fade {
+  --k: clamp(0, calc((var(--p) - var(--s)) * 6), 1);
+  opacity: var(--k);
+  transform: translateY(calc((1 - var(--k)) * 26px));
+}
+
+.bio-lead {
+  margin: 0;
+  font-size: clamp(15px, 1.35vw, 22px);
+  line-height: 1.5;
+  color: rgba(245, 244, 241, 0.72);
+}
+
+.bio-lead strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.bio-lead em {
+  font-family: var(--serif-font);
+  font-style: italic;
+  color: #fff;
+}
+
+.bio-col h3 {
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(245, 244, 241, 0.14);
+  font-family: var(--default-font);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #fff;
+}
+
+.bio-col p {
+  margin: 0 0 14px;
+  font-size: clamp(12.5px, 0.95vw, 15px);
+  line-height: 1.7;
+  color: rgba(245, 244, 241, 0.5);
+}
+
+.bio-col .bio-accent {
+  font-style: italic;
+  color: rgba(226, 85, 77, 0.85);
+}
+
+.bio-sign {
+  display: inline-block;
+  margin-top: 6px;
+  font-family: var(--serif-font);
+  font-style: italic;
+  font-size: clamp(26px, 2.3vw, 38px);
+  color: #f5f4f1;
+}
+
+@media (max-width: 900px) {
+  .bio-panel {
+    padding: 0 16px;
+  }
+
+  .bio-tag {
+    display: none;
+  }
+
+  .bio-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .bio-col + .bio-col {
+    display: none;
+  }
+
+  .bio-headline {
+    font-size: clamp(30px, 9vw, 52px);
+  }
+}

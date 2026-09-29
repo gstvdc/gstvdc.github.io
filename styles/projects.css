@@ -1,0 +1,851 @@
+/* Projects: gallery intro → impact numbers → filterable archive. */
+:root {
+  --sheet: #272726; /* same solid grey as the About card border */
+}
+
+.projects-sheet {
+  position: relative;
+  z-index: 1;
+  padding: 0; /* overrides the global section padding */
+  overflow: clip;
+  background: var(--sheet);
+  color: #f5f4f1;
+}
+
+/* ---------- 1 + 2. Gallery ---------- */
+.pj-gallery {
+  --p: 0;
+  --b: 0;
+  --t: 1;
+  position: relative;
+  height: 300vh;
+}
+
+.pj-gallery-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.pj-rows {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  /* Tiles fade out as they leave through the left edge. */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 130px);
+  mask-image: linear-gradient(90deg, transparent 0, #000 130px);
+}
+
+.pj-rows.is-dragging {
+  cursor: grabbing;
+}
+
+.pj-row {
+  position: absolute;
+  left: 0;
+  display: flex;
+  gap: 24px;
+  will-change: transform;
+}
+
+.pj-tile {
+  flex: none;
+  display: block;
+  height: 34vh;
+  aspect-ratio: 1.6 / 1;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+/* Hover: the tile lifts, lights up with a red edge, and the rest dim down. */
+.pj-tile {
+  position: relative;
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease;
+}
+
+.pj-tile img {
+  transition: filter 0.45s ease;
+}
+
+.pj-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--red);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.pj-rows:not(.is-dragging) .pj-tile:hover {
+  z-index: 3;
+  transform: scale(1.05);
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.6);
+}
+
+.pj-rows:not(.is-dragging) .pj-tile:hover::after {
+  opacity: 1;
+}
+
+.pj-rows:not(.is-dragging) .pj-tile:hover img {
+  filter: brightness(1) saturate(1);
+}
+
+.pj-rows:not(.is-dragging):has(.pj-tile:hover) .pj-tile:not(:hover) img {
+  filter: brightness(calc((0.26 + var(--b) * 0.74) * 0.5))
+    saturate(calc(0.55 + var(--b) * 0.2));
+}
+
+.pj-tile img {
+  display: block;
+  width: 100%; /* always the full width; the bottom is what gets cut */
+  height: auto;
+  pointer-events: none;
+  filter: brightness(calc(0.26 + var(--b) * 0.74))
+    saturate(calc(0.55 + var(--b) * 0.45));
+}
+
+/* First tiles start fully on screen; row B is offset half a tile. */
+.pj-row--a {
+  --tile: calc(34vh * 1.6 + 24px);
+  top: calc(50% - 34vh - 12px);
+  transform: translate3d(
+    calc(150px - 3 * var(--tile) - var(--p) * 44vw + var(--dx, 0px)),
+    0,
+    0
+  );
+}
+
+.pj-row--b {
+  --tile: calc(34vh * 1.6 + 24px);
+  top: calc(50% + 12px);
+  transform: translate3d(
+    calc(
+      150px - 3 * var(--tile) + var(--tile) * 0.5 + var(--p) * 44vw +
+        var(--dx, 0px)
+    ),
+    0,
+    0
+  );
+}
+
+.pj-gallery-copy {
+  position: absolute;
+  z-index: 3;
+  left: 150px;
+  right: 6vw;
+  top: 50%;
+  max-width: 900px;
+  opacity: var(--t);
+  transform: translate3d(0, calc(-50% - (1 - var(--t)) * 40px), 0);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.pj-eyebrow {
+  display: block;
+  margin-bottom: 14px;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--red);
+}
+
+.pj-gallery-copy h2 {
+  margin: 0 0 20px;
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(38px, 5.6vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: #fff;
+}
+
+.pj-gallery-copy p {
+  max-width: 620px;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(245, 244, 241, 0.9);
+}
+
+.pj-gallery-copy strong {
+  color: #fff;
+}
+
+.pj-scroll-hint {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 3.2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transform: translateX(-50%);
+  opacity: var(--t);
+  font-family: var(--mono-font);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 244, 241, 0.7);
+}
+
+.pj-scroll-hint span {
+  width: 1px;
+  height: 46px;
+  background: linear-gradient(#f5f4f1, transparent);
+  animation: pj-hint 2s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes pj-hint {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- 3. Impact ---------- */
+.pj-impact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: -12vh; /* pull up under the gallery's empty bottom band */
+  padding: 56px 24px 96px;
+  text-align: center;
+}
+
+.pj-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.55);
+  border: 1px solid rgba(245, 244, 241, 0.12);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pj-impact h2 {
+  margin: 26px 0 16px;
+  max-width: 1400px;
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: #fff;
+}
+
+.pj-impact > p {
+  max-width: 900px;
+  margin: 0 0 60px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(245, 244, 241, 0.65);
+}
+
+.pj-impact-stats {
+  width: 100%;
+  max-width: 1600px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.pj-impact-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pj-impact-stat strong {
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+.pj-impact-stat strong small {
+  color: var(--red);
+  font-size: 1em;
+  margin-left: 2px;
+}
+
+.pj-impact-stat > span {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 244, 241, 0.6);
+}
+
+/* ---------- 4. Archive ---------- */
+.pj-archive {
+  position: relative;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px 32px 140px;
+}
+
+.pj-archive-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pj-archive-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono-font);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.pj-archive-title em {
+  padding: 3px 9px;
+  border-radius: 8px;
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(245, 244, 241, 0.1);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.pj-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #2bd576;
+  box-shadow: 0 0 0 4px rgba(43, 213, 118, 0.18);
+}
+
+.pj-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: min(340px, 100%);
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.45);
+  border: 1px solid rgba(245, 244, 241, 0.1);
+  color: rgba(245, 244, 241, 0.55);
+}
+
+.pj-search input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: 0;
+  outline: 0;
+  color: #f5f4f1;
+  font-size: 14px;
+}
+
+.pj-search input::placeholder {
+  color: rgba(245, 244, 241, 0.45);
+}
+
+.pj-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px 0 34px;
+}
+
+.pj-filters button {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 244, 241, 0.12);
+  background: transparent;
+  color: rgba(245, 244, 241, 0.7);
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.pj-filters button:hover {
+  border-color: rgba(245, 244, 241, 0.3);
+  color: #fff;
+}
+
+.pj-filters button.is-active {
+  background: #f5f4f1;
+  border-color: #f5f4f1;
+  color: #0a0a0a;
+}
+
+.pj-list {
+  border-bottom: 1px solid rgba(245, 244, 241, 0.1);
+}
+
+.pj-row-item {
+  --accent: #4dabf7;
+  display: block;
+  border-top: 1px solid rgba(245, 244, 241, 0.1);
+  color: inherit;
+  overflow: hidden;
+  transition: background-color 0.35s ease, border-radius 0.35s ease;
+}
+
+.pj-row-item:hover {
+  color: inherit;
+}
+
+/* Rows are React-managed (className changes on hover), so they animate on
+   mount with CSS instead of the observer-added .in-view class. */
+.js-motion .pj-row-item {
+  animation: pj-row-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes pj-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+.pj-row-item.is-hover {
+  background: rgba(10, 10, 10, 0.72);
+  border-radius: 18px;
+  border-top-color: transparent;
+}
+
+.pj-row-main {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 28px;
+}
+
+.pj-row-num {
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgba(245, 244, 241, 0.16);
+  transition: color 0.3s ease;
+}
+
+.is-hover .pj-row-num {
+  color: var(--accent);
+}
+
+.pj-row-body h3 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 0 6px;
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(24px, 2.6vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.pj-row-body h3 small {
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--accent);
+  font-family: var(--default-font);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pj-row-body p {
+  margin: 0;
+  max-width: 720px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: rgba(245, 244, 241, 0.62);
+}
+
+.pj-row-year {
+  font-family: var(--mono-font);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: rgba(245, 244, 241, 0.4);
+}
+
+.pj-row-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(245, 244, 241, 0.45);
+  transition: color 0.3s ease;
+}
+
+.pj-row-view i {
+  transition: transform 0.3s ease;
+}
+
+.is-hover .pj-row-view {
+  color: #fff;
+}
+
+.is-hover .pj-row-view i {
+  transform: translateX(6px);
+  color: var(--accent);
+}
+
+/* Tech strip that slides out under the hovered row. */
+.pj-row-tags {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  border-top: 1px solid rgba(245, 244, 241, 0.06);
+  transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+}
+
+.is-hover .pj-row-tags {
+  max-height: 56px;
+  opacity: 1;
+}
+
+.pj-row-track {
+  display: flex;
+  width: max-content;
+  gap: 18px;
+  padding: 16px 0;
+  animation: pj-tags 22s linear infinite;
+}
+
+.pj-row-track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--mono-font);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.pj-row-track i {
+  font-style: normal;
+  opacity: 0.6;
+}
+
+@keyframes pj-tags {
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+.pj-empty {
+  padding: 60px 0;
+  text-align: center;
+  color: rgba(245, 244, 241, 0.5);
+}
+
+.pj-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 44px;
+  color: #f5f4f1;
+  font-weight: 700;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(245, 244, 241, 0.3);
+  padding-bottom: 4px;
+}
+
+.pj-all-link:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+/* Cursor-following preview */
+.pj-float {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 340px;
+  height: 213px;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  background: #0a0a0a;
+  transition: opacity 0.25s ease;
+}
+
+.pj-float.is-visible {
+  opacity: 1;
+}
+
+.pj-float img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.pj-float img.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+@media (hover: none) {
+  .pj-float {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .projects-sheet {
+    margin-top: 0;
+  }
+
+  .pj-gallery-copy {
+    left: 24px;
+    right: 24px;
+  }
+
+  .pj-row {
+    gap: 16px;
+  }
+
+  .pj-impact-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 48px;
+  }
+
+  .pj-archive {
+    padding: 20px 16px 100px;
+  }
+
+  .pj-row-main {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 14px;
+    padding: 24px 8px;
+  }
+
+  .pj-row-num {
+    font-size: 34px;
+  }
+
+  .pj-row-year,
+  .pj-row-view {
+    display: none;
+  }
+
+  .pj-row-tags {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pj-row-track,
+  .pj-scroll-hint span {
+    animation: none;
+  }
+}
+
+/* ---------- Impact: livelier ---------- */
+.pj-impact > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Red lines: drawn in once, then a bright spark keeps travelling along each. */
+.pj-impact .pj-lines {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+
+.pj-lines path {
+  fill: none;
+  stroke: var(--red);
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+}
+
+.pj-line-base {
+  stroke-width: 1;
+  stroke-opacity: 0.28;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.pj-line-spark {
+  stroke-width: 2;
+  stroke-dasharray: 0.08 0.92;
+  stroke-dashoffset: 0.08;
+  filter: drop-shadow(0 0 5px rgba(226, 85, 77, 0.9));
+  opacity: 0;
+}
+
+.pj-lines.in-view .pj-line-base {
+  animation: pj-line-draw 1.6s cubic-bezier(0.6, 0, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.18s);
+}
+
+.pj-lines.in-view .pj-line-spark {
+  animation: pj-line-travel calc(5.5s + var(--i, 0) * 0.9s) linear infinite;
+  animation-delay: calc(1.4s + var(--i, 0) * 0.35s);
+}
+
+@keyframes pj-line-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pj-line-travel {
+  0% {
+    stroke-dashoffset: 0.08;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+}
+
+.pj-pill {
+  position: relative;
+  overflow: hidden;
+}
+
+.pj-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: pj-pill-shine 3.4s ease-in-out infinite;
+}
+
+.pj-pill i {
+  color: var(--red);
+  animation: pj-spark 2.6s ease-in-out infinite;
+}
+
+@keyframes pj-pill-shine {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes pj-spark {
+  0%,
+  100% {
+    transform: rotate(0) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.35);
+  }
+}
+
+.pj-impact-stat {
+  padding: 18px 12px 22px;
+  border-radius: 20px;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.3s ease, opacity 0.9s ease;
+}
+
+.pj-impact-stat:hover {
+  transform: translateY(-8px);
+  background: rgba(10, 10, 10, 0.4);
+}
+
+.pj-impact-bar {
+  display: block;
+  width: 56px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s;
+}
+
+.js-motion .pj-impact-stat.in-view .pj-impact-bar,
+.pj-impact-stat:hover .pj-impact-bar {
+  transform: scaleX(1);
+}
+
+.pj-impact-stat strong small {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.pj-impact-stat:hover strong small {
+  transform: rotate(90deg) scale(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pj-lines path,
+  .pj-pill,
+  .pj-pill::after,
+  .pj-pill i {
+    animation: none;
+  }
+  .pj-line-base {
+    stroke-dashoffset: 0;
+  }
+  .pj-impact-bar {
+    transform: scaleX(1);
+  }
+}

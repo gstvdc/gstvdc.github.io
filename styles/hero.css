@@ -1,0 +1,305 @@
+.hero-cover {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  background: #0a0a0a;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0 0;
+  z-index: 2;
+}
+
+/* ---------- Top bar ---------- */
+.hero-cover-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  z-index: 4;
+  padding: 0 28px;
+}
+
+.hero-cover-mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #f5f4f1;
+  transition: color 200ms ease;
+}
+
+.hero-cover-mark:hover {
+  color: var(--red);
+}
+
+.hero-cover-mark img {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+.hero-cover-mark span {
+  font-family: var(--display-font);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.hero-cover-mark em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.hero-cover-contact {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 4px;
+  color: var(--red);
+  font-family: var(--mono-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Underline that draws left-to-right on hover and exits to the right. */
+.hero-cover-contact::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hero-cover-contact:hover {
+  color: var(--red);
+}
+
+.hero-cover-contact:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- Split body ---------- */
+.hero-cover-split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: stretch;
+  will-change: opacity;
+}
+
+.hero-cover-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 56px 40px 28px;
+}
+
+.hero-cover-row {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.hero-cover-index {
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--red);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
+.hero-cover-body {
+  min-width: 0;
+}
+
+.hero-cover-name {
+  font-family: var(--serif-font);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(44px, 6vw, 80px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  color: #f5f4f1;
+  margin-bottom: 8px;
+}
+
+.hero-cover-name b {
+  display: block;
+  font-family: var(--display-font);
+  font-style: normal;
+  font-weight: 800;
+}
+
+.hero-cover-sub {
+  font-family: var(--mono-font);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 244, 241, 0.55);
+  margin-bottom: 0;
+  min-height: 3.2em;
+}
+
+.hero-cover-typed-line {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hero-cover-sub .typed-effect,
+.hero-cover-sub .typed-cursor {
+  color: var(--red);
+}
+
+.hero-cover-rail {
+  margin-top: 40px;
+  height: 2px;
+  max-width: 220px;
+  background: rgba(245, 244, 241, 0.14);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cover-rail span {
+  position: absolute;
+  inset: 0;
+  width: 22%;
+  background: var(--red);
+  border-radius: 1px;
+}
+
+.hero-cover-rail-lbl {
+  margin-top: 12px;
+  font-family: var(--mono-font);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 244, 241, 0.4);
+}
+
+/* ---------- Photo panel (transparent cut-out over a soft glow) ---------- */
+.hero-cover-photo {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(
+      ellipse 70% 55% at 55% 38%,
+      rgba(226, 85, 77, 0.2),
+      rgba(226, 85, 77, 0) 70%
+    ),
+    #0a0a0a;
+}
+
+/* Bottom fade so the cut-out melts into the page. */
+.hero-cover-photo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    #0a0a0a 0%,
+    rgba(10, 10, 10, 0.85) 30%,
+    rgba(10, 10, 10, 0) 100%
+  );
+}
+
+.hero-cover-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  filter: contrast(1.05) saturate(1.05);
+}
+
+.hero-cover-photo-tag {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  bottom: 24px;
+  font-family: var(--mono-font);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 244, 241, 0.65);
+  text-align: right;
+  line-height: 1.7;
+}
+
+@media (max-width: 992px) {
+  .hero-cover {
+    padding-left: 0;
+  }
+
+  .hero-cover-split {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .hero-cover-text {
+    padding: 32px 24px 28px;
+    order: 1;
+  }
+
+  .hero-cover-photo {
+    order: 2;
+    min-height: 46vh;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .hero-cover-topbar {
+    padding: 0 20px;
+  }
+
+  .hero-cover-mark span {
+    font-size: 12.5px;
+  }
+
+  .hero-cover-contact {
+    padding: 10px 16px;
+    font-size: 11px;
+  }
+
+  .hero-cover-text {
+    padding: 28px 20px 24px;
+  }
+
+  .hero-cover-rail {
+    margin-top: 28px;
+  }
+
+  .hero-cover-row {
+    gap: 18px;
+  }
+}

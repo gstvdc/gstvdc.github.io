@@ -1,0 +1,581 @@
+/* Motion layer for the Next.js build: reveals, preloader, cursor, typed. */
+
+/* ---------- Hero name (flying copy + in-flow placeholder) ---------- */
+.hero-name-first {
+  display: inline-block;
+}
+
+.hero-cover-name.is-ghost {
+  opacity: 0;
+}
+
+.hero-cover-name.is-traveling {
+  width: max-content;
+}
+
+/* ---------- Typed line ---------- */
+.typed-cursor {
+  color: var(--red);
+  animation: typed-blink 0.9s steps(2, start) infinite;
+}
+
+@keyframes typed-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* ---------- Block reveal ---------- */
+.js-motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.js-motion [data-reveal].in-view {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-motion [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Cards keep their own hover transform once revealed. */
+
+/* ---------- Project images: slow zoom on hover ---------- */
+
+/* ---------- Preloader ---------- */
+html.is-loading {
+  overflow: hidden;
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background: #0a0a0a;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.preloader.is-done {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.preloader-hello {
+  width: min(64vw, 460px);
+  height: auto;
+  overflow: visible;
+  fill: none;
+  stroke: #f5f4f1;
+  stroke-width: 60;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.preloader-hello path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hello-write 1.1s cubic-bezier(0.6, 0.05, 0.3, 1) forwards;
+}
+
+@keyframes hello-write {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader-hello path {
+    animation-duration: 0.01s;
+  }
+}
+
+/* ---------- Custom cursor (fine pointers only) ---------- */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10001;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cursor-dot.is-on,
+.cursor-ring.is-on {
+  opacity: 1;
+}
+
+.cursor-dot::before,
+.cursor-ring::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-dot::before {
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+}
+
+.cursor-ring::before {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(245, 244, 241, 0.5);
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cursor-ring.is-hover::before {
+  width: 64px;
+  height: 64px;
+  border-color: var(--red);
+  background: rgba(226, 85, 77, 0.12);
+}
+
+.cursor-ring.is-down::before {
+  width: 26px;
+  height: 26px;
+}
+
+.cursor-ring.has-label::after {
+  content: attr(data-label);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: var(--mono-font);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f5f4f1;
+}
+
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button {
+  cursor: none;
+}
+
+html.has-cursor input,
+html.has-cursor textarea {
+  cursor: text;
+}
+
+[data-magnetic] {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---------- Floating socials + notes around the portrait ---------- */
+.hero-float-icon {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  font-size: 34px;
+  color: rgba(245, 244, 241, 0.55);
+  animation: hero-float 6s ease-in-out infinite;
+  transition: color 0.3s ease;
+}
+
+.hero-float-icon:hover {
+  color: var(--red);
+}
+
+.hero-float-icon--github {
+  top: 12%;
+  right: 8%;
+}
+
+.hero-float-icon--linkedin {
+  top: 46%;
+  left: 12%;
+  animation-duration: 7.5s;
+  animation-delay: -2s;
+}
+
+.hero-float-icon--instagram {
+  bottom: 28%;
+  left: 5%;
+  animation-duration: 8.5s;
+  animation-delay: -4s;
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -4deg;
+  }
+  50% {
+    translate: 0 -14px;
+    rotate: 5deg;
+  }
+}
+
+.hero-float-note {
+  position: absolute;
+  z-index: 3;
+  max-width: 190px;
+  margin: 0;
+  font-family: var(--mono-font);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.7;
+  text-transform: uppercase;
+  color: rgba(245, 244, 241, 0.6);
+}
+
+.hero-float-note--left {
+  top: 15%;
+  left: 9%;
+  text-align: left;
+}
+
+.hero-float-note--right {
+  top: 31%;
+  right: 6%;
+  text-align: right;
+}
+
+@media (max-width: 992px) {
+  .hero-float-note {
+    display: none;
+  }
+
+  .hero-float-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-float-icon {
+    animation: none;
+  }
+}
+
+/* ---------- Stack: 3D machine + layer cards ---------- */
+.skills .stack-wide {
+  max-width: 1700px;
+  width: 100%;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.stack-stage {
+  position: relative;
+  margin: 28px 0 20px;
+  border: 1px solid rgba(245, 244, 241, 0.12);
+  border-radius: 28px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.stack-stage-loading {
+  display: grid;
+  place-items: center;
+  height: clamp(560px, 82vh, 820px);
+  color: rgba(245, 244, 241, 0.5);
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+
+  .stack-stage {
+    border-radius: 20px;
+  }
+}
+
+/* ---------- Horizontal swap: Projects stays put, Stack slides in from the right ---------- */
+.hs-wrap {
+  position: relative;
+  overflow-x: clip; /* the off-screen slide must not create a horizontal scrollbar */
+}
+
+.hs-front {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+}
+
+.hs-slide {
+  position: relative;
+  z-index: 2;
+}
+
+.hs-slide-inner {
+  position: relative;
+  background: #0a0a0a;
+  will-change: transform;
+}
+
+/* Depth while sliding: a shadow on the leading (left) edge only. A regular box-shadow
+   also fell below the section and darkened the next one. */
+.hs-slide-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -90px;
+  width: 90px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
+}
+
+.hs-hold {
+  pointer-events: none;
+}
+
+
+/* ---------- Stack lanes: logo marquees, one row per layer ---------- */
+.stack-lanes {
+  margin-top: 56px;
+}
+
+.stack-lanes-title {
+  display: block;
+  margin-bottom: 30px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(245, 244, 241, 0.85);
+}
+
+.stack-lane {
+  padding: 22px 0 6px;
+}
+
+.stack-lane-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+}
+
+.stack-lane-num {
+  font-family: var(--mono-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--red);
+}
+
+.stack-lane-head strong {
+  font-family: var(--display-font);
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  color: rgba(245, 244, 241, 0.9);
+  transition: color 0.3s ease;
+}
+
+.stack-lane-text {
+  font-size: 13.5px;
+  color: rgba(245, 244, 241, 0.45);
+}
+
+.stack-lane:hover .stack-lane-head strong {
+  color: var(--red);
+}
+
+.stack-marquee-row {
+  overflow: hidden;
+  padding: 26px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.stack-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 68px;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: stack-scroll-left var(--dur, 40s) linear infinite;
+}
+
+.stack-marquee-row.to-right .stack-marquee-track {
+  animation-name: stack-scroll-right;
+}
+
+.stack-marquee-row:hover .stack-marquee-track {
+  animation-play-state: paused;
+}
+
+.stack-tech {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+  font-family: var(--default-font);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: rgba(245, 244, 241, 0.7);
+  white-space: nowrap;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.stack-tech i {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.stack-tech:hover {
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+@keyframes stack-scroll-left {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes stack-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .stack-tech {
+    font-size: 18px;
+  }
+  .stack-marquee-track {
+    gap: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-marquee-track {
+    animation: none;
+  }
+  .stack-marquee-row {
+    overflow-x: auto;
+  }
+}
+
+/* ---------- Stack: the card expands to the full screen, lanes scroll inside ---------- */
+.stack-expand {
+  position: relative;
+  margin: 28px 0 0;
+}
+
+.stack-expand-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+}
+
+.stack-expand-card {
+  position: absolute;
+  left: 0;
+  top: calc(50% - clamp(560px, 82vh, 820px) / 2);
+  width: 100%;
+  height: clamp(560px, 82vh, 820px);
+  overflow: hidden;
+  border: 1px solid rgba(245, 244, 241, 0.12);
+  border-radius: 28px;
+  background: #0a0a0a;
+}
+
+.stack-expand-machine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+}
+
+.stack-expand-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 250px max(32px, 6vw) 80px;
+  /* A long, eased fade so the machine melts into the lanes instead of being cut. */
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0) 0,
+    rgba(10, 10, 10, 0.06) 40px,
+    rgba(10, 10, 10, 0.2) 90px,
+    rgba(10, 10, 10, 0.45) 140px,
+    rgba(10, 10, 10, 0.72) 185px,
+    rgba(10, 10, 10, 0.92) 225px,
+    #0a0a0a 260px,
+    #0a0a0a 100%
+  );
+  transform: translate3d(0, 110vh, 0);
+  will-change: transform;
+}
+
+.stack-expand .stack-lanes {
+  margin-top: 0;
+  max-width: 1500px;
+  margin-inline: auto;
+}
+
+/* Reduced motion: no pinning, the card and the lanes just stack. */
+.stack-expand.is-still .stack-expand-pin {
+  position: static;
+  height: auto;
+  display: block;
+}
+
+.stack-expand.is-still .stack-expand-card {
+  position: static;
+  overflow: visible;
+  border-radius: 28px;
+  height: auto;
+  background: none;
+  border: 0;
+}
+
+.stack-expand.is-still .stack-expand-machine {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 100%;
+  height: clamp(560px, 82vh, 820px);
+  transform: none;
+  border: 1px solid rgba(245, 244, 241, 0.12);
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.stack-expand.is-still .stack-expand-panel {
+  position: static;
+  transform: none;
+  padding: 40px 0 0;
+  background: none;
+}

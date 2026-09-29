@@ -1,0 +1,312 @@
+/* "Diferenciais": a dark stage with the 3D robot on the right, a numbered list on the left
+   and three slow logo-less marquees of tech chips underneath. */
+.dif-section {
+  padding-bottom: 120px;
+}
+
+.dif-wrap {
+  max-width: 1500px;
+}
+
+.dif-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: clamp(560px, 70vh, 720px);
+}
+
+/* Soft red glow behind the robot; no box, it just fades into the page. */
+.dif-stage::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: -4%;
+  top: 4%;
+  width: 62%;
+  height: 92%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 55% 55% at 55% 40%,
+    rgba(226, 85, 77, 0.2),
+    rgba(226, 85, 77, 0) 72%
+  );
+}
+
+/* Light that follows the mouse (see spotlight.tsx). */
+.spotlight {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(226, 85, 77, 0.3), transparent 72%);
+  filter: blur(22px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.spotlight.is-on {
+  opacity: 1;
+}
+
+.dif-left {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  padding: clamp(24px, 2vw, 40px) clamp(0px, 2vw, 32px) clamp(24px, 2vw, 40px) 0;
+}
+
+.dif-tag {
+  font-family: var(--mono-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+}
+
+.dif-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dif-item {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 18px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(245, 244, 241, 0.1);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dif-item:last-child {
+  border-bottom: 1px solid rgba(245, 244, 241, 0.1);
+}
+
+.dif-item:hover {
+  transform: translateX(8px);
+}
+
+.dif-item-num {
+  padding-top: 5px;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(245, 244, 241, 0.35);
+  transition: color 0.3s ease;
+}
+
+.dif-item:hover .dif-item-num {
+  color: var(--red);
+}
+
+.dif-item h3 {
+  margin: 0 0 6px;
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(20px, 1.9vw, 28px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.dif-item p {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(245, 244, 241, 0.55);
+}
+
+.dif-robot {
+  position: relative;
+  z-index: 2;
+  min-height: 420px;
+  /* Wider than its column so the arms are never cut by a hard edge. */
+  margin: 0 -8% 0 -14%;
+  overflow: hidden;
+  /* Waist up only: fade out below the belt, and soften both sides. */
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 60%, transparent 88%),
+    linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0, #000 60%, transparent 88%),
+    linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.dif-robot-scene {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* Bigger robot, anchored at the top so the head stays in view. */
+  transform: scale(1.35);
+  transform-origin: 50% 10%;
+}
+
+.spline-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.spline-loader {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(226, 85, 77, 0.2);
+  border-top-color: var(--red);
+  animation: spline-spin 0.9s linear infinite;
+}
+
+@keyframes spline-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Chip marquees ---------- */
+.dif-marquees {
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dif-mrow {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+
+.dif-mrow-title {
+  flex: none;
+  width: 190px;
+  font-family: var(--mono-font);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.dif-mrow-view {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  padding: 10px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.dif-mrow-track {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: dif-scroll-left 38s linear infinite;
+}
+
+.dif-mrow-view.to-right .dif-mrow-track {
+  animation-name: dif-scroll-right;
+}
+
+.dif-mrow-view:hover .dif-mrow-track {
+  animation-play-state: paused;
+}
+
+.dif-mrow-chip {
+  flex: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 244, 241, 0.14);
+  background: rgba(245, 244, 241, 0.03);
+  font-family: var(--mono-font);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: rgba(245, 244, 241, 0.82);
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.dif-mrow-chip:hover {
+  border-color: var(--red);
+  color: #fff;
+}
+
+.dif-mrow-chip.is-hot {
+  border-color: rgba(226, 85, 77, 0.5);
+  background: rgba(226, 85, 77, 0.1);
+  color: #fff;
+}
+
+@keyframes dif-scroll-left {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes dif-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 992px) {
+  .dif-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .dif-robot {
+    order: -1;
+    height: 380px;
+    min-height: 0;
+    margin: 0 -4%;
+  }
+
+  .dif-robot-scene {
+    transform: scale(1.25);
+  }
+
+  .dif-mrow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .dif-mrow-title {
+    width: auto;
+  }
+
+  .dif-mrow-view {
+    width: 100%;
+  }
+
+  .dif-section {
+    padding-bottom: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dif-mrow-track {
+    animation: none;
+  }
+
+  .dif-mrow-view {
+    overflow-x: auto;
+  }
+}

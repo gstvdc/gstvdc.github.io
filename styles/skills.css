@@ -1,0 +1,45 @@
+.skills .stack-banner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 30px 0;
+  margin-bottom: 0;
+  background: transparent;
+  border-top: 1px solid rgba(245, 244, 241, 0.12);
+}
+
+.skills .stack-banner-label {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red, #e2554d);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.skills .stack-banner h3 {
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 0;
+  color: var(--text-heading, var(--heading-color, #0f172a));
+}
+
+.skills .stack-banner p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted, #475569);
+  line-height: 1.65;
+}
+
+@media (max-width: 992px) {
+  .skills .stack-banner {
+    grid-template-columns: 1fr;
+  }
+}

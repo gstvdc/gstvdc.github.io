@@ -1,0 +1,164 @@
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  color: var(--default-color);
+  font-family: var(--default-font);
+  background-color: var(--background-color);
+  line-height: 1.65;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  color: var(--heading-color);
+  letter-spacing: -0.03em;
+}
+
+section,
+.section {
+  position: relative;
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 84px 0 84px 96px;
+  overflow: clip;
+}
+
+.footer {
+  padding-left: 96px;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-watermark {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: clamp(52px, 11vw, 150px);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  color: rgba(245, 244, 241, 0.035);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.section-eyebrow-mono {
+  display: inline-block;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red, #e2554d);
+  margin-bottom: 10px;
+}
+
+/* ---------- Flat panel grid: editorial replacement for shadow/rounded cards ---------- */
+
+
+.section-title h2 {
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.section-title p {
+  margin: 0 auto;
+  max-width: 680px;
+  font-size: 16px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--default-color), transparent 6%);
+}
+
+@media (max-width: 992px) {
+  .main {
+    margin-bottom: 88px;
+  }
+
+  section,
+  .section {
+    padding: 68px 0;
+  }
+
+  .footer {
+    padding-left: 0;
+  }
+
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  section,
+  .section {
+    padding: 56px 0;
+  }
+
+  .section-title {
+    padding-bottom: 36px;
+  }
+
+  .section-title p {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}
+
+/* ---------- Custom scrollbar: thin, red ---------- */
+html::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--red);
+  border-radius: 3px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #f0685f;
+}
+
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--red) #0a0a0a;
+  }
+}
