@@ -7,7 +7,7 @@ import { scrollToTarget } from "@/lib/scroll";
 const EMAIL = "gustavo.cunha.constante@gmail.com";
 const GITHUB = "https://github.com/gstvdc";
 const LINKEDIN = "https://www.linkedin.com/in/gstvdc";
-const INSTAGRAM = "https://www.instagram.com/gstvdc";
+const INSTAGRAM = "https://www.instagram.com/gstvdcc";
 
 const SOCIALS = [
   { icon: "bi-envelope", href: `mailto:${EMAIL}`, label: "Email" },

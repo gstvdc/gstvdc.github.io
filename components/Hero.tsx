@@ -296,7 +296,7 @@ export default function Hero() {
             </a>
             <a
               className="hero-float-icon hero-float-icon--instagram"
-              href="https://www.instagram.com/gstvdc"
+              href="https://www.instagram.com/gstvdcc"
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"

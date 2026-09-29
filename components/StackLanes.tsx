@@ -3,7 +3,7 @@
 import type { CSSProperties } from "react";
 import type { StationId } from "@/components/ui/stack-machine-3d";
 import { useI18n } from "@/lib/i18n";
-import { TechLogo } from "@/lib/techIcons";
+import { TechLink, TechLogo } from "@/lib/techIcons";
 
 type Lane = {
   id: StationId;
@@ -13,7 +13,7 @@ type Lane = {
 // Same order as the machine: requirement → back-end → data → front-end → infra.
 // Names are keys of the TECH catalog (lib/techIcons).
 const LANES: Lane[] = [
-  { id: "cabinet", items: ["Scrum", "Figma", "UI/UX", "Swagger"] },
+  { id: "cabinet", items: ["Scrum", "Figma", "UI/UX", "Swagger", "Notion"] },
   {
     id: "engine",
     items: [
@@ -27,12 +27,17 @@ const LANES: Lane[] = [
       "C++",
       "LangChain",
       "LangGraph",
+      "OpenAI",
+      "Claude",
+      "Gemini",
+      "Ollama",
+      "n8n",
       "JWT",
     ],
   },
   {
     id: "admin",
-    items: ["PostgreSQL", "MySQL", "MongoDB", "REST APIs", "integrations", "validations"],
+    items: ["PostgreSQL", "MySQL", "MongoDB", "Supabase", "REST APIs", "integrations", "validations"],
   },
   {
     id: "storefront",
@@ -46,6 +51,7 @@ const LANES: Lane[] = [
       "CSS3",
       "Reactive Forms",
       "Tailwind CSS",
+      "shadcn/ui",
     ],
   },
   {
@@ -106,8 +112,10 @@ export default function StackLanes({
                     key={`${item}-${i}`}
                     aria-hidden={i >= half.length ? true : undefined}
                   >
-                    <TechLogo name={item} />
-                    <span>{itemName(item)}</span>
+                    <TechLink name={item} hidden={i >= half.length}>
+                      <TechLogo name={item} />
+                      <span>{itemName(item)}</span>
+                    </TechLink>
                   </li>
                 ))}
               </ul>

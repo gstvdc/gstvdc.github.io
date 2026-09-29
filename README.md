@@ -21,7 +21,7 @@ Responsive, animated, and available in Portuguese, English and Spanish.
 [**Currículo (PDF)**](https://gstvdc.github.io/docs/gustavo-constante.pdf) ·
 [**LinkedIn**](https://www.linkedin.com/in/gstvdc) ·
 [**GitHub**](https://github.com/gstvdc) ·
-[**Instagram**](https://www.instagram.com/gstvdc) ·
+[**Instagram**](https://www.instagram.com/gstvdcc) ·
 [**E-mail**](mailto:gustavo.cunha.constante@gmail.com)
 
 </div>
@@ -111,7 +111,7 @@ Em **Settings → Pages**, a fonte precisa estar como **GitHub Actions**.
 
 - **LinkedIn:** [linkedin.com/in/gstvdc](https://www.linkedin.com/in/gstvdc)
 - **GitHub:** [github.com/gstvdc](https://github.com/gstvdc)
-- **Instagram:** [@gstvdc](https://www.instagram.com/gstvdc)
+- **Instagram:** [@gstvdcc](https://www.instagram.com/gstvdcc)
 - **E-mail:** [gustavo.cunha.constante@gmail.com](mailto:gustavo.cunha.constante@gmail.com)
 - **Currículo:** [gustavo-constante.pdf](https://gstvdc.github.io/docs/gustavo-constante.pdf)
 

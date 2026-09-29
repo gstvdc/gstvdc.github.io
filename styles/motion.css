@@ -642,3 +642,13 @@ html.has-cursor textarea {
 .is-offscreen *::after {
   animation-play-state: paused !important;
 }
+
+/* Logo links inside the stack marquees: keep the parent's layout and colour. */
+.tech-link {
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  gap: inherit;
+  color: inherit;
+  text-decoration: none;
+}

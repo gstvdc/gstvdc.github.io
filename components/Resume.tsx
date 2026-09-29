@@ -5,7 +5,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import { SplineScene } from "@/components/ui/splite";
 import { useI18n } from "@/lib/i18n";
 import { useStillLayout } from "@/lib/motion";
-import { TechLogo } from "@/lib/techIcons";
+import { TechLink, TechLogo } from "@/lib/techIcons";
 
 // Career and education in order. Even positions sit above the line, odd ones below.
 const ITEM_IDS = [
@@ -29,12 +29,14 @@ const GROUPS = [
       "NestJS",
       "React",
       "Next.js",
+      "shadcn/ui",
       "Node.js",
       "Express",
       "REST APIs",
       "Docker",
       "MongoDB",
       "PostgreSQL",
+      "Supabase",
       "Java",
       "Python",
       "C++",
@@ -45,9 +47,15 @@ const GROUPS = [
       "UI/UX",
       "Figma",
       "Scrum",
+      "Notion",
       "Postman",
       "LangChain",
       "LangGraph",
+      "OpenAI",
+      "Claude",
+      "Gemini",
+      "Ollama",
+      "n8n",
       "@english",
       "@spanish",
     ],
@@ -77,13 +85,15 @@ export default function Resume() {
   // Chips show only the logo; the name stays as tooltip and accessible label.
   const tag = (name: string) =>
     name === "@english" ? r.english : name === "@spanish" ? r.spanish : name;
-  const chip = (name: string) =>
+  const chip = (name: string, hidden: boolean) =>
     name === "@english" ? (
       <span className="dif-mrow-code">EN</span>
     ) : name === "@spanish" ? (
       <span className="dif-mrow-code">ES</span>
     ) : (
-      <TechLogo name={name} size={28} />
+      <TechLink name={name} hidden={hidden}>
+        <TechLogo name={name} size={28} />
+      </TechLink>
     );
 
   return (
@@ -154,7 +164,7 @@ export default function Resume() {
                           aria-label={tag(name)}
                           aria-hidden={k >= half.length ? true : undefined}
                         >
-                          {chip(name)}
+                          {chip(name, k >= half.length)}
                         </li>
                       ))}
                     </ul>
