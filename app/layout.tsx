@@ -18,7 +18,10 @@ import "@/styles/contact.css";
 import "@/styles/footer.css";
 import "@/styles/theme.css";
 import "@/styles/motion.css";
+import "@/styles/lang.css";
 import Effects from "@/components/Effects";
+import LangSwitch from "@/components/LangSwitch";
+import { I18nProvider } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Portfólio | Gustavo Constante",
@@ -36,6 +39,27 @@ export const metadata: Metadata = {
     "TypeScript",
     "Portfólio",
   ],
+  authors: [{ name: "Gustavo Constante", url: "https://gstvdc.github.io" }],
+  metadataBase: new URL("https://gstvdc.github.io"),
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "https://gstvdc.github.io",
+    siteName: "Gustavo Constante",
+    title: "Portfólio | Gustavo Constante",
+    description:
+      "Portfólio de Gustavo Constante, desenvolvedor full stack com experiência em SvelteKit, Laravel, Angular, NestJS, React e sistemas corporativos.",
+    images: [{ url: "/img/profile/profile-6.jpg", width: 1100, height: 825 }],
+    locale: "pt_BR",
+    alternateLocale: ["en_US", "es_ES"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfólio | Gustavo Constante",
+    description:
+      "Full stack developer: SvelteKit, Laravel, Angular, NestJS, React and enterprise systems.",
+    images: ["/img/profile/profile-6.jpg"],
+  },
   icons: { icon: "/img/logo_favicon.png", apple: "/img/logo.png" },
 };
 
@@ -61,7 +85,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@400;600;700;800&family=Fraunces:ital@1&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@400;600;700;800&family=Fraunces:ital@1&family=JetBrains+Mono:wght@400;500;600&display=swap"
         />
         <script
           dangerouslySetInnerHTML={{
@@ -71,8 +95,11 @@ export default function RootLayout({
         />
       </head>
       <body className="index-page">
-        <Effects />
-        {children}
+        <I18nProvider>
+          <Effects />
+          <LangSwitch />
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

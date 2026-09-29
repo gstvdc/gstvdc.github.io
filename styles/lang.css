@@ -1,0 +1,77 @@
+/* ---------- Language switch (PT / EN / ES) ----------
+   Collapsed: only the active language. Hover, focus or tap expands the box. */
+.lang-switch {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  height: 36px; /* same height as the hero top bar, so "Contato" lines up with it */
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(18, 18, 18, 0.92);
+  border: 1px solid rgba(245, 244, 241, 0.12);
+}
+
+.lang-switch button {
+  min-width: 34px;
+  max-width: 60px;
+  padding: 6px 9px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(245, 244, 241, 0.62);
+  font-family: var(--mono-font);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: max-width 0.3s ease, min-width 0.3s ease, padding 0.3s ease,
+    opacity 0.2s ease, background 0.25s, color 0.25s;
+}
+
+.lang-switch button:hover {
+  color: #f5f4f1;
+}
+
+.lang-switch button.is-active {
+  background: var(--red);
+  color: #fff;
+}
+
+/* Collapsed: the other languages take no room and are invisible. */
+.lang-switch button:not(.is-active) {
+  min-width: 0;
+  max-width: 0;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 0;
+}
+
+.lang-switch:hover button:not(.is-active),
+.lang-switch:focus-within button:not(.is-active),
+.lang-switch.is-open button:not(.is-active) {
+  min-width: 34px;
+  max-width: 60px;
+  padding-left: 9px;
+  padding-right: 9px;
+  opacity: 1;
+}
+
+/* Leaves room for the collapsed switch next to the hero's "Contato" link. */
+.hero-cover-topbar {
+  padding-right: 72px;
+}
+
+@media (max-width: 992px) {
+  .lang-switch {
+    right: 14px;
+  }
+
+  .hero-cover-topbar {
+    padding-right: 62px;
+  }
+}

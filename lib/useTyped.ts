@@ -1,16 +1,52 @@
 import { useEffect, useRef } from "react";
-import { prefersReducedMotion } from "@/lib/motion";
+import { useReducedMotion, useStillLayout } from "@/lib/motion";
 
-/** Typewriter effect that writes straight into the node (no re-renders). */
+/**
+ * Rotating phrases that write straight into the node (no re-renders). Desktop types and
+ * erases them; phones and tablets fade each phrase out and the next one in (typing makes a
+ * wrapped line grow and get cut off); with reduced motion only the first phrase shows.
+ */
 export function useTyped(strings: string[], typeSpeed = 42, backSpeed = 24) {
   const ref = useRef<HTMLSpanElement>(null);
+  const still = useStillLayout();
+  const reduced = useReducedMotion();
+
+  // Restart the typing whenever the phrases change (e.g. the language switches).
+  const key = strings.join("|");
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (prefersReducedMotion()) {
+    if (reduced) {
       el.textContent = ` ${strings[0]}`;
       return;
+    }
+
+    if (still) {
+      const SHOW = 3400;
+      const FADE = 450;
+      let i = 0;
+      let t1 = 0;
+      let t2 = 0;
+      el.style.transition = `opacity ${FADE}ms ease`;
+      el.textContent = ` ${strings[0]}`;
+      el.style.opacity = "1";
+      const next = () => {
+        el.style.opacity = "0";
+        t2 = window.setTimeout(() => {
+          i = (i + 1) % strings.length;
+          el.textContent = ` ${strings[i]}`;
+          el.style.opacity = "1";
+          t1 = window.setTimeout(next, SHOW);
+        }, FADE);
+      };
+      t1 = window.setTimeout(next, SHOW);
+      return () => {
+        window.clearTimeout(t1);
+        window.clearTimeout(t2);
+        el.style.transition = "";
+        el.style.opacity = "";
+      };
     }
 
     let index = 0;
@@ -51,8 +87,7 @@ export function useTyped(strings: string[], typeSpeed = 42, backSpeed = 24) {
 
     timer = window.setTimeout(tick, 600);
     return () => window.clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [key, still, reduced]);
 
   return ref;
 }

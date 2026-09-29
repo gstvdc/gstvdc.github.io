@@ -5,13 +5,7 @@ import Image from "next/image";
 import { useTyped } from "@/lib/useTyped";
 import BioPanel from "@/components/Bio";
 import { clamp01, prefersReducedMotion } from "@/lib/motion";
-
-const PHRASES = [
-  "criando sistemas que facilitam o trabalho das empresas",
-  "transformando ideias em sites e aplicações úteis",
-  "automatizando tarefas e conectando ferramentas do dia a dia",
-  "evoluindo produtos com atenção à qualidade e às pessoas",
-];
+import { useI18n } from "@/lib/i18n";
 
 const SCRIBBLES = [
   "M-40,90 C120,20 220,160 340,80 S560,10 620,110 S780,220 900,90 S1080,20 1260,120",
@@ -25,7 +19,8 @@ const easeInOut = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
 export default function Hero() {
-  const typedRef = useTyped(PHRASES);
+  const { t } = useI18n();
+  const typedRef = useTyped(t.hero.phrases);
   const wrapRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const splitRef = useRef<HTMLDivElement>(null);
@@ -186,11 +181,21 @@ export default function Hero() {
       paint(current);
       if (performance.now() < end) requestAnimationFrame(watch);
     })();
-    const poll = window.setInterval(() => paint(current), 250);
+    // Late layout shifts: re-paint a few times a second, but only while the hero is visible.
+    let heroVisible = true;
+    const heroIo = new IntersectionObserver(
+      ([entry]) => (heroVisible = entry.isIntersecting),
+      { rootMargin: "200px 0px" }
+    );
+    heroIo.observe(wrap);
+    const poll = window.setInterval(() => {
+      if (heroVisible) paint(current);
+    }, 250);
 
     return () => {
       watching = false;
       window.clearInterval(poll);
+      heroIo.disconnect();
       ro.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", refresh);
@@ -220,14 +225,14 @@ export default function Hero() {
             </span>
           </a>
           <a href="#contact" className="hero-cover-contact" data-magnetic>
-            Contato
+            {t.hero.contact}
           </a>
         </div>
 
         <div className="hero-cover-split" ref={splitRef}>
           <div className="hero-cover-text">
             <div className="hero-cover-row">
-              <span className="hero-cover-index">01 / Portfólio</span>
+              <span className="hero-cover-index">{t.hero.index}</span>
 
               <div className="hero-cover-body">
                 <h1 className="hero-cover-name" ref={ghostRef}>
@@ -236,7 +241,7 @@ export default function Hero() {
                   <b>Constante</b>
                 </h1>
                 <p className="hero-cover-sub">
-                  Full Stack Developer ·
+                  {t.hero.role}
                   <span className="hero-cover-typed-line">
                     <span className="typed-effect" ref={typedRef}></span>
                     <span className="typed-cursor" aria-hidden="true">
@@ -249,7 +254,7 @@ export default function Hero() {
                   <span></span>
                 </div>
                 <div className="hero-cover-rail-lbl">
-                  Role para ver o portfólio
+                  {t.hero.scroll}
                 </div>
               </div>
             </div>
@@ -258,16 +263,16 @@ export default function Hero() {
           <figure className="hero-cover-photo">
             <Image
               src="/img/profile/profile-cutout.webp"
-              alt="Foto de Gustavo Constante"
+              alt={t.hero.photoAlt}
               fill
               sizes="50vw"
               priority
             />
             <p className="hero-float-note hero-float-note--left">
-              Olá, sou Gustavo. Construo sistemas que resolvem problemas reais.
+              {t.hero.noteLeft}
             </p>
             <p className="hero-float-note hero-float-note--right">
-              Aberto a oportunidades e colaborações, em qualquer lugar.
+              {t.hero.noteRight}
             </p>
             <a
               className="hero-float-icon hero-float-icon--github"
@@ -299,9 +304,7 @@ export default function Hero() {
             >
               <i className="bi bi-instagram"></i>
             </a>
-            <span className="hero-cover-photo-tag">
-              SC — Brasil
-            </span>
+            <span className="hero-cover-photo-tag">{t.hero.location}</span>
           </figure>
         </div>
       </section>
@@ -328,9 +331,7 @@ export default function Hero() {
         <div className="signature-content" aria-hidden="true">
           <span className="signature-kicker">GC</span>
           <div className="signature-name-spacer" ref={spacerRef}></div>
-          <p className="signature-tagline">
-            Código com propósito. Entrega com consistência.
-          </p>
+          <p className="signature-tagline">{t.hero.tagline}</p>
         </div>
 
         {/* Same screen, same background: it fades in once the name has settled. */}

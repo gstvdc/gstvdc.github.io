@@ -5,8 +5,10 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import Split from "@/components/ui/Split";
 import type { StationId } from "@/components/ui/stack-machine-3d";
 import StackExpand from "@/components/StackExpand";
+import { useI18n } from "@/lib/i18n";
 
 export default function Skills() {
+  const { t } = useI18n();
   const [active, setActive] = useState<StationId>("engine");
 
   function pick(id: StationId) {
@@ -17,25 +19,21 @@ export default function Skills() {
   return (
     <section id="skills" className="skills section">
       <div className="section-watermark" aria-hidden="true">
-        STACK
+        {t.skills.watermark}
       </div>
       <SectionTitle
-        eyebrow="// CAIXA DE FERRAMENTAS"
-        title="Stack atual"
-        text="Uma máquina que mostra as camadas que uma funcionalidade atravessa até chegar ao ar."
+        eyebrow={t.skills.eyebrow}
+        title={t.skills.title}
+        text={t.skills.text}
       />
 
       <div className="container stack-wide">
         <div className="stack-banner" data-reveal>
           <div>
-            <span className="stack-banner-label">// FOCO ATUAL</span>
-            <Split as="h3" text="SvelteKit + Laravel em aplicações corporativas reais" />
+            <span className="stack-banner-label">{t.skills.bannerLabel}</span>
+            <Split as="h3" text={t.skills.bannerTitle} />
           </div>
-          <p>
-            Desenvolvimento e manutenção de sistemas, automações internas, integração entre
-            frontend, backend e MySQL, além de infraestrutura com Nginx e colaboração com Git e
-            code review.
-          </p>
+          <p>{t.skills.bannerText}</p>
         </div>
 
         <StackExpand active={active} onStation={setActive} onPick={pick} />

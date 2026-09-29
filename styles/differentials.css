@@ -151,6 +151,11 @@
   transform-origin: 50% 10%;
 }
 
+.spline-box {
+  position: absolute;
+  inset: 0;
+}
+
 .spline-fallback {
   position: absolute;
   inset: 0;
@@ -228,27 +233,25 @@
 
 .dif-mrow-chip {
   flex: none;
-  padding: 8px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(245, 244, 241, 0.14);
-  background: rgba(245, 244, 241, 0.03);
-  font-family: var(--mono-font);
-  font-size: 13px;
-  font-weight: 600;
-  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 10px;
   color: rgba(245, 244, 241, 0.82);
-  transition: border-color 0.25s ease, color 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .dif-mrow-chip:hover {
-  border-color: var(--red);
-  color: #fff;
+  transform: translateY(-3px) scale(1.12);
 }
 
-.dif-mrow-chip.is-hot {
-  border-color: rgba(226, 85, 77, 0.5);
-  background: rgba(226, 85, 77, 0.1);
-  color: #fff;
+.dif-mrow-code {
+  font-family: var(--mono-font);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 @keyframes dif-scroll-left {

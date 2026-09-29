@@ -655,6 +655,25 @@
     padding: 20px 16px 100px;
   }
 
+  /* Archive header, search and filters are centred on small screens. */
+  .pj-archive-head {
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .pj-archive-title {
+    justify-content: center;
+  }
+
+  .pj-search {
+    width: 100%;
+  }
+
+  .pj-filters {
+    justify-content: center;
+  }
+
   .pj-row-main {
     grid-template-columns: 52px minmax(0, 1fr);
     gap: 14px;

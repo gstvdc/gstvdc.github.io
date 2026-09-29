@@ -168,6 +168,14 @@ html.has-cursor button {
   cursor: none;
 }
 
+/* Never show the custom cursor in the mobile layout. */
+@media (max-width: 992px), (hover: none) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
 html.has-cursor input,
 html.has-cursor textarea {
   cursor: text;
@@ -257,10 +265,40 @@ html.has-cursor textarea {
     display: none;
   }
 
+  /* Icons sit in a tidy row at the bottom-left of the photo instead of floating around. */
   .hero-float-icon {
+    top: auto;
+    right: auto;
+    bottom: 22px;
     width: 44px;
     height: 44px;
     font-size: 26px;
+    animation: none;
+  }
+
+  .hero-float-icon--github {
+    left: 16px;
+  }
+
+  .hero-float-icon--linkedin {
+    left: 68px;
+  }
+
+  .hero-float-icon--instagram {
+    left: 120px;
+  }
+
+  /* No typing on phones: phrases fade in and out and wrap instead of being cut off. */
+  /* Room for up to three wrapped lines, so swapping phrases never moves the layout. */
+  .hero-cover-typed-line {
+    white-space: normal;
+    text-overflow: clip;
+    line-height: 1.6;
+    min-height: calc(1.6em * 3);
+  }
+
+  .typed-cursor {
+    display: none;
   }
 }
 
@@ -340,6 +378,23 @@ html.has-cursor textarea {
 
 .hs-hold {
   pointer-events: none;
+}
+
+/* Touch, narrow and reduced-motion layouts: the sections just follow each other. */
+.hs-wrap.is-still .hs-front {
+  position: relative;
+}
+
+.hs-wrap.is-still .hs-hold {
+  display: none;
+}
+
+.hs-wrap.is-still .hs-slide-inner {
+  will-change: auto;
+}
+
+.hs-wrap.is-still .hs-slide-inner::before {
+  display: none;
 }
 
 
@@ -578,4 +633,12 @@ html.has-cursor textarea {
   transform: none;
   padding: 40px 0 0;
   background: none;
+}
+
+/* Off-screen sections keep their looping animations paused (toggled by Effects). */
+.is-offscreen,
+.is-offscreen *,
+.is-offscreen *::before,
+.is-offscreen *::after {
+  animation-play-state: paused !important;
 }

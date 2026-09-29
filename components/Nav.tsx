@@ -2,17 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { scrollToTarget } from "@/lib/scroll";
+import { useI18n } from "@/lib/i18n";
 
 const LINKS = [
-  { id: "hero", label: "Início", icon: "bi-house" },
-  { id: "about", label: "Sobre", icon: "bi-person" },
-  { id: "projects", label: "Projetos", icon: "bi-briefcase" },
-  { id: "skills", label: "Stack", icon: "bi-code-square" },
-  { id: "resume", label: "Experiência", icon: "bi-file-earmark-text" },
-  { id: "contact", label: "Contato", icon: "bi-envelope" },
+  { id: "hero", key: "home", icon: "bi-house" },
+  { id: "about", key: "about", icon: "bi-person" },
+  { id: "projects", key: "projects", icon: "bi-briefcase" },
+  { id: "skills", key: "stack", icon: "bi-code-square" },
+  { id: "resume", key: "experience", icon: "bi-file-earmark-text" },
+  { id: "contact", key: "contact", icon: "bi-envelope" },
+] as const;
+
+// Every page section and the sidebar link that owns it. "Diferenciais" belongs to
+// Experience, and the footer to Contact, so the highlight never falls back to Home.
+const SECTIONS: { id: string; link: string }[] = [
+  ...LINKS.map(({ id }) => ({ id, link: id })),
+  { id: "resume-extra", link: "resume" },
+  { id: "footer", link: "contact" },
 ];
 
 export default function Nav() {
+  const { t } = useI18n();
   const [active, setActive] = useState("hero");
   const [visible, setVisible] = useState(false);
   const [showTop, setShowTop] = useState(false);
@@ -26,14 +36,15 @@ export default function Nav() {
       setShowTop(window.scrollY > 100);
 
       const mid = window.innerHeight * 0.5;
-      let current = "hero";
-      for (const { id } of LINKS) {
+      // Between two sections (pinned or sliding areas) nothing matches: keep the last one.
+      let current: string | null = null;
+      for (const { id, link } of SECTIONS) {
         const el = document.getElementById(id);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
-        if (rect.top <= mid && rect.bottom >= mid) current = id;
+        if (rect.top <= mid && rect.bottom >= mid) current = link;
       }
-      setActive(current);
+      if (current) setActive(current);
     }
 
     update();
@@ -52,11 +63,11 @@ export default function Nav() {
         className={"navmenu-vertical" + (visible ? " nav-visible" : "")}
       >
         <ul>
-          {LINKS.map(({ id, label, icon }) => (
+          {LINKS.map(({ id, key, icon }) => (
             <li key={id}>
               <a
                 href={`#${id}`}
-                aria-label={label}
+                aria-label={t.nav[key]}
                 className={active === id ? "active" : undefined}
                 onClick={(event) => {
                   event.preventDefault();
@@ -73,7 +84,7 @@ export default function Nav() {
       <a
         href="#hero"
         className={"scroll-top d-flex align-items-center justify-content-center" + (showTop ? " active" : "")}
-        aria-label="Voltar ao topo"
+        aria-label={t.nav.top}
         onClick={(event) => {
           event.preventDefault();
           scrollToTarget(0);

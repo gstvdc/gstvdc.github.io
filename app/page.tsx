@@ -7,8 +7,11 @@ import Resume from "@/components/Resume";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import HorizontalSwap from "@/components/HorizontalSwap";
+import { fetchProjectMeta } from "@/lib/github";
 
-export default function Home() {
+export default async function Home() {
+  const projectMeta = await fetchProjectMeta();
+
   return (
     <>
       <Nav />
@@ -16,7 +19,7 @@ export default function Home() {
         <Hero />
         <About />
         <HorizontalSwap
-          front={<Projects />}
+          front={<Projects meta={projectMeta} />}
           next={<Skills />}
         />
         <Resume />

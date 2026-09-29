@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { prefersReducedMotion } from "@/lib/motion";
+import { useStillLayout } from "@/lib/motion";
 
 /**
  * The end of `front` stays pinned while `next` slides in from the right, as if the
  * next section were sitting beside it. Scroll drives the slide; once it has fully
  * arrived, `next` continues scrolling vertically as usual.
+ *
+ * On touch and narrow screens (and with reduced motion) there is no slide: the two
+ * sections simply follow each other (`.is-still`).
  */
 export default function HorizontalSwap({
   front,
@@ -19,14 +22,19 @@ export default function HorizontalSwap({
   const slideRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const holdRef = useRef<HTMLDivElement>(null);
+  const still = useStillLayout();
 
   useEffect(() => {
     const frontEl = frontRef.current!;
     const slide = slideRef.current!;
     const inner = innerRef.current!;
     const holdEl = holdRef.current!;
-    if (prefersReducedMotion()) {
-      frontEl.style.position = "relative";
+
+    if (still) {
+      // Back from the animated layout (e.g. the window was narrowed): clear its inline styles.
+      frontEl.removeAttribute("style");
+      holdEl.removeAttribute("style");
+      inner.removeAttribute("style");
       return;
     }
 
@@ -90,10 +98,10 @@ export default function HorizontalSwap({
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [still]);
 
   return (
-    <div className="hs-wrap">
+    <div className={"hs-wrap" + (still ? " is-still" : "")}>
       <div className="hs-front" ref={frontRef}>
         {front}
       </div>

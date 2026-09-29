@@ -62,7 +62,7 @@ section,
   font-size: clamp(52px, 11vw, 150px);
   letter-spacing: -0.03em;
   white-space: nowrap;
-  color: rgba(245, 244, 241, 0.035);
+  color: rgba(245, 244, 241, 0.02);
   pointer-events: none;
   user-select: none;
   z-index: 0;

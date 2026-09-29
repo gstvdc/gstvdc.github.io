@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { useI18n } from '@/lib/i18n'
+import type { Dict } from '@/lib/i18n/pt'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
@@ -19,7 +21,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
  * Control it with window.__machine: setMode, setCamera, focusStation, play, pause.
  */
 
-export type StackMachine3DProps = {
+type StackMachine3DProps = {
   /** Height of the scene box, e.g. 720 or '100vh'. Default '100vh'. */
   height?: number | string
   className?: string
@@ -38,6 +40,8 @@ export default function StackMachine3D({
   onStation,
   onReady,
 }: StackMachine3DProps) {
+  const { lang, t } = useI18n()
+  const m = t.machine
   const rootRef = useRef< HTMLDivElement>(null)
   const handlers = useRef({ onStation, onReady })
   useEffect(() => {
@@ -54,6 +58,7 @@ export default function StackMachine3D({
       if (cancelled) return
       dispose = initMachineScene(root, getComputedStyle(root).fontFamily, {
         embedded: embed,
+        strings: m,
         onStation: (id) => handlers.current.onStation?.(id),
         onReady: () => handlers.current.onReady?.(),
       })
@@ -62,7 +67,8 @@ export default function StackMachine3D({
       cancelled = true
       dispose?.()
     }
-  }, [embed])
+    // The scene is rebuilt when the language changes so every label is re-read.
+  }, [embed, lang])
 
   return (
     <div
@@ -74,30 +80,29 @@ export default function StackMachine3D({
       <div
         id="scene"
         role="img"
-        aria-label="Máquina 3D interativa com cinco módulos: Requisitos, Back-end, Dados e APIs, Front-end e Infra e deploy. Arraste para girar, use a roda ou o gesto de pinça para ampliar. Passe o mouse ou toque em um módulo para ver mais."
+        aria-label={m.aria}
       />
       <div className="vignette" />
       <header className="topbar debug-ui">
         <div className="identity">
           <div className="af-mark">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/img/logo.png" alt="" width={34} height={34} />
           </div>
           <div>
-            <strong>Stack atual</strong>
-            <small>Oficina interativa</small>
+            <strong>{m.title}</strong>
+            <small>{m.subtitle}</small>
           </div>
         </div>
         <div className="status" id="status">
           <i />
-          <span id="status-text">Sistema rodando</span>
-          <span>SÉRIE 001</span>
+          <span id="status-text">{m.running}</span>
+          <span>{m.serial}</span>
         </div>
       </header>
       <div className="scene-heading debug-ui">
-        A stack que sustenta o produto <span className="index">5 MÓDULOS / 1 SISTEMA</span>
+        {m.heading} <span className="index">{m.headingIndex}</span>
       </div>
-      <div className="coordinates debug-ui">PROTÓTIPO 01 — DA IDEIA AO DEPLOY</div>
+      <div className="coordinates debug-ui">{m.prototype}</div>
       <div id="journey" className="debug-ui">
         <div className="journey-icon">
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
@@ -105,8 +110,8 @@ export default function StackMachine3D({
           </svg>
         </div>
         <div>
-          <strong id="journey-title">Novo requisito</strong>
-          <small id="journey-detail">Requisitos · uma tarefa entra na sprint</small>
+          <strong id="journey-title">{m.journey[0][0]}</strong>
+          <small id="journey-detail">{m.journey[0][1]}</small>
         </div>
         <div className="track">
           <i id="journey-progress" />
@@ -118,7 +123,7 @@ export default function StackMachine3D({
         <p />
       </div>
       <div className="controls debug-ui">
-        <nav className="mode-bar" aria-label="Modo da máquina">
+        <nav className="mode-bar" aria-label={m.modeLabel}>
           <button data-mode="assembled" aria-pressed="true">
             <svg viewBox="0 0 16 16" fill="none">
               <path
@@ -127,7 +132,7 @@ export default function StackMachine3D({
                 strokeLinejoin="round"
               />
             </svg>
-            Montada
+            {m.modes[0]}
           </button>
           <button data-mode="cutaway" aria-pressed="false">
             <svg viewBox="0 0 16 16" fill="none">
@@ -137,7 +142,7 @@ export default function StackMachine3D({
                 strokeLinejoin="round"
               />
             </svg>
-            Corte
+            {m.modes[1]}
           </button>
           <button data-mode="stations" aria-pressed="false">
             <svg viewBox="0 0 16 16" fill="none">
@@ -148,34 +153,34 @@ export default function StackMachine3D({
                 strokeLinejoin="round"
               />
             </svg>
-            Módulos
+            {m.modes[2]}
           </button>
           <button data-mode="order" aria-pressed="false">
             <svg viewBox="0 0 16 16" fill="none">
               <path d="M5 2.5l8 5.5-8 5.5v-11z" stroke="currentColor" strokeLinejoin="round" />
             </svg>
-            Uma entrega
+            {m.modes[3]}
           </button>
         </nav>
-        <nav className="camera-row" aria-label="Câmera">
-          <span className="caption">VISTA</span>
+        <nav className="camera-row" aria-label={m.cameraLabel}>
+          <span className="caption">{m.view}</span>
           <button data-camera="overview" aria-pressed="true">
-            Geral
+            {m.cameras[0]}
           </button>
           <button data-camera="side" aria-pressed="false">
-            Lateral
+            {m.cameras[1]}
           </button>
           <button data-camera="top" aria-pressed="false">
-            Topo
+            {m.cameras[2]}
           </button>
           <button data-camera="station" aria-pressed="false">
-            Módulo
+            {m.cameras[3]}
           </button>
           <button data-camera="flight" aria-pressed="false">
-            Voo
+            {m.cameras[4]}
           </button>
           <span className="divider" />
-          <button id="play" aria-label="Pausar a animação" aria-pressed="false">
+          <button id="play" aria-label={m.pause} aria-pressed="false">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
               <rect x="2" y="1" width="2.5" height="10" rx=".5" />
               <rect x="7.5" y="1" width="2.5" height="10" rx=".5" />
@@ -185,7 +190,7 @@ export default function StackMachine3D({
       </div>
       <footer className="af-footer">
         <span className="wordmark">
-          Gustavo Constante · <span>stack de produção</span>
+          {m.wordmark}<span>{m.wordmarkSub}</span>
         </span>
         <span className="footer-center debug-ui">SVELTEKIT + LARAVEL</span>
         <span className="hint debug-ui">
@@ -193,17 +198,17 @@ export default function StackMachine3D({
             <rect x="2" y="1" width="9" height="14" rx="4.5" stroke="currentColor" />
             <path d="M6.5 4v3" stroke="currentColor" strokeLinecap="round" />
           </svg>
-          Gire. Amplie. Explore.
+          {m.hint}
         </span>
       </footer>
       <div id="loading">
         <i />
-        <span>Montando a stack</span>
+        <span>{m.loading}</span>
       </div>
       <div id="error" role="alert">
-        <strong>Não foi possível iniciar a cena 3D</strong>
-        <p>Verifique se o WebGL está ativado no seu navegador.</p>
-        <button onClick={() => location.reload()}>Tentar de novo</button>
+        <strong>{m.errorTitle}</strong>
+        <p>{m.errorText}</p>
+        <button onClick={() => location.reload()}>{m.retry}</button>
       </div>
     </div>
   )
@@ -214,11 +219,11 @@ export default function StackMachine3D({
 // embed API. All geometry and textures are procedural.
 // ---------------------------------------------------------------------------
 
-export type MachineMode = 'assembled' | 'cutaway' | 'stations' | 'order'
-export type MachineCamera = 'overview' | 'side' | 'top' | 'station' | 'flight'
+type MachineMode = 'assembled' | 'cutaway' | 'stations' | 'order'
+type MachineCamera = 'overview' | 'side' | 'top' | 'station' | 'flight'
 export type StationId = 'engine' | 'admin' | 'storefront' | 'cabinet' | 'cashdesk'
 
-export type MachineApi = {
+type MachineApi = {
   setMode: (name: string) => boolean
   focusStation: (id: string) => boolean
   setCamera: (name: string) => boolean
@@ -229,13 +234,14 @@ export type MachineApi = {
 declare global {
   interface Window {
     __machine?: MachineApi
-    __machineDebug?: { getState: () => Record< string, unknown> }
   }
 }
 
-export type MachineSceneOptions = {
+type MachineSceneOptions = {
   /** Clean hero: panels hidden, wheel and touch scroll the page. */
   embedded: boolean
+  /** Every user-facing text, in the active language. */
+  strings: Dict['machine']
   onStation?: (id: StationId) => void
   onReady?: () => void
 }
@@ -245,6 +251,8 @@ function initMachineScene(
   fontFamily: string,
   options: MachineSceneOptions
 ): () => void {
+  // Texts painted on the scene's canvas screens.
+  const sc = options.strings.scene
   const cleanups: Array<() => void> = []
   const frameWidth = () => root.clientWidth
   const frameHeight = () => root.clientHeight
@@ -284,12 +292,12 @@ function initMachineScene(
       })
     } catch (e) {
       showError(
-        'O WebGL não está disponível. Ative a aceleração de hardware no navegador e recarregue a página.'
+        options.strings.noWebgl
       )
       throw e
     }
     renderer.setClearColor(0x000000, 0)
-    renderer.setPixelRatio(Math.min(devicePixelRatio, frameWidth() < 900 ? 1.5 : 1.75))
+    renderer.setPixelRatio(Math.min(devicePixelRatio, frameWidth() < 900 ? 1.25 : 1.5))
     renderer.setSize(frameWidth(), frameHeight())
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.toneMapping = THREE.ACESFilmicToneMapping
@@ -549,8 +557,8 @@ function initMachineScene(
       c.lineWidth = 2
       c.strokeRect(2, 2, w - 4, h - 4)
       print(c, 'STACK', 45, 79, 40, '#d9d8cd', 650)
-      print(c, '·  front  ·  back  ·  dados  ·  deploy', 285, 79, 34, '#b8bdc1', 450)
-      print(c, 'FULL STACK    /    SVELTEKIT + LARAVEL EM PRODUÇÃO', 47, 133, 19, '#737e88', 500)
+      print(c, sc.boardTags, 285, 79, 34, '#b8bdc1', 450)
+      print(c, sc.boardSub, 47, 133, 19, '#737e88', 500)
       print(c, 'GC-01', 1360, 130, 23, '#c57e45')
     })
     const plate = screen(machine, 7.35, 0.84, -0.4, 0.25, 3.51, engraving)
@@ -609,43 +617,43 @@ function initMachineScene(
     const definitions: StationDef[] = [
       {
         id: 'engine',
-        name: 'Back-end',
+        name: options.strings.stations.engine.name,
         step: 2,
-        output: 'regra de negócio',
+        output: options.strings.stations.engine.output,
         pos: [-4.15, 0.29, -0.65],
-        desc: 'Laravel, NestJS e Node.js: regras de negócio, autenticação e automações.',
+        desc: options.strings.stations.engine.desc,
       },
       {
         id: 'admin',
-        name: 'Dados & APIs',
+        name: options.strings.stations.admin.name,
         step: 3,
-        output: 'dados',
+        output: options.strings.stations.admin.output,
         pos: [-1.65, 0.29, -2.03],
-        desc: 'PostgreSQL, MySQL e MongoDB: persistência, modelagem e APIs REST.',
+        desc: options.strings.stations.admin.desc,
       },
       {
         id: 'storefront',
-        name: 'Front-end',
+        name: options.strings.stations.storefront.name,
         step: 4,
-        output: 'interface',
+        output: options.strings.stations.storefront.output,
         pos: [1.5, 0.29, -2.08],
-        desc: 'SvelteKit, Angular, React e Next.js: interfaces rápidas e fáceis de manter.',
+        desc: options.strings.stations.storefront.desc,
       },
       {
         id: 'cabinet',
-        name: 'Requisitos',
+        name: options.strings.stations.cabinet.name,
         step: 1,
-        output: 'requisito',
+        output: options.strings.stations.cabinet.output,
         pos: [4.03, 0.29, 0.12],
-        desc: 'Scrum, Figma e UI/UX: requisitos, protótipos e entregas em sprints.',
+        desc: options.strings.stations.cabinet.desc,
       },
       {
         id: 'cashdesk',
-        name: 'Infra & Deploy',
+        name: options.strings.stations.cashdesk.name,
         step: 5,
-        output: 'deploy',
+        output: options.strings.stations.cashdesk.output,
         pos: [0.93, 0.29, 1.85],
-        desc: 'Git, GitHub, Docker, Nginx e Vercel: versionamento, code review e deploy.',
+        desc: options.strings.stations.cashdesk.desc,
       },
     ]
     const stations: Station[] = [],
@@ -726,7 +734,7 @@ function initMachineScene(
       screen(group, 1.54, 0.345, 0, 0.27, 0.891, plaque)
       const label = document.createElement('div')
       label.className = 'station-label'
-      label.innerHTML = `<div class="stem"></div><div class="label-card"><div class="label-title"><span>${String(i + 1).padStart(2, '0')}</span>${d.name}</div><div class="label-meta">Etapa ${d.step} · ${d.output}</div></div>`
+      label.innerHTML = `<div class="stem"></div><div class="label-card"><div class="label-title"><span>${String(i + 1).padStart(2, '0')}</span>${d.name}</div><div class="label-meta">${options.strings.step} ${d.step} · ${d.output}</div></div>`
       $('labels').appendChild(label)
       cleanups.push(() => label.remove())
 
@@ -829,13 +837,13 @@ function initMachineScene(
         c.ellipse(194, 270, 90 - i * 21, 111, Math.sin(t * 0.25) * 0.3 + 0.4, 0, TAU)
         c.stroke()
       }
-      print(c, 'CÓDIGO', 28, 57, 24, '#242320', 650)
-      print(c, 'COM PROPÓSITO.', 24, 103, 34, '#242320', 700)
+      print(c, sc.codeA, 28, 57, 24, '#242320', 650)
+      print(c, sc.codeB, 24, 103, 34, '#242320', 700)
       c.fillStyle = '#171b20'
       c.beginPath()
       c.roundRect(25, 465, 334, 123, 12)
       c.fill()
-      const texts = ['Da ideia —', 'ao produto real.', 'SvelteKit + Laravel', 'em produção.']
+      const texts = sc.pitch
       const n = Math.floor(t * 0.7) % 4
       print(c, texts[n], 45, 505, 25, '#f4f1ea', 550)
       print(c, texts[(n + 1) % 4], 45, 547, 25, '#f4f1ea', 550)
@@ -869,7 +877,7 @@ function initMachineScene(
       const c = queue.ctx
       c.fillStyle = '#111b20'
       c.fillRect(0, 0, 640, 340)
-      print(c, 'CONSULTAS', 25, 45, 21, '#acb9b8', 550)
+      print(c, sc.queries, 25, 45, 21, '#acb9b8', 550)
       print(c, '03 / 08', 497, 45, 20, ACCENT, 500)
       for (let i = 0; i < 3; i++) {
         const y = 74 + i * 76
@@ -879,10 +887,10 @@ function initMachineScene(
         c.fill()
         c.fillStyle = i === 0 ? '#c57e45' : '#626f69'
         c.fillRect(34, y + 10, 27, 41)
-        print(c, ['Persistência', 'Modelagem', 'APIs REST'][i], 77, y + 29, 19, '#d4d8cc')
+        print(c, sc.queryNames[i], 77, y + 29, 19, '#d4d8cc')
         print(
           c,
-          i === 0 ? 'EXECUTANDO' : 'NA FILA',
+          i === 0 ? sc.running : sc.queued,
           77,
           y + 49,
           11,
@@ -929,7 +937,7 @@ function initMachineScene(
         c.fill()
       }
       print(c, 'GUSTAVO.DEV', 33, 100, 22, '#22282b', 650)
-      print(c, 'Início    Projetos    Contato', 535, 98, 14, '#6a7271')
+      print(c, sc.mockNav, 535, 98, 14, '#6a7271')
       c.fillStyle = ACCENT
       c.beginPath()
       c.roundRect(32, 131, 287, 401, 10)
@@ -941,12 +949,12 @@ function initMachineScene(
         c.ellipse(175, 320, 75 - i * 17, 94, 0.4, 0, TAU)
         c.stroke()
       }
-      print(c, 'DA IDEIA', 52, 181, 29, '#242827', 700)
-      print(c, 'AO PRODUTO.', 52, 220, 29, '#242827', 700)
-      print(c, 'Interfaces', 359, 197, 41, '#22282b', 600)
-      print(c, 'rápidas.', 359, 252, 41, '#22282b', 600)
-      print(c, 'Componentes claros, foco', 362, 300, 19, '#77807b')
-      print(c, 'em manutenção e uso.', 362, 329, 19, '#77807b')
+      print(c, sc.mockA, 52, 181, 29, '#242827', 700)
+      print(c, sc.mockB, 52, 220, 29, '#242827', 700)
+      print(c, sc.mockC, 359, 197, 41, '#22282b', 600)
+      print(c, sc.mockD, 359, 252, 41, '#22282b', 600)
+      print(c, sc.mockE, 362, 300, 19, '#77807b')
+      print(c, sc.mockF, 362, 329, 19, '#77807b')
       for (let i = 0; i < 3; i++) {
         c.fillStyle = '#d1d5cd'
         c.fillRect(362, 363 + i * 16, 400 - i * 43, 5)
@@ -955,7 +963,7 @@ function initMachineScene(
       c.beginPath()
       c.roundRect(359, 447, 279, 62, 7)
       c.fill()
-      print(c, 'Ver projetos  ↗', 390, 486, 22, '#f4f1ea', 500)
+      print(c, sc.mockCta, 390, 486, 22, '#f4f1ea', 500)
       print(c, 'SVELTEKIT · ANGULAR · REACT', 33, 571, 12, '#879088')
     })
     screen(storefront, 2.16, 1.43, 0, 1.95, 0.011, webTexture)
@@ -977,7 +985,7 @@ function initMachineScene(
       c.lineTo(140, 100)
       c.lineTo(94, 134)
       c.fill()
-      print(c, 'INTERFACE', 17, 225, 21, '#283030', 600)
+      print(c, sc.iface, 17, 225, 21, '#283030', 600)
       c.fillStyle = '#b0b5b0'
       c.fillRect(17, 244, 153, 6)
       c.fillRect(17, 258, 104, 5)
@@ -991,9 +999,9 @@ function initMachineScene(
     const orderTex = canvasTexture(480, 460, (c, w, h) => {
       c.fillStyle = '#172224'
       c.fillRect(0, 0, w, h)
-      print(c, 'REQUISITOS', 30, 51, 27, '#e8e8d8', 550)
-      print(c, 'Sprint · 3 itens', 30, 81, 16, '#869991')
-      ;['Login e perfil', 'API de pedidos', 'Painel admin'].forEach((n, i) => {
+      print(c, sc.reqs, 30, 51, 27, '#e8e8d8', 550)
+      print(c, sc.sprint, 30, 81, 16, '#869991')
+      ;sc.tasks.forEach((n, i) => {
         const y = 110 + i * 100
         c.fillStyle = '#283839'
         c.beginPath()
@@ -1005,7 +1013,7 @@ function initMachineScene(
         c.fill()
         print(c, String(i + 1), 52, y + 47, 20, '#1b2828', 600)
         print(c, n, 93, y + 33, 23, '#e6e8dc', 550)
-        print(c, ['Nova tarefa', 'Em desenvolvimento', 'Pronto'][i], 93, y + 58, 15, '#94a59b')
+        print(c, sc.taskState[i], 93, y + 58, 15, '#94a59b')
         print(c, '↗', 410, y + 49, 25, '#c57e45')
       })
     })
@@ -1036,8 +1044,8 @@ function initMachineScene(
       c.arc(58, 98, 32, 0, TAU)
       c.fill()
       print(c, '#', 47, 110, 34, ACCENT, 550)
-      print(c, 'Nova task', 108, 91, 36, '#222822', 600)
-      print(c, 'Requisito  +', 108, 138, 23, '#5b2a26', 500)
+      print(c, sc.newTask, 108, 91, 36, '#222822', 600)
+      print(c, sc.reqPlus, 108, 138, 23, '#5b2a26', 500)
     })
     screen(incoming, 0.82, 0.39, 0, 0, 0.026, nameTex)
 
@@ -1069,8 +1077,8 @@ function initMachineScene(
       const c = cashTex.ctx
       c.fillStyle = '#12231e'
       c.fillRect(0, 0, 512, 176)
-      print(c, 'DEPLOY CONCLUÍDO', 22, 44, 23, '#9cae91', 500)
-      print(c, '● NO AR', 26, 131, 62, '#ecedc7', 500)
+      print(c, sc.deployDone, 22, 44, 23, '#9cae91', 500)
+      print(c, sc.live, 26, 131, 62, '#ecedc7', 500)
     }
     drawCash()
     screen(cashdesk, 1.015, 0.349, -0.35, 1.98, -0.459, cashTex)
@@ -1091,8 +1099,8 @@ function initMachineScene(
       c.stroke()
       print(c, 'Deploy', 25, 154, 22, '#333d36')
       print(c, '1 × release', 25, 190, 21, '#333d36')
-      print(c, 'NO AR', 25, 263, 31, '#333d36', 650)
-      print(c, 'Obrigado!', 25, 317, 24, '#687067')
+      print(c, sc.liveShort, 25, 263, 31, '#333d36', 650)
+      print(c, sc.thanks, 25, 317, 24, '#687067')
       for (let i = 0; i < 44; i++) {
         c.fillStyle = '#333d36'
         c.fillRect(25 + i * 5, 370, 1 + (i % 3), 83)
@@ -1208,19 +1216,19 @@ function initMachineScene(
     const scriptTex = canvasTexture(256, 352, (c, w, h) => {
       c.fillStyle = '#eeeae0'
       c.fillRect(0, 0, w, h)
-      print(c, 'REGRAS', 24, 47, 22, '#3b403a', 650)
-      print(c, '01 / Negócio', 24, 85, 15, '#8b8d80')
+      print(c, sc.rules, 24, 47, 22, '#3b403a', 650)
+      print(c, sc.business, 24, 85, 15, '#8b8d80')
       for (let i = 0; i < 9; i++) {
         c.fillStyle = i === 4 ? '#c57e45' : '#aeb2a5'
         c.fillRect(24, 111 + i * 21, 190 - (i % 3) * 24, 6)
       }
-      print(c, 'PRONTO  ✓', 24, 327, 17, '#786124', 600)
+      print(c, sc.done, 24, 327, 17, '#786124', 600)
     })
     const orderCardTex = canvasTexture(256, 352, (c, w, h) => {
       c.fillStyle = '#c57e45'
       c.fillRect(0, 0, w, h)
-      print(c, 'NOVA', 21, 48, 24, '#30362d', 650)
-      print(c, 'TASK', 21, 79, 24, '#30362d', 650)
+      print(c, sc.newA, 21, 48, 24, '#30362d', 650)
+      print(c, sc.newB, 21, 79, 24, '#30362d', 650)
       c.strokeStyle = '#716431'
       c.lineWidth = 2
       c.strokeRect(23, 112, 210, 139)
@@ -1489,13 +1497,13 @@ function initMachineScene(
     }
     function syncPlayback() {
       const b = $('play')
-      b.setAttribute('aria-label', playing ? 'Pausar a animação' : 'Retomar a animação')
+      b.setAttribute('aria-label', playing ? options.strings.pause : options.strings.resume)
       b.setAttribute('aria-pressed', String(!playing))
       b.innerHTML = playing
         ? '<svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="2" y="1" width="2.5" height="10" rx=".5"/><rect x="7.5" y="1" width="2.5" height="10" rx=".5"/></svg>'
         : '<svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M3 1l8 5-8 5z"/></svg>'
       $('status').classList.toggle('paused', !playing)
-      $('status-text').textContent = playing ? 'Sistema rodando' : 'Sistema pausado'
+      $('status-text').textContent = playing ? options.strings.running : options.strings.paused
     }
     function play() {
       playing = true
@@ -1610,7 +1618,7 @@ function initMachineScene(
       e.preventDefault()
       contextLost = true
       showError(
-        'O contexto gráfico foi interrompido. A cena volta sozinha quando o WebGL estiver disponível de novo.'
+        options.strings.contextLost
       )
     })
     listen(renderer.domElement, 'webglcontextrestored', () => {
@@ -1621,13 +1629,7 @@ function initMachineScene(
 
     const scratch = new THREE.Vector3(),
       anchor = new THREE.Vector3()
-    const journeySteps = [
-      ['Novo requisito', 'Requisitos · uma tarefa entra na sprint'],
-      ['Regra de negócio', 'Back-end · a lógica ganha forma'],
-      ['Dados & APIs', 'Dados · persistência e contratos REST'],
-      ['Interface', 'Front-end · a tela chega ao usuário'],
-      ['Deploy concluído', 'Infra · versionado, revisado e no ar'],
-    ]
+    const journeySteps = options.strings.journey
     let prevJourney = -1,
       lastFrame = performance.now(),
       frameCount = 0,
@@ -1864,36 +1866,6 @@ function initMachineScene(
 
     $('loading').classList.add('done')
     $('error').style.display = 'none'
-    // Lightweight inspection for integration and automated browser checks; no production UI.
-    Object.defineProperty(window, '__machineDebug', {
-      value: {
-        getState: () => ({
-          mode,
-          camera: cameraMode,
-          playing,
-          time: simTime,
-          spread,
-          cutHeight: cutPlane.constant,
-          width,
-          height,
-          embedded,
-          drawCalls: renderer.info.render.calls,
-          triangles: renderer.info.render.triangles,
-          pixelRatio: renderer.getPixelRatio(),
-          stations: stations.map((s) => {
-            const p = s.group.position
-              .clone()
-              .add(new THREE.Vector3(0, 1, 0))
-              .project(camera)
-            return { id: s.id, x: (p.x * 0.5 + 0.5) * width, y: (-0.5 * p.y + 0.5) * height }
-          }),
-        }),
-      },
-      configurable: true,
-    })
-    cleanups.push(() => {
-      delete window.__machineDebug
-    })
   } catch (error) {
     console.error('Machine: failed to start', error)
     showError()

@@ -60,6 +60,7 @@
   align-items: center;
   gap: 6px;
   padding-bottom: 4px;
+  margin-top: 6px; /* offsets the underline padding so the text centres on the language switch */
   color: var(--red);
   font-family: var(--mono-font);
   font-size: 12px;
@@ -288,6 +289,7 @@
 
   .hero-cover-contact {
     padding: 10px 16px;
+    margin-top: 0;
     font-size: 11px;
   }
 

@@ -4,13 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import StackLanes from "@/components/StackLanes";
 import type { StationId } from "@/components/ui/stack-machine-3d";
-import { clamp01, easeOutCubic, prefersReducedMotion } from "@/lib/motion";
+import { useI18n } from "@/lib/i18n";
+import { clamp01, easeOutCubic, useStillLayout } from "@/lib/motion";
 
 // three.js only runs in the browser; load it lazily so it never blocks the first paint.
 const StackMachine3D = dynamic(() => import("@/components/ui/stack-machine-3d"), {
   ssr: false,
-  loading: () => <div className="stack-stage-loading">Montando a stack…</div>,
+  loading: () => <StackLoading />,
 });
+
+function StackLoading() {
+  const { t } = useI18n();
+  return <div className="stack-stage-loading">{t.skills.loading}</div>;
+}
 
 
 /**
@@ -31,7 +37,23 @@ export default function StackExpand({
   const cardRef = useRef<HTMLDivElement>(null);
   const machineRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const [still, setStill] = useState(false);
+  // Touch, narrow and reduced-motion layouts skip the pinned expansion (it would shake).
+  const still = useStillLayout();
+  // three.js (~600 KB) is only downloaded and started once the section is about to be seen.
+  const [near, setNear] = useState(false);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap || near) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setNear(true);
+      },
+      { rootMargin: "1500px 0px" }
+    );
+    io.observe(wrap);
+    return () => io.disconnect();
+  }, [near]);
 
   useEffect(() => {
     const wrap = wrapRef.current!;
@@ -39,8 +61,9 @@ export default function StackExpand({
     const machine = machineRef.current!;
     const panel = panelRef.current!;
 
-    if (prefersReducedMotion()) {
-      setStill(true);
+    if (still) {
+      // Back from the animated layout (e.g. the window was narrowed): clear its inline styles.
+      [wrap, card, machine, panel].forEach((el) => el.removeAttribute("style"));
       return;
     }
 
@@ -125,14 +148,18 @@ export default function StackExpand({
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [still]);
 
   return (
     <div className={"stack-expand" + (still ? " is-still" : "")} ref={wrapRef}>
       <div className="stack-expand-pin">
         <div className="stack-expand-card" ref={cardRef}>
           <div className="stack-expand-machine" ref={machineRef}>
-            <StackMachine3D height="100%" onStation={onStation} />
+            {near ? (
+              <StackMachine3D height="100%" onStation={onStation} />
+            ) : (
+              <StackLoading />
+            )}
           </div>
           <div className="stack-expand-panel" ref={panelRef}>
             <StackLanes active={active} onPick={onPick} reveal={false} />

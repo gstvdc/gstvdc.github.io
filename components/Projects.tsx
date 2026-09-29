@@ -11,11 +11,14 @@ import CountUp from "@/components/ui/CountUp";
 import Split from "@/components/ui/Split";
 import {
   PROJECTS,
-  baseProject,
-  withMetadata,
+  sortByLastCommit,
+  withMeta,
   type Project,
+  type RepoMeta,
 } from "@/lib/projects";
 import { clamp01 } from "@/lib/motion";
+import { useI18n } from "@/lib/i18n";
+import { rich } from "@/lib/i18n/rich";
 
 const IMPACT_LINES = [
   "M -60 110 L 1660 30",
@@ -31,6 +34,7 @@ const IMPACT_LINES = [
 /* Stage 1 + 2: dim gallery with title, brightening as you scroll      */
 /* ------------------------------------------------------------------ */
 function Gallery({ projects }: { projects: Project[] }) {
+  const { t } = useI18n();
   const ref = useRef<HTMLDivElement>(null);
   const rowsRef = useRef<HTMLDivElement>(null);
   const drag = useRef({
@@ -158,11 +162,10 @@ function Gallery({ projects }: { projects: Project[] }) {
       target="_blank"
       rel="noreferrer"
       draggable={false}
-      aria-label={`Abrir ${p.title}`}
+      aria-label={`${t.projects.open} ${p.title}`}
       tabIndex={i < shots.length ? 0 : -1}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={p.previewImage} alt={i < shots.length ? p.title : ""} draggable={false} loading="lazy" />
+      <img src={p.previewImage} alt={i < shots.length ? p.title : ""} draggable={false} loading="lazy" decoding="async" />
     </a>
   );
 
@@ -178,18 +181,14 @@ function Gallery({ projects }: { projects: Project[] }) {
         </div>
 
         <div className="pj-gallery-copy">
-          <span className="pj-eyebrow">// TRABALHO SELECIONADO</span>
-          <h2>Projetos em destaque</h2>
-          <p>
-            Uma curadoria de sistemas, sites e algoritmos. Do{" "}
-            <strong>full stack</strong> ao front-end, com foco em problemas
-            reais e código que entrega.
-          </p>
+          <span className="pj-eyebrow">{t.projects.eyebrow}</span>
+          <h2>{t.projects.title}</h2>
+          <p>{rich(t.projects.intro)}</p>
         </div>
 
         <div className="pj-scroll-hint" aria-hidden="true">
           <span></span>
-          Scroll
+          {t.projects.scroll}
         </div>
       </div>
     </div>
@@ -200,18 +199,19 @@ function Gallery({ projects }: { projects: Project[] }) {
 /* Stage 3: impact numbers                                              */
 /* ------------------------------------------------------------------ */
 function Impact({ projects }: { projects: Project[] }) {
+  const { t } = useI18n();
   const stats = useMemo(() => {
     const techs = new Set(projects.flatMap((p) => p.stack));
     return [
-      { label: "Projetos em destaque", to: projects.length },
-      { label: "Projetos no ar", to: projects.filter((p) => p.liveUrl).length },
+      { label: t.projects.impactStats.featured, to: projects.length },
+      { label: t.projects.impactStats.live, to: projects.filter((p) => p.liveUrl).length },
       {
-        label: "Repositórios públicos",
+        label: t.projects.impactStats.repos,
         to: projects.filter((p) => !p.private && p.htmlUrl).length,
       },
-      { label: "Tecnologias usadas", to: techs.size },
+      { label: t.projects.impactStats.techs, to: techs.size },
     ];
-  }, [projects]);
+  }, [projects, t]);
 
   return (
     <div className="pj-impact">
@@ -231,13 +231,10 @@ function Impact({ projects }: { projects: Project[] }) {
       </svg>
       <span className="pj-pill" data-reveal>
         <i className="bi bi-stars"></i>
-        Impacto dos projetos
+        {t.projects.impactPill}
       </span>
-      <Split as="h2" text="Construindo o que entrega resultado" />
-      <p data-reveal>
-        Ideias transformadas em soluções prontas para produção, com regras de
-        negócio, integração e experiência de uso bem resolvidas.
-      </p>
+      <Split as="h2" text={t.projects.impactTitle} />
+      <p data-reveal>{t.projects.impactText}</p>
       <div className="pj-impact-stats">
         {stats.map((stat, i) => (
           <div
@@ -262,61 +259,85 @@ function Impact({ projects }: { projects: Project[] }) {
 /* Stage 4: archive list with filters and a cursor-following preview    */
 /* ------------------------------------------------------------------ */
 function Archive({ projects }: { projects: Project[] }) {
-  const [filter, setFilter] = useState("Todos");
+  const { t } = useI18n();
+  const [filter, setFilter] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [hovered, setHovered] = useState<string | null>(null);
   const floatRef = useRef<HTMLDivElement>(null);
   const pointer = useRef({ x: 0, y: 0, fx: 0, fy: 0, on: false });
 
+  const items = t.projects.items;
+  const tagLabel = (tag: string) => t.projects.tags[tag] ?? tag;
+  const groupOf = (p: Project) => items[p.id].category.split(" / ")[0];
+
   const groups = useMemo(
-    () => [
-      "Todos",
-      ...Array.from(new Set(projects.map((p) => p.category.split(" / ")[0]))),
-    ],
-    [projects]
+    () => Array.from(new Set(projects.map((p) => items[p.id].category.split(" / ")[0]))),
+    [projects, items]
   );
+  // A group from another language no longer exists after switching: fall back to "all".
+  const activeGroup = filter && groups.includes(filter) ? filter : null;
 
   const visible = projects.filter((p) => {
-    const inGroup = filter === "Todos" || p.category.startsWith(filter);
+    const inGroup = !activeGroup || groupOf(p) === activeGroup;
     const q = query.trim().toLowerCase();
     const inQuery =
       !q ||
       p.title.toLowerCase().includes(q) ||
-      p.stack.some((tag) => tag.toLowerCase().includes(q));
+      p.stack.some((tag) => tagLabel(tag).toLowerCase().includes(q));
     return inGroup && inQuery;
   });
 
-  // Preview image trails the cursor with a little inertia.
-  useEffect(() => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches)
-      return;
+  // The preview image trails the cursor with a little inertia. It is placed straight from
+  // the mouse events (so it can never sit at the screen corner) and only animates while
+  // the pointer is over the list.
+  const raf = useRef(0);
+  const placeFloat = () => {
+    const s = pointer.current;
     const el = floatRef.current;
-    if (!el) return;
-    let raf = 0;
+    if (el) el.style.transform = `translate3d(${s.fx + 28}px, ${s.fy - 130}px, 0)`;
+  };
+  const stopFloat = () => {
+    cancelAnimationFrame(raf.current);
+    raf.current = 0;
+  };
+  const startFloat = () => {
+    if (raf.current) return;
     const loop = () => {
       const s = pointer.current;
       s.fx += (s.x - s.fx) * 0.14;
       s.fy += (s.y - s.fy) * 0.14;
-      el.style.transform = `translate3d(${s.fx + 28}px, ${s.fy - 130}px, 0)`;
-      raf = requestAnimationFrame(loop);
+      placeFloat();
+      raf.current = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, []);
+    raf.current = requestAnimationFrame(loop);
+  };
+  const trackPointer = (event: { clientX: number; clientY: number }) => {
+    const s = pointer.current;
+    s.x = event.clientX;
+    s.y = event.clientY;
+    if (!s.on) {
+      s.fx = s.x;
+      s.fy = s.y;
+      s.on = true;
+      placeFloat();
+      startFloat();
+    }
+  };
+  useEffect(() => stopFloat, []);
 
   return (
     <div className="pj-archive">
       <div className="pj-archive-head" data-reveal>
         <div className="pj-archive-title">
           <i className="pj-dot"></i>
-          <span>Arquivo de projetos</span>
+          <span>{t.projects.archive}</span>
           <em>{projects.length}</em>
         </div>
         <label className="pj-search">
           <i className="bi bi-search"></i>
           <input
             type="search"
-            placeholder="Buscar projetos ou tecnologias..."
+            placeholder={t.projects.search}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
@@ -324,45 +345,38 @@ function Archive({ projects }: { projects: Project[] }) {
       </div>
 
       <div className="pj-filters" data-reveal role="tablist">
-        {groups.map((group) => (
+        {[null, ...groups].map((group) => (
           <button
-            key={group}
+            key={group ?? "all"}
             type="button"
             role="tab"
-            aria-selected={filter === group}
-            className={filter === group ? "is-active" : ""}
+            aria-selected={activeGroup === group}
+            className={activeGroup === group ? "is-active" : ""}
             onClick={() => setFilter(group)}
           >
-            {group}
+            {group ?? t.projects.all}
           </button>
         ))}
       </div>
 
       <div
         className="pj-list"
-        onMouseMove={(event) => {
-          const s = pointer.current;
-          s.x = event.clientX;
-          s.y = event.clientY;
-          if (!s.on) {
-            s.fx = s.x;
-            s.fy = s.y;
-            s.on = true;
-          }
-        }}
+        onMouseMove={trackPointer}
         onMouseLeave={() => {
           pointer.current.on = false;
+          stopFloat();
           setHovered(null);
         }}
       >
         {visible.map((project, index) => {
           const href = project.liveUrl || project.htmlUrl || undefined;
+          const item = items[project.id];
           const badge = project.private
-            ? project.badge || "Privado"
+            ? item.badge || t.projects.badgePrivate
             : project.liveUrl
-            ? "No ar"
-            : "Repositório";
-          const tags = [...project.stack, ...project.stack, ...project.stack];
+            ? t.projects.badgeLive
+            : t.projects.badgeRepo;
+          const tags = [...project.stack, ...project.stack, ...project.stack].map(tagLabel);
           return (
             <a
               key={project.title}
@@ -373,7 +387,10 @@ function Archive({ projects }: { projects: Project[] }) {
               href={href}
               target="_blank"
               rel="noreferrer"
-              onMouseEnter={() => setHovered(project.title)}
+              onMouseEnter={(event) => {
+                trackPointer(event);
+                setHovered(project.title);
+              }}
             >
               <div className="pj-row-main">
                 <span className="pj-row-num">
@@ -384,11 +401,11 @@ function Archive({ projects }: { projects: Project[] }) {
                     {project.title}
                     <small>{badge}</small>
                   </h3>
-                  <p>{project.summary}</p>
+                  <p>{item.summary}</p>
                 </div>
                 <span className="pj-row-year">{project.year}</span>
                 <span className="pj-row-view">
-                  ver <i className="bi bi-arrow-right"></i>
+                  {t.projects.view} <i className="bi bi-arrow-right"></i>
                 </span>
               </div>
               <div className="pj-row-tags" aria-hidden="true">
@@ -405,7 +422,7 @@ function Archive({ projects }: { projects: Project[] }) {
           );
         })}
         {visible.length === 0 && (
-          <p className="pj-empty">Nenhum projeto encontrado.</p>
+          <p className="pj-empty">{t.projects.empty}</p>
         )}
       </div>
 
@@ -422,11 +439,12 @@ function Archive({ projects }: { projects: Project[] }) {
         {projects
           .filter((project) => project.previewImage)
           .map((project) => (
-            // eslint-disable-next-line @next/next/no-img-element
             <img
               key={project.title}
               src={project.previewImage}
               alt=""
+              loading="lazy"
+              decoding="async"
               className={hovered === project.title ? "is-on" : ""}
             />
           ))}
@@ -439,26 +457,18 @@ function Archive({ projects }: { projects: Project[] }) {
         rel="noreferrer"
         data-magnetic
       >
-        Ver todos os repositórios <i className="bi bi-arrow-up-right"></i>
+        {t.projects.allRepos} <i className="bi bi-arrow-up-right"></i>
       </a>
     </div>
   );
 }
 
-export default function Projects() {
-  const [projects, setProjects] = useState<Project[]>(() =>
-    PROJECTS.map(baseProject)
+export default function Projects({ meta }: { meta: Record<string, RepoMeta> }) {
+  // GitHub data comes from the build (lib/github.ts); the list is newest commit first.
+  const projects = useMemo(
+    () => sortByLastCommit(PROJECTS.map((config) => withMeta(config, meta[config.id]))),
+    [meta]
   );
-
-  useEffect(() => {
-    let cancelled = false;
-    Promise.all(PROJECTS.map(withMetadata)).then((list) => {
-      if (!cancelled) setProjects(list);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   return (
     <section id="projects" className="projects-sheet">

@@ -1,21 +1,24 @@
+"use client";
+
 import type { CSSProperties } from "react";
+import { useI18n } from "@/lib/i18n";
+import { rich } from "@/lib/i18n/rich";
 
-// Words of the headline. `tone` picks the colour, `s` is the point (0 to 1) of the reveal
-// where the word lights up, in order.
-const HEADLINE: { text: string; tone: "bright" | "dim" | "serif"; s: number }[] = [
-  { text: "Código", tone: "bright", s: 0.04 },
-  { text: "com", tone: "bright", s: 0.08 },
-  { text: "propósito.", tone: "bright", s: 0.12 },
-  { text: "Entrega", tone: "dim", s: 0.17 },
-  { text: "com", tone: "dim", s: 0.21 },
-  { text: "consistência.", tone: "dim", s: 0.25 },
-];
+// Each headline word lights up in order during the reveal; `s` is the point (0 to 1)
+// of the reveal where the word turns on.
+const START = 0.04;
+const STEP = 0.042;
 
-const word = (w: (typeof HEADLINE)[number], i: number) => (
-  <span key={i} className={`bio-w bio-w--${w.tone}`} style={{ "--s": w.s } as CSSProperties}>
-    {w.text}{" "}
-  </span>
-);
+const words = (line: string, offset: number, tone: "bright" | "dim") =>
+  line.split(/\s+/).map((text, i) => (
+    <span
+      key={`${tone}-${i}`}
+      className={`bio-w bio-w--${tone}`}
+      style={{ "--s": (START + (offset + i) * STEP).toFixed(3) } as CSSProperties}
+    >
+      {text}{" "}
+    </span>
+  ));
 
 const fade = (s: number): CSSProperties => ({ "--s": s } as CSSProperties);
 
@@ -24,8 +27,12 @@ const fade = (s: number): CSSProperties => ({ "--s": s } as CSSProperties);
  * variables `--bp` (panel in/out) and `--p` (word-by-word reveal), set by the hero on scroll.
  */
 export default function BioPanel() {
+  const { t } = useI18n();
+  const b = t.bio;
+  const first = b.line1.split(/\s+/).length;
+
   return (
-    <div className="bio-panel" aria-label="Sobre mim">
+    <div className="bio-panel" aria-label={b.aria}>
       <div className="bio-frame">
         <span className="bio-corner bio-corner--tl" aria-hidden="true"></span>
         <span className="bio-corner bio-corner--tr" aria-hidden="true"></span>
@@ -33,21 +40,18 @@ export default function BioPanel() {
         <span className="bio-corner bio-corner--br" aria-hidden="true"></span>
 
         <div className="bio-head">
-          <span className="bio-label">SOBRE MIM</span>
-          <span className="bio-tag">FULL STACK DEVELOPER · SOMBRIO, SC</span>
+          <span className="bio-label">{b.label}</span>
+          <span className="bio-tag">{b.tag}</span>
         </div>
 
-        <h2
-          className="bio-headline"
-          aria-label="Código com propósito. Entrega com consistência."
-        >
+        <h2 className="bio-headline" aria-label={`${b.line1} ${b.line2}`}>
           <span className="bio-quote" aria-hidden="true">
             &ldquo;
           </span>
           <span aria-hidden="true">
-            {HEADLINE.slice(0, 3).map((w, i) => word(w, i))}
+            {words(b.line1, 0, "bright")}
             <br />
-            {HEADLINE.slice(3).map((w, i) => word(w, i + 3))}
+            {words(b.line2, first, "dim")}
           </span>
           <span className="bio-quote bio-quote--end" aria-hidden="true">
             &rdquo;
@@ -58,26 +62,18 @@ export default function BioPanel() {
 
         <div className="bio-grid">
           <p className="bio-lead bio-fade" style={fade(0.52)}>
-            Sou <strong>Gustavo Constante</strong>, estudante de Ciência da Computação na UNESC e
-            desenvolvedor full stack. Construo aplicações que resolvem problemas reais,{" "}
-            <em>do banco de dados à interface</em>.
+            {rich(b.lead)}
           </p>
 
           <div className="bio-col bio-fade" style={fade(0.62)}>
-            <h3>TRAJETÓRIA</h3>
-            <p>
-              Comecei no design gráfico, passei por vendas e rotinas administrativas e hoje
-              desenvolvo sistemas corporativos com SvelteKit e Laravel na CIA Engenharia Elétrica.
-            </p>
-            <p className="bio-accent">Do design ao código, pensando sempre no usuário.</p>
+            <h3>{b.pathTitle}</h3>
+            <p>{b.pathText}</p>
+            <p className="bio-accent">{b.pathAccent}</p>
           </div>
 
           <div className="bio-col bio-fade" style={fade(0.72)}>
-            <h3>FOCO ATUAL</h3>
-            <p>
-              Aprendo e entrego com Angular, NestJS, React e Next.js, cuido de APIs, banco de dados
-              e deploy, e mantenho projetos próprios com IA, algoritmos e hardware.
-            </p>
+            <h3>{b.focusTitle}</h3>
+            <p>{b.focusText}</p>
             <span className="bio-sign">Gustavo</span>
           </div>
         </div>

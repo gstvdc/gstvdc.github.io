@@ -12,9 +12,9 @@ import {
   type ReactNode,
   useLayoutEffect,
   useRef,
-  useSyncExternalStore,
 } from "react";
 import gsap from "gsap";
+import { useReducedMotion } from "@/lib/motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 
@@ -49,7 +49,6 @@ function useGSAP(
       ctxRef.current?.revert();
       ctxRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useLayoutEffect(() => {
@@ -57,7 +56,6 @@ function useGSAP(
     cleanupRef.current?.();
     const ret = ctxRef.current.add(callback);
     cleanupRef.current = typeof ret === "function" ? ret : undefined;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
 
@@ -72,7 +70,7 @@ export type TimelineItem = {
 
 type SplitTextInstance = InstanceType<typeof SplitText>;
 
-export type TimelineProps = {
+type TimelineProps = {
   items: TimelineItem[];
   title?: string;
   periodLabel?: string;
@@ -89,29 +87,12 @@ export type TimelineProps = {
   cvLabel?: string;
   /** Reveal animation duration, in seconds. */
   duration?: number;
+  /**
+   * Plain vertical list (photo, then the milestones one below the other) instead of the
+   * pinned horizontal scroll. Changing it needs a remount (use a `key`).
+   */
+  vertical?: boolean;
 };
-
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeToReducedMotion(callback: () => void) {
-  if (typeof window === "undefined") return () => {};
-  const mediaQueryList = window.matchMedia(REDUCED_MOTION_QUERY);
-  mediaQueryList.addEventListener("change", callback);
-  return () => mediaQueryList.removeEventListener("change", callback);
-}
-
-function getReducedMotionSnapshot() {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia?.(REDUCED_MOTION_QUERY)?.matches ?? false;
-}
-
-function usePrefersReducedMotion() {
-  return useSyncExternalStore(
-    subscribeToReducedMotion,
-    getReducedMotionSnapshot,
-    () => false
-  );
-}
 
 export default function Timeline({
   items,
@@ -127,10 +108,11 @@ export default function Timeline({
   cvHref,
   cvLabel = "Baixar currículo",
   duration = 1.4,
+  vertical = false,
 }: TimelineProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const wholeSliderRef = useRef<HTMLDivElement>(null);
-  const reducedMotion = usePrefersReducedMotion();
+  const reducedMotion = useReducedMotion();
   const normalizedDuration = Math.max(0.2, duration);
 
   // Even positions sit above the line, odd ones below it.
@@ -144,7 +126,7 @@ export default function Timeline({
   useGSAP(
     () => {
       const section = sectionRef.current;
-      if (!section) return;
+      if (!section || vertical) return;
 
       const isMobile = window.innerWidth < 600;
       const slidePercent = isMobile ? -57 : -65;
@@ -194,13 +176,13 @@ export default function Timeline({
         },
       });
     },
-    { dependencies: [reducedMotion, items.length], scope: sectionRef }
+    { dependencies: [reducedMotion, items.length, vertical], scope: sectionRef }
   );
 
   useGSAP(
     () => {
       const section = sectionRef.current;
-      if (!section) return;
+      if (!section || vertical) return;
 
       if (reducedMotion) {
         items.forEach((item) => {
@@ -321,8 +303,50 @@ export default function Timeline({
         ro.disconnect();
       };
     },
-    { dependencies: [normalizedDuration, reducedMotion, items.length], scope: sectionRef }
+    { dependencies: [normalizedDuration, reducedMotion, items.length, vertical], scope: sectionRef }
   );
+
+  if (vertical) {
+    return (
+      <section
+        ref={sectionRef}
+        id="resume"
+        className="tl-section tl-vertical"
+        style={sectionStyle}
+      >
+        <h2 className="tlv-heading">{title}</h2>
+        <div className="tlv-meta">
+          <p className="tl-period-label" style={mutedTextStyle}>
+            {periodLabel}
+          </p>
+          {cvHref && (
+            <a className="tl-cv" href={cvHref} download>
+              <i className="bi bi-file-earmark-arrow-down"></i>
+              {cvLabel}
+            </a>
+          )}
+        </div>
+
+        <div className="tlv-photo">
+          {lead ?? (
+            <img src={imageUrl} alt={imageAlt} draggable={false} />
+          )}
+        </div>
+
+        <ol className="tlv-list" style={{ borderColor: activeColor }}>
+          {items.map((item) => (
+            <li key={item.id} className="tlv-item">
+              <span className="tlv-dot" style={activeStyle}></span>
+              <h4 className="tlv-period">{item.period}</h4>
+              <p className="tlv-desc" style={mutedTextStyle}>
+                {item.content}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    );
+  }
 
   return (
     <section ref={sectionRef} id="resume" className="tl-section" style={sectionStyle}>
@@ -330,7 +354,6 @@ export default function Timeline({
         <div ref={wholeSliderRef} className="tl-slider">
           <div className="tl-photo">
             {lead ?? (
-              // eslint-disable-next-line @next/next/no-img-element
               <img src={imageUrl} alt={imageAlt} draggable={false} />
             )}
           </div>

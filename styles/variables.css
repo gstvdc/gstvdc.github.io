@@ -11,7 +11,7 @@
   --nav-font: "Manrope", sans-serif;
   --display-font: "Bricolage Grotesque", "Manrope", sans-serif;
   --serif-font: "Fraunces", "Manrope", serif;
-  --mono-font: "JetBrains Mono", "Sora", monospace;
+  --mono-font: "JetBrains Mono", ui-monospace, monospace;
   --font-mono: var(--mono-font);
 
   --white: #ffffff;

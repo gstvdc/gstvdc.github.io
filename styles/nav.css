@@ -69,7 +69,6 @@
     top: auto;
     padding: 10px 16px;
     background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(14px);
     box-shadow: 0 -8px 24px rgba(245, 244, 241, 0.08);
   }
 

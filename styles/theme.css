@@ -1,11 +1,5 @@
 /* Dark theme corrections + motion helpers (loaded last). */
 
-/* ---------- Dark overrides for legacy light literals ---------- */
-.contact .contact-form-container .contact-form .form-field .form-input,
-.contact .contact-form-container .contact-form .form-field .form-input:focus {
-  background: rgba(245, 244, 241, 0.04);
-}
-
 .navmenu-vertical a {
   background: rgba(18, 18, 18, 0.92);
   color: var(--nav-color);
@@ -13,7 +7,7 @@
 
 @media (max-width: 992px) {
   .navmenu-vertical {
-    background: rgba(10, 10, 10, 0.92);
+    background: rgba(10, 10, 10, 0.97);
     box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
   }
 }
@@ -26,6 +20,7 @@
   line-height: 0.98;
   letter-spacing: -0.035em;
   margin-bottom: 18px;
+  color: #fff;
 }
 
 .rv .rv-mask {

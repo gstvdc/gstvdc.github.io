@@ -1,59 +1,131 @@
+/* ---------- Footer: bio, sitemap columns, social tiles ---------- */
+/* Only the top edge runs from side to side; the content keeps clear of the sidebar
+   (`padding-left` comes from base.css). */
 .footer {
-  color: rgba(226, 232, 240, 0.72);
-  background-color: #11151b;
+  color: rgba(245, 244, 241, 0.62);
+  background-color: var(--background-color);
   font-size: 14px;
-  padding: 8px 0 36px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top: 1px solid rgba(245, 244, 241, 0.1);
 }
 
-.footer-tagline {
-  text-align: center;
-  font-family: var(--serif-font);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(18px, 2.4vw, 24px);
-  color: rgba(255, 255, 255, 0.88);
-  padding-top: 30px;
-  margin-bottom: 0;
+.ft-wrap {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 22px clamp(24px, 4vw, 64px) 16px;
 }
 
-.footer .copyright p {
-  margin-top: 15px;
-  margin-bottom: 10px;
+.ft-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.footer .social-links {
-  margin-top: 5px;
-  margin-bottom: 14px;
+.ft-logo {
+  flex: none;
+  display: inline-flex;
+  padding: 2px;
+  transition: transform 0.3s;
+}
+
+.ft-logo:hover {
+  transform: scale(1.06);
+}
+
+.ft-brand p {
+  margin: 0;
+  max-width: 1200px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(245, 244, 241, 0.62);
+}
+
+.ft-rule {
+  height: 1px;
+  margin: 14px 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(245, 244, 241, 0.14) 50%,
+    transparent 50%
+  );
+  background-size: 4px 1px;
+}
+
+.ft-cols {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.ft-cols ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ft-cols a {
+  font-size: 13px;
+  color: rgba(245, 244, 241, 0.62);
+  transition: color 0.2s;
+}
+
+.ft-cols a:hover {
+  color: var(--heading-color);
+}
+
+/* Copyright on the left, social tiles on the right. */
+.ft-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+}
+
+.ft-social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
 }
 
-.footer .social-links a {
+.ft-social a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 16px;
-  color: #ffffff;
-  transition: var(--transition-fast);
-  box-shadow: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(245, 244, 241, 0.03);
+  border: 1px solid rgba(245, 244, 241, 0.09);
+  color: var(--heading-color);
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.25s, transform 0.25s, background 0.25s;
 }
 
-.footer .social-links a:hover {
-  color: #ffffff;
-  border-color: rgba(226, 85, 77, 0.42);
+.ft-social a:hover {
+  border-color: rgba(226, 85, 77, 0.55);
+  background: rgba(226, 85, 77, 0.08);
+  transform: translateY(-2px);
 }
 
-.footer .credits {
-  margin-top: 10px;
+.ft-copy {
+  margin: 0;
   font-size: 13px;
-  text-align: center;
+  color: rgba(245, 244, 241, 0.55);
 }
 
+.ft-copy strong {
+  color: var(--heading-color);
+}
+
+/* ---------- Floating back-to-top button ---------- */
 .scroll-top {
   position: fixed;
   visibility: hidden;
@@ -88,5 +160,32 @@
   .scroll-top {
     bottom: 96px;
   }
+
+  /* Room for the fixed bottom navigation. */
+  .footer {
+    padding-bottom: 92px;
+  }
 }
 
+@media (max-width: 768px) {
+  .ft-wrap {
+    padding: 22px 20px 20px;
+  }
+
+  .ft-brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .ft-cols {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 20px;
+  }
+
+  .ft-bottom {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+  }
+}

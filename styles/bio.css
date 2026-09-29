@@ -20,8 +20,7 @@
   padding: clamp(28px, 4vw, 64px);
   border: 1px solid rgba(245, 244, 241, 0.09);
   background: radial-gradient(rgba(245, 244, 241, 0.06) 1px, transparent 1px) 0 0 / 22px 22px,
-    rgba(10, 10, 10, 0.72);
-  backdrop-filter: blur(3px);
+    rgba(10, 10, 10, 0.78);
 }
 
 /* Red corner marks. */

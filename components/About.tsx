@@ -1,43 +1,31 @@
+"use client";
+
 import type { CSSProperties } from "react";
 import CountUp from "@/components/ui/CountUp";
+import { useI18n } from "@/lib/i18n";
 
-const STATS = [
-  { label: "Experiência profissional", to: 1, suffix: "+ ano" },
-  { label: "Projetos em destaque", to: 6, suffix: "" },
-  { label: "Tecnologias e ferramentas", to: 30, suffix: "+" },
-  { label: "Camadas do stack", to: 4, suffix: "" },
-];
+const STAT_VALUES = [1, 6, 30, 4];
 
 const LINES = [
-  { text: "Aplicações reais.", from: "left", color: "#e2554d", delay: 0 },
-  {
-    text: "Do front-end ao banco de dados.",
-    from: "right",
-    color: "#f5f4f1",
-    delay: 260,
-  },
-  {
-    text: "Entrega com consistência.",
-    from: "left",
-    color: "#d4a72c",
-    delay: 520,
-  },
+  { from: "left", color: "#e2554d", delay: 0 },
+  { from: "right", color: "#f5f4f1", delay: 260 },
+  { from: "left", color: "#d4a72c", delay: 520 },
 ];
 
 export default function About() {
+  const { t } = useI18n();
+  const a = t.about;
+
   return (
     <section id="about" className="about-stats">
       <div className="about-inner">
         <span className="about-pill" data-reveal>
           <i className="about-pill-dot"></i>
-          Foco em resultados
+          {a.pill}
         </span>
 
-        <h2
-          className="rv about-headline wipe"
-          aria-label="Aplicações reais. Do front-end ao banco de dados. Entrega com consistência."
-        >
-          {LINES.map((line) => (
+        <h2 className="rv about-headline wipe" aria-label={a.lines.join(" ")}>
+          {LINES.map((line, i) => (
             <span
               className={`wipe-line wipe-line--${line.from}`}
               style={
@@ -46,20 +34,20 @@ export default function About() {
                   "--wipe-delay": `${line.delay}ms`,
                 } as CSSProperties
               }
-              key={line.text}
+              key={i}
               aria-hidden="true"
             >
-              <span className="wipe-text">{line.text}</span>
+              <span className="wipe-text">{a.lines[i]}</span>
             </span>
           ))}
         </h2>
 
         <div className="about-stat-bar" data-reveal>
-          {STATS.map((stat) => (
-            <div className="about-stat" key={stat.label}>
+          {a.stats.map((stat, i) => (
+            <div className="about-stat" key={i}>
               <span className="about-stat-label">{stat.label}</span>
               <span className="about-stat-value">
-                <CountUp to={stat.to} suffix={stat.suffix} />
+                <CountUp to={STAT_VALUES[i]} suffix={stat.suffix} />
               </span>
             </div>
           ))}
@@ -67,11 +55,11 @@ export default function About() {
 
         <div className="about-cta" data-reveal>
           <a href="#resume" className="btn-ghost" data-magnetic>
-            Ver experiência
+            {a.ctaExperience}
             <i className="bi bi-arrow-right-short"></i>
           </a>
           <a href="#contact" className="btn-ghost alt" data-magnetic>
-            Entrar em contato
+            {a.ctaContact}
             <i className="bi bi-envelope"></i>
           </a>
         </div>

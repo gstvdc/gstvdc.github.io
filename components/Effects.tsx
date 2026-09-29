@@ -6,6 +6,21 @@ import { HELLO_PATHS, HELLO_TRANSFORM, HELLO_VIEWBOX } from "@/components/ui/hel
 import { prefersReducedMotion } from "@/lib/motion";
 import { getLenis, scrollToTarget, setLenis } from "@/lib/scroll";
 
+// Elements with looping CSS animations; they are paused (`.is-offscreen`) while off screen.
+const LOOPING = [
+  ".stack-marquee-row",
+  ".dif-mrow-view",
+  ".pj-row-item",
+  ".pj-impact",
+  ".pj-gallery",
+  ".hero-cover-photo",
+  ".hero-cover-sub",
+  ".spline-fallback",
+].join(",");
+
+// The custom cursor only makes sense with a mouse on a wide screen; never in the mobile layout.
+const CURSOR_QUERY = "(hover: hover) and (pointer: fine) and (min-width: 993px)";
+
 /**
  * Global motion layer: smooth scroll, intro preloader, custom cursor,
  * magnetic buttons, scroll reveals and watermark parallax.
@@ -120,13 +135,50 @@ export default function Effects() {
     };
   }, []);
 
-  // ---- Custom cursor + magnetic elements ----
+  // ---- Pause looping CSS animations (marquees, floating icons, lines) while off screen ----
   useEffect(() => {
-    if (
-      prefersReducedMotion() ||
-      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
-    )
-      return;
+    if (!("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) =>
+          entry.target.classList.toggle("is-offscreen", !entry.isIntersecting)
+        ),
+      { rootMargin: "120px 0px" }
+    );
+    const seen = new WeakSet<Element>();
+    const scan = () =>
+      document.querySelectorAll(LOOPING).forEach((el) => {
+        if (seen.has(el)) return;
+        seen.add(el);
+        io.observe(el);
+      });
+    scan();
+    // Lists re-render (filters, language): pick up rows that appear later.
+    let timer = 0;
+    const mo = new MutationObserver(() => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(scan, 200);
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => {
+      window.clearTimeout(timer);
+      mo.disconnect();
+      io.disconnect();
+    };
+  }, []);
+
+  // ---- Custom cursor + magnetic elements (desktop with a mouse only) ----
+  const [cursorOn, setCursorOn] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(CURSOR_QUERY);
+    const sync = () => setCursorOn(mq.matches && !prefersReducedMotion());
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    if (!cursorOn) return;
 
     const dot = dotRef.current!;
     const ring = ringRef.current!;
@@ -138,20 +190,28 @@ export default function Effects() {
     let ry = y;
     let raf = 0;
 
+    // The loop only runs while the ring is still catching up with the pointer.
     const loop = () => {
       rx += (x - rx) * 0.18;
       ry += (y - ry) * 0.18;
       dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-      raf = requestAnimationFrame(loop);
+      raf =
+        Math.abs(x - rx) < 0.1 && Math.abs(y - ry) < 0.1
+          ? 0
+          : requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+    wake();
 
     let magnet: HTMLElement | null = null;
 
     const onMove = (event: MouseEvent) => {
       x = event.clientX;
       y = event.clientY;
+      wake();
       dot.classList.add("is-on");
       ring.classList.add("is-on");
 
@@ -189,12 +249,15 @@ export default function Effects() {
     return () => {
       cancelAnimationFrame(raf);
       document.documentElement.classList.remove("has-cursor");
+      dot.classList.remove("is-on");
+      ring.classList.remove("is-on");
+      if (magnet) magnet.style.transform = "";
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseleave", onLeave);
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("mouseup", onUp);
     };
-  }, []);
+  }, [cursorOn]);
 
   return (
     <>
