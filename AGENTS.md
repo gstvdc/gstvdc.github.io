@@ -23,7 +23,7 @@ Rode `npx tsc --noEmit` e `npm run build` antes de concluir uma mudança.
 - `app/`: `layout.tsx` (metadados, fontes, imports de CSS) e `page.tsx` (ordem das seções).
 - `components/`: uma seção por arquivo (Hero, About, Projects, Skills, Resume, Contact, Footer),
   mais `Effects` (Lenis, preloader, cursor), `HorizontalSwap`, `StackExpand` e `StackLanes`.
-- `components/ui/`: peças reutilizáveis (Split, SectionTitle, CountUp, timeline, spotlight,
+- `components/ui/`: peças reutilizáveis (Split, SectionTitle, CountUp, timeline,
   splite e `stack-machine-3d`, a cena three.js carregada com `dynamic`).
 - `lib/i18n/`: idiomas pt/en/es. `pt.ts` é a fonte da estrutura (`Dict`); `en.ts` e `es.ts` seguem o tipo. Provider em `index.tsx`, hook `useI18n()`, `rich()` para `<strong>`/`<em>` nos textos.
 - `lib/`: `projects.ts` (dados dos projetos + metadados do GitHub), `scroll.ts` (Lenis),

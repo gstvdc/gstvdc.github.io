@@ -50,7 +50,7 @@ Publicado em [gstvdc.github.io](https://gstvdc.github.io) como site estático, g
 | --- | --- |
 | Framework | Next.js 16 (App Router, `output: "export"`), React 19, TypeScript |
 | Estilo | CSS por seção, Bootstrap (grid e ícones) |
-| Animação | GSAP (ScrollTrigger, SplitText), Lenis, Framer Motion |
+| Animação | GSAP (ScrollTrigger, SplitText), Lenis |
 | 3D e mapas | three.js, Spline, d3-geo, topojson |
 | Ícones | Bootstrap Icons, Simple Icons |
 | Deploy | GitHub Actions + GitHub Pages |
@@ -80,7 +80,7 @@ O site abre em <http://localhost:3000>.
 ```text
 app/                layout (metadados, fontes) e página
 components/         seções (Hero, About, Projects, Skills, Resume, Contact, Footer) e efeitos
-components/ui/      peças reutilizáveis: timeline, cena 3D, globo, spotlight, Split...
+components/ui/      peças reutilizáveis: timeline, cena 3D, globo, Split...
 lib/                dados dos projetos, GitHub (build), scroll, animação e ícones
 lib/i18n/           idiomas: provider, hook useI18n e dicionários pt, en e es
 styles/             CSS por seção, mais motion.css e theme.css

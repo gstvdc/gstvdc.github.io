@@ -3,7 +3,6 @@
 import Timeline, { type TimelineItem } from "@/components/ui/timeline";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { SplineScene } from "@/components/ui/splite";
-import { Spotlight } from "@/components/ui/spotlight";
 import { useI18n } from "@/lib/i18n";
 import { useStillLayout } from "@/lib/motion";
 import { TechLogo } from "@/lib/techIcons";
@@ -113,8 +112,6 @@ export default function Resume() {
 
         <div className="container dif-wrap" data-reveal>
           <div className="dif-stage">
-            <Spotlight size={340} />
-
             <div className="dif-left">
               <span className="dif-tag">{r.difTag}</span>
               <ol className="dif-list">

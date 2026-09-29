@@ -33,22 +33,6 @@
   );
 }
 
-/* Light that follows the mouse (see spotlight.tsx). */
-.spotlight {
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(226, 85, 77, 0.3), transparent 72%);
-  filter: blur(22px);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.spotlight.is-on {
-  opacity: 1;
-}
-
 .dif-left {
   position: relative;
   z-index: 2;
